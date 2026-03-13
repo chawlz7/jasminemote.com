@@ -27,7 +27,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
     <div class="hero-credentials-grid fade-up d5">
       {% for cred in homepage.credentials %}
       <div class="credential-pill">
-        <a href="{{ cred.url }}"{% if cred.external %} target="_blank" rel="noopener"{% endif %}>
+        <a href="{% if cred.external %}{{ cred.url }}{% else %}{{ cred.url | url }}{% endif %}"{% if cred.external %} target="_blank" rel="noopener"{% endif %}>
           <span class="pill-icon">{{ cred.icon }}</span>
           <div>
             <div class="pill-label">{{ cred.label }}</div>

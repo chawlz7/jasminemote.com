@@ -602,6 +602,15 @@ footer { padding: 3rem 0; border-top: 1px solid var(--rule); }
   .posts-grid { grid-template-columns: 1fr; }
   .writing-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { display: none; }
+  .nav-links--open {
+    display: flex; flex-direction: column; gap: 0;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--bg); border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0 1rem;
+  }
+  .nav-links--open li { width: 100%; }
+  .nav-links--open a { display: block; padding: 0.6rem 1.5rem; }
+  .nav-links--open .btn-nav { margin: 0.5rem 1.5rem 0; display: inline-block; width: auto; }
   .nav-hamburger { display: block; }
   .therapy-card { position: static; }
 }
