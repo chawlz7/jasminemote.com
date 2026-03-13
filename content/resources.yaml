@@ -1,0 +1,95 @@
+# ──────────────────────────────────────────────────────────────
+# Resources page content — jasminemote.com/resources/
+# Edit this file to update the PhD guide link or to add, remove,
+# or update any of the mental health resources.
+#
+# ── To add a resource ─────────────────────────────────────────
+#
+#   Under early_psychosis or general_mental_health, add a new
+#   item in this format:
+#
+#     - name: "Program Name"
+#       detail: "Location or short descriptor"
+#       url: "https://..."
+#
+# ── Formatting tags you can use in text fields ────────────────
+#
+#   Bold:   <strong>word</strong>
+#   Italic: <em>word</em>
+#
+# ──────────────────────────────────────────────────────────────
+
+
+# ── Page header ───────────────────────────────────────────────
+page:
+  eyebrow: "Resources"
+  headline: "For clients, students & <em>anyone</em> who needs it"
+  subhead: >-
+    A small collection of things I've put together over the years — a guide for
+    prospective PhD students, and a list of mental health resources for people in
+    Massachusetts.
+
+
+# ── PhD Guide callout ─────────────────────────────────────────
+phd_guide:
+  kicker: "For prospective applicants"
+  headline: "Clinical Psychology PhD Programs — A Guide"
+  body: >-
+    Based on my own experiences navigating the application process, this guide covers
+    how to choose programs, how to write application materials, what to expect in
+    interviews, and how to think about funding and the academic job market. It includes
+    sample materials and links to additional resources.
+  url: "https://docs.google.com/document/d/19Gh4T4dTpA1tgPftkw2iAI04zOE9X7DV/edit?usp=sharing&ouid=117579138163099908841&rtpof=true&sd=true"
+  cta: "View the guide ↗"
+
+
+# ── Crisis / intro line for MA resources section ──────────────
+# Uses <strong> tags for the phone numbers — rendered as bold on the page.
+crisis_intro: >-
+  The following programs and services are specific to Massachusetts. If you're in
+  crisis, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline) or call
+  the Behavioral Health Help Line at <strong>833-773-2445</strong>.
+
+
+# ── Early Psychosis Services ──────────────────────────────────
+early_psychosis:
+  - name: "CEDAR — Center for Early Detection, Assessment & Response to Risk"
+    detail: "Boston area"
+    url: "http://www.cedarclinic.org/"
+  - name: "PREP — Prevention and Recovery in Early Psychosis"
+    detail: "Boston area"
+    url: "http://www.cedarclinic.org/index.php/related-psychosis-programs"
+  - name: "RISE — Recovery in Shared Experiences"
+    detail: "Cambridge Health Alliance"
+    url: "https://www.challiance.org/about/first-episode-psychosis"
+  - name: "FEPP — First-Episode and Early Psychosis Program"
+    detail: "Massachusetts General Hospital"
+    url: "https://www.massgeneral.org/schizophrenia/services/treatmentprograms.aspx?id=1571"
+  - name: "McLean OnTrack"
+    detail: "Belmont, MA"
+    url: "https://www.mcleanhospital.org/programs/mclean-ontrack"
+  - name: "STEER — Specialized Team for Early Engagement and Recovery"
+    detail: "Veterans · Bedford VA"
+    url: "https://www.mapnet.online/steer"
+  - name: "Massachusetts Psychosis Network for Early Treatment"
+    detail: "Find a program"
+    url: "https://www.mapnet.online/"
+
+
+# ── General Mental Health ─────────────────────────────────────
+general_mental_health:
+  - name: "Behavioral Health Help Line"
+    detail: "24/7 · 833-773-2445"
+    url: "https://www.mass.gov/info-details/behavioral-health-help-line-bhhl-faq"
+  - name: "Emergency Service Programs"
+    detail: "Community crisis · 1-877-382-1609"
+    url: "https://namimass.org/wp-content/uploads/esps.pdf"
+  - name: "Center for Psychiatric Rehabilitation — Boston University"
+    detail: "Wellness & recovery for adults with serious mental illness"
+    url: "https://cpr.bu.edu/about/"
+  - name: "NAMI Massachusetts"
+    detail: "Advocacy and peer support groups"
+    url: "https://namimass.org/"
+  - name: "DBSA Boston"
+    detail: "Mood disorders and bipolar disorder support"
+    url: "https://dbsaboston.org/"

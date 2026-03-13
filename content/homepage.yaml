@@ -1,0 +1,139 @@
+# ──────────────────────────────────────────────────────────────
+# Homepage content — jasminemote.com
+# Edit this file to update the text on the homepage.
+# Commit your changes and the site will rebuild automatically.
+#
+# ── Formatting tags you can use in any text field ─────────────
+#
+#   Italic:   <em>word</em>
+#   Bold:     <strong>word</strong>
+#   Link:     <a href="https://example.com">link text</a>
+#
+#   Avoid underlining — on the web, underline = link, which
+#   confuses readers. Use bold or italic for emphasis instead.
+#
+# ── A note on the "&" character ───────────────────────────────
+#
+#   Write "&" normally in plain text fields (tags, list items,
+#   labels). The site handles the conversion automatically.
+#
+#   In fields that use formatting tags — like bio, body text,
+#   and headlines — write "&amp;" instead of "&" if you need
+#   an ampersand, otherwise the page may not render correctly.
+#   Most of those fields don't have ampersands, so this
+#   probably won't come up.
+#
+# ──────────────────────────────────────────────────────────────
+
+
+# ── Headshot ──────────────────────────────────────────────────
+# To update the photo: drop the new file into public/ and update
+# the path below. Used in the hero section (desktop only).
+photo:
+  src: "/jasmine-headshot.png"
+  alt: "Jasmine Mote, PhD"
+
+
+# ── Hero ──────────────────────────────────────────────────────
+hero:
+  eyebrow: "Clinical Psychologist · Researcher · Writer"
+  headline: "Helping people understand the <em>science</em> of how they feel."
+  bio: >-
+    I'm a PhD clinical psychologist, researcher at Boston University, and therapist
+    in the Boston area. I write <em>Mental Healthy</em> — a newsletter on the science
+    of mental health for parents and people navigating real life.
+
+
+# ── Credential cards (2×2 grid below hero, all screen sizes) ──
+credentials:
+  - icon: "📬"
+    label: "Mental Healthy Newsletter"
+    sub: "Mental health science for parents & people — Substack"
+    url: "https://jasminemote.substack.com"
+    external: true
+  - icon: "🛋"
+    label: "Therapy — Cambridge Psychology Group"
+    sub: "Anxiety, OCD, perinatal mental health, life transitions"
+    url: "/therapy/"
+    external: false
+  - icon: "🔬"
+    label: "Research — Boston University"
+    sub: "AMP Lab · 25+ peer-reviewed publications"
+    url: "/research/"
+    external: false
+  - icon: "✍️"
+    label: "Writing — Scientific American & more"
+    sub: "Science of Parenting series + press & interviews"
+    url: "/writing/"
+    external: false
+
+
+# ── Newsletter section ────────────────────────────────────────
+newsletter:
+  intro: >-
+    Mental health science is complicated, contested, and deeply personal — especially
+    when you're pregnant, postpartum, or just trying to raise a kid while staying sane.
+    <em>Mental Healthy</em> makes the research accessible without making it simple.
+
+
+# ── About section ─────────────────────────────────────────────
+about:
+  # Credential items shown in the right column of the About section.
+  # Each item has a label (small caps category), value (main text), and sub (detail line).
+  credentials:
+    - label: "Affiliation"
+      value: "Boston University"
+      sub: "Research Asst. Professor · AMP Lab"
+    - label: "Practice"
+      value: "Cambridge Psychology Group"
+      sub: "Licensed Clinical Psychologist"
+    - label: "Research"
+      value: "25+ Publications"
+      sub: "Peer-reviewed · Emotion & social connection"
+    - label: "Writing"
+      value: "Mental Healthy"
+      sub: "Newsletter on Substack"
+  pullquote: >-
+    "I became a therapist and a writer for the same reason: because people deserve
+    honest, evidence-based answers about how their minds work."
+  body:
+    - >-
+      I'm a licensed clinical psychologist, researcher, and writer based in the Boston
+      area. My work sits at the intersection of science and lived experience — in my
+      research lab, my therapy practice, and on the page.
+    - >-
+      As a Research Assistant Professor at Boston University's AMP Lab, I study the
+      emotional and social experiences of people living with serious mental illness. As
+      a therapist at Cambridge Psychology Group, I work with adults navigating anxiety,
+      OCD, perinatal mental health, and major life transitions.
+  tags:
+    - "Perinatal mental health"
+    - "Anxiety & OCD"
+    - "Serious mental illness"
+    - "LGBTQIA+ affirmative"
+    - "Anti-racist practice"
+    - "Life transitions"
+
+
+# ── Therapy section ───────────────────────────────────────────
+therapy:
+  eyebrow: "Therapy — Boston Area"
+  headline: "Thoughtful, evidence-based therapy for <em>real</em> moments in life."
+  body: >-
+    I work with adults navigating anxiety, OCD, perinatal mental health challenges,
+    and major life transitions — including new parents, academics and professionals
+    under intense pressure, and people exploring questions of identity.
+  specialties:
+    - "Anxiety, OCD, and obsessive-compulsive spectrum"
+    - "Perinatal & postpartum mental health"
+    - "Life transitions (new parenthood, career, identity)"
+    - "Depression and mood difficulties"
+    - "Psychosis-spectrum and serious mental illness"
+    - "Academics, researchers, and high-stress professionals"
+  card:
+    title: "Ready to get started?"
+    body: >-
+      I see clients through Cambridge Psychology Group. You can learn more about
+      my practice and request an initial consultation on their website.
+    cta_text: "View my CPG profile →"
+    cta_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"

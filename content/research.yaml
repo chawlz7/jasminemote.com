@@ -1,0 +1,33 @@
+statement:
+  eyebrow: Research
+  headline: "The science of emotion, social connection & serious mental illness"
+  body: >
+    My research asks a deceptively simple question: how do people with schizophrenia experience
+    everyday social life? Using ecological momentary assessment (EMA) and smartphone sensing,
+    I study emotion, social motivation, and interpersonal connection in real-world contexts —
+    moving beyond the lab to understand how serious mental illness actually shapes daily experience.
+    This work spans health disparities, digital health interventions, and the development of
+    tools that people living with serious mental illness actually want to use.
+  affiliation: "Research Assistant Professor · Boston University Sargent College · AMP Lab"
+
+stats:
+  - number: "30+"
+    label: "Peer-reviewed publications"
+  - number: "BU"
+    label: "Research Asst. Professor<br>Sargent College — AMP Lab"
+  - number: "15+"
+    label: "Years of active research"
+
+focus_areas:
+  - title: "Schizophrenia & Psychosis Spectrum"
+    description: "Emotion experience, social motivation, and cognitive symptoms in schizophrenia spectrum disorders, studied across laboratory and daily-life contexts."
+  - title: "Ecological Momentary Assessment"
+    description: "Using experience sampling and EMA to measure affect, social behavior, and daily functioning in real-world settings outside the clinic."
+  - title: "Digital Health & Mobile Interventions"
+    description: "Developing and evaluating smartphone apps and technology-based tools to improve social functioning and quality of life in serious mental illness."
+  - title: "Social Functioning & Motivation"
+    description: "Quality of everyday social interactions, social effort and conscientiousness, and interpersonal connection in people with and without psychosis."
+  - title: "Mental Health Disparities"
+    description: "Racial, ethnic, and gender disparities in diagnosis, symptom presentation, and access to evidence-based care across the psychosis spectrum."
+  - title: "Emotion Science"
+    description: "Facial emotion perception, affect regulation, reward processing, and the relationship between emotion and behavior in clinical populations."

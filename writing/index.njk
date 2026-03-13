@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+title: "Writing & Press — Jasmine Mote, PhD"
+description: "Essays, articles, and press coverage by Jasmine Mote, PhD — clinical psychologist and science writer. Published in Scientific American, STAT News, and more."
+---
+
+{# ── PAGE HEADER ── #}
+<section class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">{{ writingPage.page.eyebrow }}</p>
+    <h1 class="page-headline">{{ writingPage.page.headline | safe }}</h1>
+    <p class="page-subhead">{{ writingPage.page.subhead | safe }}</p>
+    <div class="page-header-links">
+      <a href="{{ writingPage.newsletter_callout.url }}" class="btn-secondary" target="_blank" rel="noopener">Mental Healthy Newsletter ↗</a>
+    </div>
+  </div>
+</section>
+
+{# ── ESSAYS & ARTICLES ── #}
+<section class="writing-page-section">
+  <div class="container">
+
+    {# Newsletter callout #}
+    <div class="writing-nl-callout">
+      <div class="wnl-text">
+        <div class="wnl-kicker">{{ writingPage.newsletter_callout.kicker }}</div>
+        <div class="wnl-headline">{{ writingPage.newsletter_callout.headline }}</div>
+        <p class="wnl-body">{{ writingPage.newsletter_callout.body | safe }}</p>
+      </div>
+      <a href="{{ writingPage.newsletter_callout.url }}" class="btn-primary" target="_blank" rel="noopener">{{ writingPage.newsletter_callout.cta }}</a>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">Essays & <em>Articles</em></h2>
+    </div>
+
+    <div class="writing-grid writing-grid--full">
+      {% for item in writing %}
+        {% if item.category == "writing" %}
+          {% if item.url %}
+          <a href="{{ item.url }}" class="writing-card" target="_blank" rel="noopener">
+            <span class="writing-source">{{ item.source }}</span>
+            <h3 class="writing-title">{{ item.title }}</h3>
+            <span class="writing-arrow">Read ↗</span>
+          </a>
+          {% else %}
+          <div class="writing-card writing-card--no-link">
+            <span class="writing-source">{{ item.source }}</span>
+            <h3 class="writing-title">{{ item.title }}</h3>
+            {% if item.note %}<span class="writing-note">{{ item.note }}</span>{% endif %}
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{# ── PRESS & MEDIA ── #}
+<section class="press-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">Press & <em>Media</em></h2>
+    </div>
+
+    <div class="press-list">
+      {% for item in writing %}
+        {% if item.category == "press" %}
+        <div class="press-item">
+          {% if item.url %}
+          <a href="{{ item.url }}" class="press-item-link" target="_blank" rel="noopener">
+          {% endif %}
+            <span class="press-source">{{ item.source }}</span>
+            <span class="press-title">{{ item.title }}</span>
+            <span class="press-meta">
+              {% if item.note %}<span class="press-badge">{{ item.note }}</span>{% endif %}
+              {% if item.date %}<span class="press-date">{{ item.date }}</span>{% endif %}
+            </span>
+          {% if item.url %}
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>

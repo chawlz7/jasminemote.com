@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title or "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer" }}</title>
+  <meta name="description" content="{{ description or 'Jasmine Mote is a licensed clinical psychologist, researcher at Boston University, and writer. She sees therapy clients in the Boston area and writes Mental Healthy, a newsletter on the science of mental health for parents.' }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/css/main.css' | url }}">
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <a href="{{ '/' | url }}" class="nav-logo">Jasmine Mote, <em>PhD</em></a>
+        <ul class="nav-links">
+          <li><a href="{{ '/#newsletter' | url }}">Newsletter</a></li>
+          <li><a href="{{ '/writing/' | url }}">Writing</a></li>
+          <li><a href="{{ '/research/' | url }}">Research</a></li>
+          <li><a href="{{ '/resources/' | url }}">Resources</a></li>
+          <li><a href="{{ '/therapy/' | url }}" class="btn-nav">Work With Me</a></li>
+        </ul>
+        <button class="nav-hamburger" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-name">Jasmine Mote, PhD</span>
+        <ul class="footer-links">
+          <li><a href="https://jasminemote.substack.com" target="_blank" rel="noopener">Newsletter</a></li>
+          <li><a href="{{ '/writing/' | url }}">Writing</a></li>
+          <li><a href="{{ '/research/' | url }}">Research</a></li>
+          <li><a href="{{ '/resources/' | url }}">Resources</a></li>
+          <li><a href="{{ '/therapy/' | url }}">Work With Me</a></li>
+          <li><a href="{{ '/contact/' | url }}">Contact</a></li>
+        </ul>
+        <span class="footer-note">Somerville, MA</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="{{ '/js/main.js' | url }}"></script>
+</body>
+</html>

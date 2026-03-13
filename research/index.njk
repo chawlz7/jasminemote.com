@@ -1,0 +1,106 @@
+---
+layout: layouts/base.njk
+title: "Research — Jasmine Mote, PhD"
+description: "Jasmine Mote's research focuses on emotion, social connection, and serious mental illness. Research Assistant Professor at Boston University Sargent College."
+---
+
+{# ── PAGE HEADER ── #}
+<section class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">{{ research.statement.eyebrow }}</p>
+    <h1 class="page-headline">{{ research.statement.headline | safe }}</h1>
+    <p class="page-subhead">{{ research.statement.body }}</p>
+    <p class="page-affiliation">{{ research.statement.affiliation }}</p>
+    <div class="page-header-links">
+      <a href="https://scholar.google.com" class="btn-secondary" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <a href="{{ '/cv.pdf' | url }}" class="btn-secondary">Download CV</a>
+    </div>
+  </div>
+</section>
+
+{# ── STATS ── #}
+<section class="research-page-stats">
+  <div class="container">
+    <div class="research-stats">
+      {% for stat in research.stats %}
+      <div class="stat-cell">
+        <div class="stat-number">{{ stat.number }}</div>
+        <div class="stat-label">{{ stat.label | safe }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── RESEARCH FOCUS AREAS ── #}
+<section class="research-focus-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Research <em>Focus</em></h2>
+    </div>
+    <div class="research-focus-grid">
+      {% for area in research.focus_areas %}
+      <div class="research-focus-card">
+        <div class="rfc-number">0{{ loop.index }}</div>
+        <h3 class="rfc-title">{{ area.title }}</h3>
+        <p class="rfc-desc">{{ area.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── PUBLICATIONS ── #}
+<section class="publications-page-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">All <em>Publications</em></h2>
+      <a href="https://scholar.google.com" class="section-link" target="_blank" rel="noopener">Google Scholar ↗</a>
+    </div>
+
+    {# Publication timeline — fully automatic from publications.json #}
+    <div class="pub-timeline-label">Publications by year</div>
+    <div class="pub-timeline-chart">
+      {% for bar in publications | pubsChartData %}
+      <a href="#y{{ bar.year }}" class="ptb-bar" style="height: {{ bar.height }}px" title="{{ bar.year }}: {{ bar.label }}"></a>
+      {% endfor %}
+    </div>
+    <div class="pub-timeline-years">
+      {% for bar in publications | pubsChartData %}
+      <span>{{ bar.year }}</span>
+      {% endfor %}
+    </div>
+
+    {# Year-grouped publications list #}
+    {% for group in publications | groupByYear %}
+    <div id="y{{ group.year }}" class="pub-year-group">
+      <h3 class="pub-year-heading">{{ group.year }}</h3>
+      <div class="pub-year-list">
+        {% for pub in group.items %}
+        <div class="pub-entry{% if pub.url %} pub-entry--linked{% endif %}">
+          {% if pub.url %}
+          <a href="{{ pub.url }}" target="_blank" rel="noopener" class="pub-entry-link">
+          {% endif %}
+          <p class="pub-citation">
+            <span class="pub-authors-page">{{ pub.authors }}</span>
+            ({{ pub.year }}). {{ pub.title }}
+            {% if pub.journal %}<span class="pub-journal-page">{{ pub.journal }}</span>{% endif %}
+          </p>
+          {% if pub.url %}
+            <span class="pub-doi-link">View ↗</span>
+          </a>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+
+    <div class="research-links">
+      <a href="https://scholar.google.com" class="btn-secondary" target="_blank" rel="noopener">Google Scholar ↗</a>
+      <a href="{{ '/cv.pdf' | url }}" class="btn-secondary">Download CV</a>
+    </div>
+
+  </div>
+</section>

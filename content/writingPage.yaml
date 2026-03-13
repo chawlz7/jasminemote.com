@@ -1,0 +1,36 @@
+# ──────────────────────────────────────────────────────────────
+# Writing page content — jasminemote.com/writing/
+# Edit this file to update the text on the Writing & Press page.
+#
+# The writing articles and press items themselves are in:
+#   content/writing.json  ← add new articles and press clips there
+#
+# ── Formatting tags you can use in text fields ────────────────
+#
+#   Italic:   <em>word</em>
+#   Bold:     <strong>word</strong>
+#
+# ──────────────────────────────────────────────────────────────
+
+
+# ── Page header ───────────────────────────────────────────────
+page:
+  eyebrow: "Writing & Press"
+  headline: "Making the science of mental health <em>readable</em>"
+  subhead: >-
+    I write about psychology, parenting, and mental health for general audiences —
+    translating research into something people can actually use. My Substack newsletter,
+    <em>Mental Healthy</em>, is where most of my writing lives; the pieces below are
+    from other outlets.
+
+
+# ── Newsletter callout (top of the articles section) ──────────
+newsletter_callout:
+  kicker: "Newsletter — Free on Substack"
+  headline: "Mental Healthy"
+  body: >-
+    The science of mental health for parents and the people who love them. I write
+    about anxiety, sleep, child development, behavior, and what the research actually
+    says — in plain language.
+  url: "https://jasminemote.substack.com"
+  cta: "Read on Substack →"

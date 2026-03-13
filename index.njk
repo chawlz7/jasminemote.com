@@ -1,0 +1,217 @@
+---
+layout: layouts/base.njk
+title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
+---
+
+{# ── HERO ── #}
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <p class="hero-eyebrow fade-up d1">{{ homepage.hero.eyebrow }}</p>
+        <h1 class="hero-name fade-up d2">{{ homepage.hero.headline | safe }}</h1>
+        <p class="hero-bio fade-up d3">{{ homepage.hero.bio | safe }}</p>
+        <div class="hero-ctas fade-up d4">
+          <a href="{{ '/therapy/' | url }}" class="btn-primary">Work with me →</a>
+        </div>
+      </div>
+
+      <div class="hero-photo-col fade-up d5">
+        <div class="hero-photo-block">
+          <img src="{{ homepage.photo.src }}" alt="{{ homepage.photo.alt }}" class="hero-photo">
+          <div class="hero-photo-name">Jasmine Mote, <em>PhD</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-credentials-grid fade-up d5">
+      {% for cred in homepage.credentials %}
+      <div class="credential-pill">
+        <a href="{{ cred.url }}"{% if cred.external %} target="_blank" rel="noopener"{% endif %}>
+          <span class="pill-icon">{{ cred.icon }}</span>
+          <div>
+            <div class="pill-label">{{ cred.label }}</div>
+            <div class="pill-sub">{{ cred.sub }}</div>
+          </div>
+          <span class="pill-arrow">{% if cred.external %}↗{% else %}→{% endif %}</span>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── NEWSLETTER ── #}
+<section class="newsletter-spotlight" id="newsletter">
+  <div class="container">
+
+    <div class="newsletter-brand">
+      <div class="newsletter-logo-wrap">📓</div>
+      <div class="newsletter-name-block">
+        <div class="kicker">Newsletter</div>
+        <div class="nl-title">Mental Healthy</div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">Recent from <em>Mental Healthy</em></h2>
+      <a href="https://jasminemote.substack.com" class="section-link" target="_blank" rel="noopener">All posts ↗</a>
+    </div>
+
+    <p class="newsletter-intro">{{ homepage.newsletter.intro | safe }}</p>
+
+    <div class="posts-grid">
+      {% for post in substackPosts %}
+        <a href="{{ post.url }}" class="post-card{% if post.featured %} featured{% endif %}" target="_blank" rel="noopener">
+          <span class="post-tag">Mental Healthy</span>
+          <h3 class="post-title">{{ post.title }}</h3>
+          {% if post.featured %}
+            <p class="post-excerpt">{{ post.excerpt }}</p>
+          {% endif %}
+          <div class="post-meta">
+            {{ post.date | postDate }} ·
+            <span class="post-read-more">Read on Substack ↗</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+    <div class="subscribe-strip">
+      <div class="subscribe-strip-text">
+        <div class="slabel">Free Newsletter</div>
+        <div class="sheadline">Get Mental Healthy in your inbox</div>
+      </div>
+      <a href="https://jasminemote.substack.com" class="subscribe-btn" target="_blank" rel="noopener">
+        Subscribe on Substack →
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{# ── ABOUT STRIP ── #}
+<section class="about-strip" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div>
+        <div class="section-header">
+          <h2 class="section-title">About <em>Jasmine</em></h2>
+        </div>
+        <blockquote class="about-pull">{{ homepage.about.pullquote | safe }}</blockquote>
+        {% for para in homepage.about.body %}
+        <p class="about-body">{{ para | safe }}</p>
+        {% endfor %}
+        <div class="about-tags">
+          {% for tag in homepage.about.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        <div class="about-links">
+          <a href="https://jasminemote.substack.com" class="about-link" target="_blank" rel="noopener">Newsletter ↗</a>
+          <a href="{{ '/research/' | url }}" class="about-link">Research &amp; publications</a>
+          <a href="https://cambridgepsych.org/clinicians/jasmine-mote/" class="about-link" target="_blank" rel="noopener">Cambridge Psychology Group ↗</a>
+          <a href="{{ '/cv.pdf' | url }}" class="about-link">Download CV</a>
+        </div>
+      </div>
+
+      <div class="about-cred-block">
+        {% for cred in homepage.about.credentials %}
+        <div class="about-cred-item">
+          <div class="about-cred-label">{{ cred.label }}</div>
+          <div class="about-cred-value">{{ cred.value }}</div>
+          <div class="about-cred-sub">{{ cred.sub }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ── WRITING PREVIEW ── #}
+<section class="writing-section" id="writing">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Writing &amp; <em>Press</em></h2>
+      <a href="{{ '/writing/' | url }}" class="section-link">All writing →</a>
+    </div>
+    <div class="writing-grid">
+      {% for item in writing | slice(0, 6) %}
+        <a href="{{ item.url }}" class="writing-card" target="_blank" rel="noopener">
+          <span class="writing-source">{{ item.source }}</span>
+          <h3 class="writing-title">{{ item.title }}</h3>
+          <span class="writing-arrow">Read ↗</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── THERAPY CTA ── #}
+<section class="therapy-section" id="therapy">
+  <div class="container">
+    <div class="therapy-inner">
+      <div>
+        <p class="therapy-eyebrow">{{ homepage.therapy.eyebrow }}</p>
+        <h2 class="therapy-headline">{{ homepage.therapy.headline | safe }}</h2>
+        <p class="therapy-body">{{ homepage.therapy.body | safe }}</p>
+        <ul class="specialty-list">
+          {% for item in homepage.therapy.specialties %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <div class="therapy-card">
+          <h3 class="therapy-card-title">{{ homepage.therapy.card.title }}</h3>
+          <p class="therapy-card-body">{{ homepage.therapy.card.body | safe }}</p>
+          <a href="{{ homepage.therapy.card.cta_url }}" class="btn-primary" target="_blank" rel="noopener">
+            {{ homepage.therapy.card.cta_text }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ── RESEARCH PREVIEW ── #}
+<section class="research-section" id="research">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><em>Research</em></h2>
+      <a href="{{ '/research/' | url }}" class="section-link">All publications →</a>
+    </div>
+    <div class="research-stats">
+      <div class="stat-cell">
+        <div class="stat-number">25+</div>
+        <div class="stat-label">Peer-reviewed publications</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">BU</div>
+        <div class="stat-label">Research Asst. Professor<br>Sargent College — AMP Lab</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-number">∿</div>
+        <div class="stat-label">Emotion, social connection &amp; serious mental illness</div>
+      </div>
+    </div>
+    <div class="pub-list">
+      {% for pub in publications | slice(0, 4) %}
+        <div class="pub-item{% if pub.url %} pub-item--linked{% endif %}">
+          {% if pub.url %}
+            <a href="{{ pub.url }}" target="_blank" rel="noopener" class="pub-link">
+          {% endif %}
+          <span class="pub-year">{{ pub.year }}</span>
+          <span class="pub-title-text">
+            {{ pub.authors }} {{ pub.title }}
+            {% if pub.journal %}<span class="pub-journal">{{ pub.journal }}</span>{% endif %}
+          </span>
+          {% if pub.url %}</a>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="research-links">
+      <a href="{{ '/research/' | url }}" class="btn-secondary">Full publication list →</a>
+      <a href="https://scholar.google.com" class="btn-secondary" target="_blank" rel="noopener">Google Scholar ↗</a>
+    </div>
+  </div>
+</section>

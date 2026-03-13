@@ -1,0 +1,374 @@
+# jasminemote.com — Project README
+
+> **Status:** 4 of 7 pages complete. Homepage, Research, Writing, and Resources are built and deployed. Therapy, About, and Contact still needed.
+
+---
+
+## Project Overview
+
+This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), the professional website of Jasmine Mote, PhD — a licensed clinical psychologist, researcher at Boston University, and writer. The site is being rebuilt from a bare WordPress.com theme into a custom static site.
+
+**The through-line of the site:** Jasmine is a researcher, a therapist, and a writer, and all three roles are mutually reinforcing. The site should communicate that coherently rather than treating each role as a separate identity.
+
+---
+
+## Goals (in rough priority order)
+
+1. **Attract therapy clients** — biggest content gap in the current site; needs a dedicated, well-written therapy page
+2. **Grow the Substack** (*Mental Healthy*) — newsletter is front and center on the homepage; subscriber CTA prominent
+3. **Establish academic credibility** — publications list, BU affiliation, research overview
+4. **General professional polish** — the current WordPress theme is unstyled and generic; this redesign establishes a real visual identity
+
+---
+
+## Stack
+
+| Layer | Tool | Notes |
+|---|---|---|
+| Static site generator | [Eleventy (11ty)](https://www.11ty.dev) v3 | Templates in Nunjucks (`.njk`) |
+| CI/CD | GitHub Actions | Builds on push to main + daily 6am UTC cron |
+| Hosting | GitHub Pages | Free on public repos; custom domain support |
+| Source control | GitHub | Jasmine edits content files in-browser |
+| Newsletter | [Substack](https://jasminemote.substack.com) | RSS fetched at build time |
+| Fonts | Google Fonts | Playfair Display + DM Sans |
+| CSS | Hand-rolled, no framework | CSS custom properties throughout |
+
+**Why this stack:**
+- Jasmine is comfortable editing YAML/JSON files but doesn't want to touch code or a CMS admin UI
+- GitHub's in-browser file editor is sufficient for her update cadence (bio, publications, writing credits)
+- Substack posts surface automatically via RSS — zero maintenance
+- GitHub Actions + Pages is fully free on a public repo (vs Netlify free tier which caps at 300 build minutes/month — insufficient for daily scheduled rebuilds)
+- No separate hosting account to manage; everything lives in GitHub
+
+---
+
+## Design System
+
+**Palette** — derived from the *Mental Healthy* Substack logo (indigo/violet + botanical illustration style):
+
+```css
+--bg:         #F8F5F0;   /* warm off-white, main background */
+--bg-section: #F0EDE8;   /* slightly darker, alternate sections */
+--ink:        #1A1814;   /* near-black body text */
+--ink-mid:    #4A4640;   /* secondary text */
+--ink-light:  #948E86;   /* meta text, captions */
+--accent:     #4B3D8F;   /* indigo — primary accent, CTAs */
+--accent-lt:  #7B6EC0;   /* lighter indigo — decorative dots etc */
+--accent-bg:  #EDEAF8;   /* indigo tint — hover states, tags */
+--rule:       #DDD8D0;   /* borders, dividers */
+```
+
+**Typography:**
+- Display/headings: `Playfair Display` (serif) — italic variant used decoratively in headlines
+- Body/UI: `DM Sans` (weight 300 for body, 500 for labels/caps)
+- No system fonts anywhere
+
+**Aesthetic direction:** Editorial/magazine — think an independent publication, not a therapy directory listing. Generous whitespace, strong typographic hierarchy, card-based content grids, minimal decoration.
+
+**Key design patterns:**
+- Section headers: serif title left + small-caps link right, separated by a rule
+- Content grids: `gap: 1.5px; background: var(--rule)` creates a hairline-divided grid from white cards
+- Italic serif in headlines: used selectively for emphasis (e.g. "the *science* of how they feel")
+- Inner pages: `.page-header` section with eyebrow, serif headline, subhead; then content sections below
+
+---
+
+## Project Structure
+
+```
+jasminemote.com/
+├── .eleventy.js              # Eleventy config, custom filters
+├── .github/
+│   └── workflows/
+│       └── build.yml         # GitHub Actions: build + deploy on push + daily cron
+├── package.json
+├── .gitignore
+│
+├── index.njk                 # Homepage ✅
+├── research/
+│   └── index.njk             # Research page ✅
+├── writing/
+│   └── index.njk             # Writing & Press page ✅
+├── resources/
+│   └── index.njk             # Resources page ✅
+├── therapy/                  # ← Not yet built
+├── about/                    # ← Not yet built
+├── contact/                  # ← Not yet built
+│
+├── _includes/
+│   └── layouts/
+│       └── base.njk          # Shared shell: <head>, nav, footer
+│
+├── content/                  # Global data — auto-available in all templates
+│   ├── homepage.yaml         # ← Jasmine edits: homepage text & credentials
+│   ├── research.yaml         # ← Jasmine edits: research statement, stats, focus areas
+│   ├── writingPage.yaml      # ← Jasmine edits: writing page header + newsletter callout
+│   ├── resources.yaml        # ← Jasmine edits: PhD guide link + all resource lists
+│   ├── publications.json     # ← Jasmine edits: add new publications here
+│   ├── writing.json          # ← Jasmine edits: add new articles and press clips here
+│   └── substackPosts.js      # Fetches RSS at build time; fallback posts if offline
+│
+├── public/                   # Static assets copied to site root
+│   ├── CNAME                 # jasminemote.com — keeps custom domain on redeploy
+│   └── jasmine-headshot.png  # Headshot photo
+│
+└── src/
+    ├── css/
+    │   └── main.css          # All styles (no preprocessor)
+    └── js/
+        └── main.js           # Mobile nav toggle only
+```
+
+**Eleventy output:** `_site/` (gitignored, rebuilt by GitHub Actions on deploy)
+
+---
+
+## Site Architecture
+
+| URL | Template | Status | Notes |
+|---|---|---|---|
+| `/` | `index.njk` | ✅ Built | Full homepage |
+| `/research/` | `research/index.njk` | ✅ Built | Publications, bar chart, focus areas |
+| `/writing/` | `writing/index.njk` | ✅ Built | Essays & press from `writing.json` |
+| `/resources/` | `resources/index.njk` | ✅ Built | PhD guide + MA mental health resources |
+| `/therapy/` | `therapy/index.njk` | ❌ Not started | **Highest priority** — client acquisition |
+| `/about/` | `about/index.njk` | ❌ Not started | Expanded bio, photo, CV download |
+| `/contact/` | `contact/index.njk` | ❌ Not started | Simple contact / therapy intake note |
+
+---
+
+## Eleventy Config Notes
+
+**Custom filters** (defined in `.eleventy.js`):
+
+| Filter | Usage | Description |
+|---|---|---|
+| `postDate` | `date \| postDate` | Formats a JS Date as "March 2025" |
+| `isoDate` | `date \| isoDate` | ISO string for `<time datetime="...">` |
+| `truncate(n)` | `str \| truncate(200)` | Truncates string to n chars with ellipsis |
+| `stripHtml` | `str \| stripHtml` | Strips HTML tags (used on RSS excerpts) |
+| `slice(start, end)` | `arr \| slice(0, 6)` | Array slice — used to limit homepage writing cards |
+| `groupByYear` | `publications \| groupByYear` | Groups pub array by year → `[{ year, items }]` newest first |
+| `pubsChartData` | `publications \| pubsChartData` | Builds bar chart data scaled to 120px max height |
+
+**Global data files** (auto-available in all templates as the variable name matching the filename):
+
+| Variable | File | Contents |
+|---|---|---|
+| `homepage` | `content/homepage.yaml` | All homepage editable text |
+| `research` | `content/research.yaml` | Research statement, stats, focus areas |
+| `writingPage` | `content/writingPage.yaml` | Writing page header + newsletter callout |
+| `resources` | `content/resources.yaml` | PhD guide + MA resource lists |
+| `publications` | `content/publications.json` | Array of 30+ publications |
+| `writing` | `content/writing.json` | Array of writing articles + press items |
+| `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (RSS fetch) |
+
+**Passthrough copy:**
+- `src/css/` → `_site/css/`
+- `src/js/` → `_site/js/`
+- `public/` → `_site/` (use for favicon, og images, cv.pdf, robots.txt etc.)
+
+---
+
+## Substack RSS Integration
+
+**Feed URL:** `https://jasminemote.substack.com/feed`
+
+Fetched in `content/substackPosts.js` at build time using `node-fetch` and `fast-xml-parser`. Returns an array of the 3 most recent posts. If the fetch fails (network unavailable, Substack down), falls back to hardcoded recent posts so the build never breaks.
+
+Each post object:
+```js
+{
+  title: "Post title",
+  url: "https://jasminemote.substack.com/p/...",
+  date: Date object,
+  excerpt: "Stripped, truncated text excerpt (200 chars)",
+  featured: true   // only the first post
+}
+```
+
+**Scheduled rebuilds:** GitHub Actions runs a daily 6am UTC cron build so new Substack posts appear without manual intervention. Jasmine can also trigger a manual rebuild from the Actions tab → "Build and Deploy" → "Run workflow".
+
+---
+
+## Content Jasmine Can Edit (No Code Required)
+
+All content files live in `content/`. Open any file in GitHub's browser editor, make changes, and commit — the site rebuilds automatically in about a minute.
+
+---
+
+### Homepage text — `content/homepage.yaml`
+
+Controls all major text on the homepage: hero headline and bio, credential cards, newsletter intro, about section body and pullquote, therapy section. The file has comments explaining every field.
+
+---
+
+### Research page — `content/research.yaml`
+
+Controls the research statement (eyebrow, headline, body, affiliation), the three stats cells, and the six focus area cards.
+
+```yaml
+stats:
+  - number: "30+"
+    label: "Peer-reviewed publications"
+```
+
+```yaml
+focus_areas:
+  - title: "Schizophrenia & Psychosis Spectrum"
+    description: "..."
+```
+
+---
+
+### Publications — `content/publications.json`
+
+Add a new object to the **top** of the array (newest first):
+
+```json
+{
+  "year": 2026,
+  "authors": "Mote, J., & Collaborator, A.",
+  "title": "Title of the paper.",
+  "journal": "Journal Name, vol(issue), pages.",
+  "url": "https://doi.org/..."
+}
+```
+
+Leave `"url": ""` if no public link yet. The publications bar chart updates automatically when new entries are added.
+
+---
+
+### Writing & Press — `content/writing.json`
+
+Add a new writing article:
+```json
+{
+  "category": "writing",
+  "source": "Publication Name",
+  "title": "Article title",
+  "url": "https://..."
+}
+```
+
+Add a new press/media item:
+```json
+{
+  "category": "press",
+  "source": "Outlet Name",
+  "title": "Article or segment title",
+  "url": "https://...",
+  "date": "Month Year",
+  "note": "Interview"
+}
+```
+
+Leave `"url": ""` and add `"note": "description"` for items without a public link.
+
+---
+
+### Writing page text — `content/writingPage.yaml`
+
+Controls the page header (eyebrow, headline, subhead) and the newsletter callout box (kicker, headline, body text, Substack URL, button label). Update this if the newsletter description changes.
+
+---
+
+### Resources — `content/resources.yaml`
+
+Controls the PhD guide callout (update the `url` field when the guide moves) and both resource lists. To add a resource:
+
+```yaml
+early_psychosis:          # or general_mental_health
+  - name: "Program Name"
+    detail: "Location or descriptor"
+    url: "https://..."
+```
+
+---
+
+## Deployment Setup
+
+**Platform: GitHub Actions + GitHub Pages (public repo, free tier)**
+
+Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month, which a daily scheduled rebuild plus dev pushes would exhaust. GitHub Actions gives 2,000 free minutes/month on public repos — effectively unlimited for this site.
+
+### One-time setup (already done for existing pages — reference for new deploys)
+
+1. **GitHub repo** — public repo, GitHub Pages enabled under Settings → Pages → Source: "GitHub Actions"
+2. **Custom domain** — Settings → Pages → Custom domain → `jasminemote.com`
+   - `public/CNAME` file contains `jasminemote.com` — preserves custom domain across deploys
+3. **DNS** — `A` records at registrar pointing to GitHub Pages IPs:
+   ```
+   185.199.108.153
+   185.199.109.153
+   185.199.110.153
+   185.199.111.153
+   ```
+   Plus `CNAME`: `www` → `[username].github.io`
+4. **HTTPS** — Settings → Pages → Enforce HTTPS (available once DNS propagates)
+
+### How deploys work
+
+- **On every push to `main`** — Actions builds and deploys automatically (~1 min)
+- **Daily at 6am UTC** — scheduled build picks up new Substack posts
+- **Manual trigger** — Actions tab → "Build and Deploy" → "Run workflow"
+
+---
+
+## Assets Needed
+
+| Asset | Status | Notes |
+|---|---|---|
+| Headshot / photo | ✅ Added | `public/jasmine-headshot.png` — professional session still recommended |
+| Favicon | ❌ Missing | Create from Mental Healthy logo or initials lockup; drop in `public/` |
+| CV PDF | ❌ Missing | Drop into `public/cv.pdf` — linked from Research page |
+| OG image | ❌ Missing | For social sharing previews; 1200×630px; drop in `public/` |
+| Google Scholar URL | ❌ Placeholder | Update the two `https://scholar.google.com` links in `research/index.njk` |
+| DOI URLs for publications | ❌ Mostly empty | Fill in `"url"` fields in `content/publications.json` |
+
+---
+
+## Key Design Decisions
+
+Decisions made during the initial design conversation (Claude Code, March 2026):
+
+- **Platform:** Static site (Eleventy + GitHub Pages) over WordPress, Squarespace, or Webflow. Jasmine comfortable with file editing; GitHub in-browser editor is sufficient for her update cadence.
+- **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
+- **RSS fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh.
+- **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
+- **Therapy page is the biggest content gap** — the current site barely mentions her clinical practice. A full `/therapy/` page is high priority.
+- **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
+- **Publications bar chart is fully automatic** — adding a new pub to `publications.json` updates the chart and year groupings with no template changes needed.
+
+---
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server with live reload
+npm start
+# → http://localhost:8080
+
+# Production build
+npm run build
+# → output in _site/
+```
+
+**Note:** The Substack RSS fetch will fail in local dev if you're offline or if Substack's feed blocks the request. The fallback posts will be used automatically — this is expected behavior and fine for local work.
+
+---
+
+## Next Steps (in rough priority order)
+
+- [ ] Build `/therapy/` page — highest ROI, primary client acquisition
+- [ ] Build `/about/` page — expanded bio, photo, CV download
+- [ ] Build `/contact/` page — simple contact + note about therapy intake
+- [ ] Add CV PDF to `public/cv.pdf` (linked from Research page already)
+- [ ] Add favicon to `public/`
+- [ ] Add OG/social meta tags to `_includes/layouts/base.njk`
+- [ ] Update Google Scholar URL in `research/index.njk` (currently a placeholder)
+- [ ] Fill in DOI `"url"` fields in `content/publications.json`
+- [ ] Confirm domain registrar situation before any DNS changes (may be WordPress.com controlled)

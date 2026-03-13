@@ -1,0 +1,69 @@
+---
+layout: layouts/base.njk
+title: "Resources — Jasmine Mote, PhD"
+description: "Mental health resources in Massachusetts and a guide to clinical psychology PhD programs, compiled by Jasmine Mote, PhD."
+---
+
+{# ── PAGE HEADER ── #}
+<section class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">{{ resources.page.eyebrow }}</p>
+    <h1 class="page-headline">{{ resources.page.headline | safe }}</h1>
+    <p class="page-subhead">{{ resources.page.subhead }}</p>
+  </div>
+</section>
+
+{# ── PHD GUIDE ── #}
+<section class="resources-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">PhD <em>Guide</em></h2>
+    </div>
+
+    <div class="writing-nl-callout">
+      <div class="wnl-text">
+        <div class="wnl-kicker">{{ resources.phd_guide.kicker }}</div>
+        <div class="wnl-headline">{{ resources.phd_guide.headline }}</div>
+        <p class="wnl-body">{{ resources.phd_guide.body }}</p>
+      </div>
+      <a href="{{ resources.phd_guide.url }}" class="btn-primary" target="_blank" rel="noopener">{{ resources.phd_guide.cta }}</a>
+    </div>
+
+  </div>
+</section>
+
+{# ── MA MENTAL HEALTH RESOURCES ── #}
+<section class="resources-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">Massachusetts Mental <em>Health</em> Resources</h2>
+    </div>
+
+    <p class="page-subhead" style="margin-bottom: 2.5rem;">{{ resources.crisis_intro | safe }}</p>
+
+    {# Early Psychosis — items driven by resources.yaml #}
+    <p class="resources-subheading">Early Psychosis Services</p>
+    <div class="resource-list">
+      {% for item in resources.early_psychosis %}
+      <a href="{{ item.url }}" class="resource-item resource-item--link" target="_blank" rel="noopener">
+        <span class="resource-name">{{ item.name }}</span>
+        <span class="resource-detail resource-link-arrow">{{ item.detail }} ↗</span>
+      </a>
+      {% endfor %}
+    </div>
+
+    {# General Mental Health — items driven by resources.yaml #}
+    <p class="resources-subheading">General Mental Health</p>
+    <div class="resource-list">
+      {% for item in resources.general_mental_health %}
+      <a href="{{ item.url }}" class="resource-item resource-item--link" target="_blank" rel="noopener">
+        <span class="resource-name">{{ item.name }}</span>
+        <span class="resource-detail resource-link-arrow">{{ item.detail }} ↗</span>
+      </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
