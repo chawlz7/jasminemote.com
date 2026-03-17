@@ -1,52 +1,41 @@
 const fetch = require("node-fetch");
-const { XMLParser } = require("fast-xml-parser");
 
 module.exports = async function() {
-  const FEED_URL = "https://jasminemote.substack.com/feed";
-  const POST_COUNT = 3;
+  const API_URL = "https://jasminemote.substack.com/api/v1/posts?limit=3";
 
   try {
-    const response = await fetch(FEED_URL, {
+    const response = await fetch(API_URL, {
       headers: { "User-Agent": "jasminemote.com site build" }
     });
 
     if (!response.ok) {
-      console.warn(`[RSS] Feed fetch failed: ${response.status}`);
+      console.warn(`[Substack] API fetch failed: ${response.status}`);
       return fallbackPosts();
     }
 
-    const xml = await response.text();
-    const parser = new XMLParser({
-      ignoreAttributes: false,
-      attributeNamePrefix: "@_"
-    });
-    const result = parser.parse(xml);
-    const items = result?.rss?.channel?.item ?? [];
+    const items = await response.json();
 
-    const posts = items.slice(0, POST_COUNT).map((item, i) => {
-      const rawExcerpt = item.description || item["content:encoded"] || "";
-      const stripped = rawExcerpt.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
-      const excerpt = stripped.length > 300
-        ? stripped.slice(0, 300).trimEnd() + "…"
-        : stripped;
-
-      const image = item.enclosure?.["@_url"] || null;
+    const posts = items.slice(0, 3).map((item, i) => {
+      const rawExcerpt = item.truncated_body_text || item.subtitle || "";
+      const excerpt = rawExcerpt.length > 300
+        ? rawExcerpt.slice(0, 300).trimEnd() + "…"
+        : rawExcerpt;
 
       return {
         title: item.title || "Untitled",
-        url: item.link || "#",
-        date: item.pubDate ? new Date(item.pubDate) : new Date(),
+        url: item.canonical_url || "#",
+        date: item.post_date ? new Date(item.post_date) : new Date(),
         excerpt,
-        image,
+        image: item.cover_image || null,
         featured: i === 0
       };
     });
 
-    console.log(`[RSS] Fetched ${posts.length} posts from Substack`);
+    console.log(`[Substack] Fetched ${posts.length} posts from API`);
     return posts;
 
   } catch (err) {
-    console.warn(`[RSS] Error fetching feed: ${err.message}`);
+    console.warn(`[Substack] Error fetching posts: ${err.message}`);
     return fallbackPosts();
   }
 };

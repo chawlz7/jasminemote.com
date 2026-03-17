@@ -29,7 +29,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 | CI/CD | GitHub Actions | Builds on push to main + daily 6am UTC cron |
 | Hosting | GitHub Pages | Free on public repos; custom domain support |
 | Source control | GitHub | Jasmine edits content files in-browser |
-| Newsletter | [Substack](https://jasminemote.substack.com) | RSS fetched at build time |
+| Newsletter | [Substack](https://jasminemote.substack.com) | JSON API fetched at build time |
 | Contact form | [Web3Forms](https://web3forms.com) | Free tier; access key in `content/workWithMe.yaml` |
 | Fonts | Google Fonts | Playfair Display + DM Sans |
 | CSS | Hand-rolled, no framework | CSS custom properties throughout |
@@ -164,7 +164,7 @@ jasminemote.com/
 | `workWithMe` | `content/workWithMe.yaml` | Work With Me page text + Formspree endpoint |
 | `publications` | `content/publications.json` | Array of 30+ publications |
 | `writing` | `content/writing.json` | Array of writing articles + press items |
-| `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (RSS fetch) |
+| `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (JSON API fetch) |
 
 **Passthrough copy:**
 - `src/css/` → `_site/css/`
@@ -173,11 +173,11 @@ jasminemote.com/
 
 ---
 
-## Substack RSS Integration
+## Substack Integration
 
-**Feed URL:** `https://jasminemote.substack.com/feed`
+**API URL:** `https://jasminemote.substack.com/api/v1/posts?limit=3`
 
-Fetched in `content/substackPosts.js` at build time using `node-fetch` and `fast-xml-parser`. Returns an array of the 3 most recent posts. If the fetch fails (network unavailable, Substack down), falls back to hardcoded recent posts so the build never breaks.
+Fetched in `content/substackPosts.js` at build time using `node-fetch`. Returns an array of the 3 most recent posts. If the fetch fails (network unavailable, Substack down), falls back to hardcoded recent posts so the build never breaks.
 
 Each post object:
 ```js
@@ -185,13 +185,15 @@ Each post object:
   title: "Post title",
   url: "https://jasminemote.substack.com/p/...",
   date: Date object,
-  excerpt: "Post subtitle (from RSS description field — the subtitle Jasmine sets per post in Substack)",
-  image: "https://substackcdn.com/...",  // from RSS <enclosure> tag; null if absent
+  excerpt: "Truncated body text or subtitle from Substack",
+  image: "https://substackcdn.com/...",  // cover_image field; null if absent
   featured: true   // only the first post
 }
 ```
 
-**Image source:** The RSS `<enclosure>` tag provides the cover image URL for each post (served via Substack's CDN). This is the same image shown at the top of the post on Substack.
+**Image source:** The `cover_image` field in the API response provides the post's cover image URL (served via Substack's CDN).
+
+**Note:** The RSS feed (`/feed`) was previously used but was found to return 403 errors from GitHub Actions runners (Azure datacenter IPs). The JSON API does not have this restriction.
 
 **Scheduled rebuilds:** GitHub Actions runs a daily 6am UTC cron build so new Substack posts appear without manual intervention. Jasmine can also trigger a manual rebuild from the Actions tab → "Build and Deploy" → "Run workflow".
 
@@ -352,14 +354,14 @@ Decisions made during the initial build (Claude Code, March 2026):
 
 - **Platform:** Static site (Eleventy + GitHub Pages) over WordPress, Squarespace, or Webflow. Jasmine comfortable with file editing; GitHub in-browser editor is sufficient for her update cadence.
 - **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
-- **RSS fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh.
+- **API fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh. Uses Substack's JSON API (`/api/v1/posts`) rather than RSS — the RSS feed returns 403 from GitHub Actions runners.
 - **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
 - **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG and Psychology Today; all other inquiries go through the Web3Forms contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
 - **Publications bar chart is fully automatic** — adding a new pub to `publications.json` updates the chart and year groupings with no template changes needed.
-- **Substack post images via RSS enclosure** — each post card on the homepage shows the post's cover image, pulled from the `<enclosure>` tag in the RSS feed. No manual maintenance required; images update automatically with each build.
+- **Substack post images via API** — each post card on the homepage shows the post's cover image, pulled from the `cover_image` field in the JSON API response. No manual maintenance required; images update automatically with each build.
 - **Editorial post grid layout** — newsletter section uses a `7fr 4fr` two-column grid: featured post spans both rows on the left (large image + title + subtitle), two supporting posts stack on the right (each with image + title). Cards are visually separated with individual borders and gap spacing rather than hairline-divided.
-- **Substack subtitle as excerpt** — the `description` RSS field (which maps to the post subtitle Jasmine sets in Substack) is used as the excerpt on the featured card, rather than the raw start of the article body.
+- **Substack excerpt** — the `truncated_body_text` API field (falling back to `subtitle`) is used as the excerpt on post cards.
 
 ---
 
@@ -378,7 +380,7 @@ npm run build
 # → output in _site/
 ```
 
-**Note:** The Substack RSS fetch will fail in local dev if you're offline or if Substack's feed blocks the request. The fallback posts will be used automatically — this is expected behavior and fine for local work.
+**Note:** The Substack API fetch will fail in local dev if you're offline. The fallback posts will be used automatically — this is expected behavior and fine for local work.
 
 ---
 
