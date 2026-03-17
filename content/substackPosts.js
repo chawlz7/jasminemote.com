@@ -1,50 +1,19 @@
-const fetch = require("node-fetch");
+const fs = require("fs");
+const path = require("path");
 
-module.exports = async function() {
-  const SUBSTACK_URL = "https://jasminemote.substack.com/api/v1/posts?limit=3";
-  const SCRAPER_KEY = process.env.SCRAPER_API_KEY;
-  const API_URL = SCRAPER_KEY
-    ? `https://api.scraperapi.com?api_key=${SCRAPER_KEY}&url=${encodeURIComponent(SUBSTACK_URL)}`
-    : SUBSTACK_URL;
-
+module.exports = function() {
   try {
-    const response = await fetch(API_URL, {
-      headers: { "User-Agent": "jasminemote.com site build" }
-    });
-
-    if (!response.ok) {
-      console.warn(`[Substack] API fetch failed: ${response.status}`);
-      return fallbackPosts();
-    }
-
-    const items = await response.json();
-
-    const posts = items.slice(0, 3).map((item, i) => {
-      const rawExcerpt = item.truncated_body_text || item.subtitle || "";
-      const excerpt = rawExcerpt.length > 300
-        ? rawExcerpt.slice(0, 300).trimEnd() + "…"
-        : rawExcerpt;
-
-      return {
-        title: item.title || "Untitled",
-        url: item.canonical_url || "#",
-        date: item.post_date ? new Date(item.post_date) : new Date(),
-        excerpt,
-        image: item.cover_image || null,
-        featured: i === 0
-      };
-    });
-
-    console.log(`[Substack] Fetched ${posts.length} posts from API`);
-    return posts;
-
+    const dataPath = path.join(__dirname, "substackPostsData.json");
+    const posts = JSON.parse(fs.readFileSync(dataPath, "utf8"));
+    // Dates are stored as ISO strings; restore as Date objects for Eleventy filters
+    return posts.map(post => ({ ...post, date: new Date(post.date) }));
   } catch (err) {
-    console.warn(`[Substack] Error fetching posts: ${err.message}`);
+    console.warn(`[Substack] Could not read substackPostsData.json: ${err.message}`);
     return fallbackPosts();
   }
 };
 
-// Shown if the feed is unreachable at build time (e.g. local dev offline)
+// Shown if substackPostsData.json is missing (e.g. fresh clone before first update)
 function fallbackPosts() {
   return [
     {

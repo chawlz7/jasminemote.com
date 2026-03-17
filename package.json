@@ -6,7 +6,8 @@
   "scripts": {
     "build": "eleventy",
     "start": "eleventy --serve",
-    "dev": "eleventy --serve --watch"
+    "dev": "eleventy --serve --watch",
+    "update-substack": "node scripts/update-substack.js"
   },
   "keywords": [],
   "author": "",
