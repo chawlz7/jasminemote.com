@@ -39,6 +39,7 @@ jobs:
         run: npm run build
         env:
           ELEVENTY_PATH_PREFIX: /jasminemote.com/
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

@@ -1,7 +1,11 @@
 const fetch = require("node-fetch");
 
 module.exports = async function() {
-  const API_URL = "https://jasminemote.substack.com/api/v1/posts?limit=3";
+  const SUBSTACK_URL = "https://jasminemote.substack.com/api/v1/posts?limit=3";
+  const SCRAPER_KEY = process.env.SCRAPER_API_KEY;
+  const API_URL = SCRAPER_KEY
+    ? `https://api.scraperapi.com?api_key=${SCRAPER_KEY}&url=${encodeURIComponent(SUBSTACK_URL)}`
+    : SUBSTACK_URL;
 
   try {
     const response = await fetch(API_URL, {
