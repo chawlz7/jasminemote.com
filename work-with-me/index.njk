@@ -70,9 +70,12 @@ description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology 
         <div class="wwm-success" id="wwm-success">
           <strong>Message sent!</strong> Thanks for reaching out — I'll get back to you as soon as I can.
         </div>
-        <form class="wwm-form" action="{{ workWithMe.collaboration.form_endpoint }}" method="POST">
-          <input type="hidden" name="_subject" value="New inquiry from jasminemote.com">
-          <input type="hidden" name="_next" value="https://jasminemote.com/work-with-me/?sent=true">
+        <form class="wwm-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="{{ workWithMe.collaboration.web3forms_key }}">
+          <input type="hidden" name="subject" value="New inquiry from jasminemote.com">
+          <input type="hidden" name="from_name" value="jasminemote.com">
+          <input type="hidden" name="redirect" value="https://jasminemote.com/work-with-me/?sent=true">
+          <input type="checkbox" name="botcheck" style="display:none;">
           <div class="form-group">
             <label class="form-label" for="name">Name</label>
             <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
