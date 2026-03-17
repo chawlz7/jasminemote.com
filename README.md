@@ -29,7 +29,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 | CI/CD | GitHub Actions | Builds on push to main + daily 6am UTC cron |
 | Hosting | GitHub Pages | Free on public repos; custom domain support |
 | Source control | GitHub | Jasmine edits content files in-browser |
-| Newsletter | [Substack](https://jasminemote.substack.com) | JSON API fetched at build time |
+| Newsletter | [Substack](https://jasminemote.substack.com) | Committed JSON file, updated by Mac Mini cron |
 | Contact form | [Web3Forms](https://web3forms.com) | Free tier; access key in `content/workWithMe.yaml` |
 | Fonts | Google Fonts | Playfair Display + DM Sans |
 | CSS | Hand-rolled, no framework | CSS custom properties throughout |
@@ -37,7 +37,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 **Why this stack:**
 - Jasmine is comfortable editing YAML/JSON files but doesn't want to touch code or a CMS admin UI
 - GitHub's in-browser file editor is sufficient for her update cadence (bio, publications, writing credits)
-- Substack posts surface automatically via RSS — zero maintenance
+- Substack posts are committed as a JSON file and updated daily by a Mac Mini cron job — Substack blocks HTTP requests from GitHub Actions runners (Azure IPs), so fetching at build time isn't viable
 - GitHub Actions + Pages is fully free on a public repo (vs Netlify free tier which caps at 300 build minutes/month — insufficient for daily scheduled rebuilds)
 - No separate hosting account to manage; everything lives in GitHub
 
@@ -109,7 +109,12 @@ jasminemote.com/
 │   ├── workWithMe.yaml       # ← Jasmine edits: Work With Me page text + Formspree endpoint
 │   ├── publications.json     # ← Jasmine edits: add new publications here
 │   ├── writing.json          # ← Jasmine edits: add new articles and press clips here
-│   └── substackPosts.js      # Fetches RSS at build time; fallback posts if offline
+│   ├── substackPosts.js      # Reads substackPostsData.json; fallback posts if file missing
+│   └── substackPostsData.json  # ← Committed JSON of 3 most recent Substack posts (updated by cron)
+│
+├── scripts/
+│   ├── update-substack.js    # Fetches Substack JSON API locally; writes substackPostsData.json
+│   └── update-and-push.sh   # Shell script: fetch + commit + push (runs on Mac Mini or any machine)
 │
 ├── public/                   # Static assets copied to site root
 │   ├── CNAME                 # jasminemote.com — keeps custom domain on redeploy
@@ -164,7 +169,7 @@ jasminemote.com/
 | `workWithMe` | `content/workWithMe.yaml` | Work With Me page text + Formspree endpoint |
 | `publications` | `content/publications.json` | Array of 30+ publications |
 | `writing` | `content/writing.json` | Array of writing articles + press items |
-| `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (JSON API fetch) |
+| `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (reads from committed `substackPostsData.json`) |
 
 **Passthrough copy:**
 - `src/css/` → `_site/css/`
@@ -175,27 +180,49 @@ jasminemote.com/
 
 ## Substack Integration
 
-**API URL:** `https://jasminemote.substack.com/api/v1/posts?limit=3`
+### Architecture: committed JSON, not fetched at build time
 
-Fetched in `content/substackPosts.js` at build time using `node-fetch`. Returns an array of the 3 most recent posts. If the fetch fails (network unavailable, Substack down), falls back to hardcoded recent posts so the build never breaks.
+Substack actively blocks HTTP requests from GitHub Actions runners (Azure datacenter IPs). Both the RSS feed (`/feed`) and the JSON API (`/api/v1/posts`) return 403 or 404 from those IPs — proxy services (e.g. ScraperAPI) are also detected and blocked. **Fetching Substack data at build time is not viable from GitHub Actions.**
 
-Each post object:
-```js
+**Solution:** The Substack post data is committed directly to the repo as `content/substackPostsData.json`. The build just reads that file — no network call required. A cron job on a local Mac Mini fetches the data and pushes any changes, which triggers a new GitHub Pages build.
+
+### How it works
+
+1. **Mac Mini cron** — runs `scripts/update-and-push.sh` daily at 7am
+2. The script calls `node scripts/update-substack.js`, which fetches `https://jasminemote.substack.com/api/v1/posts?limit=3` from a residential IP (not blocked)
+3. If the posts have changed, it commits `content/substackPostsData.json` and pushes to `main`
+4. GitHub Actions picks up the push and rebuilds the site (~1 min)
+5. If posts haven't changed, the script exits silently with no commit
+
+### Running manually
+
+```bash
+# Fetch latest posts and push (if changed)
+bash scripts/update-and-push.sh
+
+# Or just fetch and write the JSON without pushing
+npm run update-substack
+```
+
+Anyone with repo access can run `scripts/update-and-push.sh` to force a post refresh — including Jasmine from her own machine.
+
+### Post data format
+
+Each entry in `content/substackPostsData.json`:
+```json
 {
-  title: "Post title",
-  url: "https://jasminemote.substack.com/p/...",
-  date: Date object,
-  excerpt: "Truncated body text or subtitle from Substack",
-  image: "https://substackcdn.com/...",  // cover_image field; null if absent
-  featured: true   // only the first post
+  "title": "Post title",
+  "url": "https://jasminemote.substack.com/p/...",
+  "date": "2025-03-01T12:00:00.000Z",
+  "excerpt": "Truncated body text or subtitle from Substack",
+  "image": "https://substackcdn.com/...",
+  "featured": true
 }
 ```
 
-**Image source:** The `cover_image` field in the API response provides the post's cover image URL (served via Substack's CDN).
+`content/substackPosts.js` reads this file and converts `date` strings back to `Date` objects for Eleventy. If the file is missing or unreadable, it falls back to hardcoded posts so the build never breaks.
 
-**Note:** The RSS feed (`/feed`) was previously used but was found to return 403 errors from GitHub Actions runners (Azure datacenter IPs). The JSON API does not have this restriction.
-
-**Scheduled rebuilds:** GitHub Actions runs a daily 6am UTC cron build so new Substack posts appear without manual intervention. Jasmine can also trigger a manual rebuild from the Actions tab → "Build and Deploy" → "Run workflow".
+**Image source:** The `cover_image` field in the Substack API response; `null` if a post has no cover image.
 
 ---
 
@@ -328,7 +355,8 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 ### How deploys work
 
 - **On every push to `main`** — Actions builds and deploys automatically (~1 min)
-- **Daily at 6am UTC** — scheduled build picks up new Substack posts
+- **Daily at 6am UTC** — scheduled build as a safety net for any missed pushes
+- **Via Substack cron** — the Mac Mini cron job runs daily at 7am, fetches new posts, and pushes `substackPostsData.json` if changed — this push triggers a new build automatically
 - **Manual trigger** — Actions tab → "Build and Deploy" → "Run workflow"
 
 ---
@@ -354,7 +382,7 @@ Decisions made during the initial build (Claude Code, March 2026):
 
 - **Platform:** Static site (Eleventy + GitHub Pages) over WordPress, Squarespace, or Webflow. Jasmine comfortable with file editing; GitHub in-browser editor is sufficient for her update cadence.
 - **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
-- **API fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh. Uses Substack's JSON API (`/api/v1/posts`) rather than RSS — the RSS feed returns 403 from GitHub Actions runners.
+- **Committed JSON for Substack posts** (not fetched at build time) — Substack blocks requests from GitHub Actions runners (Azure IPs), making live API calls impossible during CI builds. Instead, `content/substackPostsData.json` is committed to the repo and updated by a Mac Mini cron job. The build reads the file; no network call needed. This gives clean page loads with no CORS concerns and no flash of empty cards, while keeping post data fresh via the cron.
 - **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
 - **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG and Psychology Today; all other inquiries go through the Web3Forms contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
@@ -380,7 +408,7 @@ npm run build
 # → output in _site/
 ```
 
-**Note:** The Substack API fetch will fail in local dev if you're offline. The fallback posts will be used automatically — this is expected behavior and fine for local work.
+**Note:** The build reads Substack posts from the committed `content/substackPostsData.json` file — no network call happens at build time, so local dev works fully offline. To refresh the posts locally, run `npm run update-substack` (requires internet access).
 
 ---
 
