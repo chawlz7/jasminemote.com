@@ -188,7 +188,7 @@ Substack actively blocks HTTP requests from GitHub Actions runners (Azure datace
 
 ### How it works
 
-1. **Mac Mini cron** — runs `scripts/update-and-push.sh` daily at 7am
+1. **Mac Mini cron** — runs `scripts/update-and-push.sh` daily at 8:10am (10 min after Jasmine's typical 8am Substack publish time)
 2. The script calls `node scripts/update-substack.js`, which fetches `https://jasminemote.substack.com/api/v1/posts?limit=3` from a residential IP (not blocked)
 3. If the posts have changed, it commits `content/substackPostsData.json` and pushes to `main`
 4. GitHub Actions picks up the push and rebuilds the site (~1 min)
@@ -356,7 +356,7 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 
 - **On every push to `main`** — Actions builds and deploys automatically (~1 min)
 - **Daily at 6am UTC** — scheduled build as a safety net for any missed pushes
-- **Via Substack cron** — the Mac Mini cron job runs daily at 7am, fetches new posts, and pushes `substackPostsData.json` if changed — this push triggers a new build automatically
+- **Via Substack cron** — the Mac Mini cron job runs daily at 8:10am, fetches new posts, and pushes `substackPostsData.json` if changed — this push triggers a new build automatically
 - **Manual trigger** — Actions tab → "Build and Deploy" → "Run workflow"
 
 ---
