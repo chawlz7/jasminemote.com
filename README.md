@@ -185,10 +185,13 @@ Each post object:
   title: "Post title",
   url: "https://jasminemote.substack.com/p/...",
   date: Date object,
-  excerpt: "Stripped, truncated text excerpt (200 chars)",
+  excerpt: "Post subtitle (from RSS description field — the subtitle Jasmine sets per post in Substack)",
+  image: "https://substackcdn.com/...",  // from RSS <enclosure> tag; null if absent
   featured: true   // only the first post
 }
 ```
+
+**Image source:** The RSS `<enclosure>` tag provides the cover image URL for each post (served via Substack's CDN). This is the same image shown at the top of the post on Substack.
 
 **Scheduled rebuilds:** GitHub Actions runs a daily 6am UTC cron build so new Substack posts appear without manual intervention. Jasmine can also trigger a manual rebuild from the Actions tab → "Build and Deploy" → "Run workflow".
 
@@ -354,6 +357,9 @@ Decisions made during the initial build (Claude Code, March 2026):
 - **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG and Psychology Today; all other inquiries go through the Web3Forms contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
 - **Publications bar chart is fully automatic** — adding a new pub to `publications.json` updates the chart and year groupings with no template changes needed.
+- **Substack post images via RSS enclosure** — each post card on the homepage shows the post's cover image, pulled from the `<enclosure>` tag in the RSS feed. No manual maintenance required; images update automatically with each build.
+- **Editorial post grid layout** — newsletter section uses a `7fr 4fr` two-column grid: featured post spans both rows on the left (large image + title + subtitle), two supporting posts stack on the right (each with image + title). Cards are visually separated with individual borders and gap spacing rather than hairline-divided.
+- **Substack subtitle as excerpt** — the `description` RSS field (which maps to the post subtitle Jasmine sets in Substack) is used as the excerpt on the featured card, rather than the raw start of the article body.
 
 ---
 

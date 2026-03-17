@@ -12,7 +12,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
         <h1 class="hero-name fade-up d2">{{ homepage.hero.headline | safe }}</h1>
         <p class="hero-bio fade-up d3">{{ homepage.hero.bio | safe }}</p>
         <div class="hero-ctas fade-up d4">
-          <a href="{{ '/therapy/' | url }}" class="btn-primary">Work with me →</a>
+          <a href="{{ '/work-with-me/' | url }}" class="btn-primary">Work with me →</a>
         </div>
       </div>
 
@@ -63,6 +63,9 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
     <div class="posts-grid">
       {% for post in substackPosts %}
         <a href="{{ post.url }}" class="post-card{% if post.featured %} featured{% endif %}" target="_blank" rel="noopener">
+          {% if post.image %}
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="post-card-img" loading="lazy">
+          {% endif %}
           <span class="post-tag">Mental Healthy</span>
           <h3 class="post-title">{{ post.title }}</h3>
           {% if post.featured %}

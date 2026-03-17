@@ -24,17 +24,20 @@ module.exports = async function() {
     const items = result?.rss?.channel?.item ?? [];
 
     const posts = items.slice(0, POST_COUNT).map((item, i) => {
-      const rawExcerpt = item["content:encoded"] || item.description || "";
+      const rawExcerpt = item.description || item["content:encoded"] || "";
       const stripped = rawExcerpt.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").trim();
-      const excerpt = stripped.length > 200
-        ? stripped.slice(0, 200).trimEnd() + "…"
+      const excerpt = stripped.length > 300
+        ? stripped.slice(0, 300).trimEnd() + "…"
         : stripped;
+
+      const image = item.enclosure?.["@_url"] || null;
 
       return {
         title: item.title || "Untitled",
         url: item.link || "#",
         date: item.pubDate ? new Date(item.pubDate) : new Date(),
         excerpt,
+        image,
         featured: i === 0
       };
     });
