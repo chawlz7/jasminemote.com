@@ -1,23 +1,23 @@
 # jasminemote.com — Project README
 
-> **Status:** 4 of 7 pages complete. Homepage, Research, Writing, and Resources are built and deployed. Therapy, About, and Contact still needed.
+> **Status:** Site complete. All 6 pages built and deployed. Pending: Formspree activation, favicon, CV PDF, OG image, DNS cutover to custom domain.
 
 ---
 
 ## Project Overview
 
-This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), the professional website of Jasmine Mote, PhD — a licensed clinical psychologist, researcher at Boston University, and writer. The site is being rebuilt from a bare WordPress.com theme into a custom static site.
+This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), the professional website of Jasmine Mote, PhD — a licensed clinical psychologist, researcher at Boston University, and writer. The site is built from scratch as a custom static site, replacing a bare WordPress.com theme.
 
-**The through-line of the site:** Jasmine is a researcher, a therapist, and a writer, and all three roles are mutually reinforcing. The site should communicate that coherently rather than treating each role as a separate identity.
+**The through-line of the site:** Jasmine is a researcher, a therapist, and a writer, and all three roles are mutually reinforcing. The site communicates that coherently rather than treating each role as a separate identity.
 
 ---
 
 ## Goals (in rough priority order)
 
-1. **Attract therapy clients** — biggest content gap in the current site; needs a dedicated, well-written therapy page
+1. **Attract therapy clients** — `/therapy/` page details her practice; `/work-with-me/` funnels potential clients to CPG
 2. **Grow the Substack** (*Mental Healthy*) — newsletter is front and center on the homepage; subscriber CTA prominent
 3. **Establish academic credibility** — publications list, BU affiliation, research overview
-4. **General professional polish** — the current WordPress theme is unstyled and generic; this redesign establishes a real visual identity
+4. **General professional polish** — custom visual identity replacing the generic WordPress theme
 
 ---
 
@@ -30,6 +30,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 | Hosting | GitHub Pages | Free on public repos; custom domain support |
 | Source control | GitHub | Jasmine edits content files in-browser |
 | Newsletter | [Substack](https://jasminemote.substack.com) | RSS fetched at build time |
+| Contact form | [Formspree](https://formspree.io) | Free tier; requires one-time account setup |
 | Fonts | Google Fonts | Playfair Display + DM Sans |
 | CSS | Hand-rolled, no framework | CSS custom properties throughout |
 
@@ -91,9 +92,10 @@ jasminemote.com/
 │   └── index.njk             # Writing & Press page ✅
 ├── resources/
 │   └── index.njk             # Resources page ✅
-├── therapy/                  # ← Not yet built
-├── about/                    # ← Not yet built
-├── contact/                  # ← Not yet built
+├── therapy/
+│   └── index.njk             # Therapy page ✅
+├── work-with-me/
+│   └── index.njk             # Work With Me page ✅
 │
 ├── _includes/
 │   └── layouts/
@@ -104,6 +106,7 @@ jasminemote.com/
 │   ├── research.yaml         # ← Jasmine edits: research statement, stats, focus areas
 │   ├── writingPage.yaml      # ← Jasmine edits: writing page header + newsletter callout
 │   ├── resources.yaml        # ← Jasmine edits: PhD guide link + all resource lists
+│   ├── workWithMe.yaml       # ← Jasmine edits: Work With Me page text + Formspree endpoint
 │   ├── publications.json     # ← Jasmine edits: add new publications here
 │   ├── writing.json          # ← Jasmine edits: add new articles and press clips here
 │   └── substackPosts.js      # Fetches RSS at build time; fallback posts if offline
@@ -131,9 +134,8 @@ jasminemote.com/
 | `/research/` | `research/index.njk` | ✅ Built | Publications, bar chart, focus areas |
 | `/writing/` | `writing/index.njk` | ✅ Built | Essays & press from `writing.json` |
 | `/resources/` | `resources/index.njk` | ✅ Built | PhD guide + MA mental health resources |
-| `/therapy/` | `therapy/index.njk` | ❌ Not started | **Highest priority** — client acquisition |
-| `/about/` | `about/index.njk` | ❌ Not started | Expanded bio, photo, CV download |
-| `/contact/` | `contact/index.njk` | ❌ Not started | Simple contact / therapy intake note |
+| `/therapy/` | `therapy/index.njk` | ✅ Built | Specialties, CPG intake CTA |
+| `/work-with-me/` | `work-with-me/index.njk` | ✅ Built | Two paths: therapy (CPG + Psychology Today) + collaboration contact form |
 
 ---
 
@@ -159,6 +161,7 @@ jasminemote.com/
 | `research` | `content/research.yaml` | Research statement, stats, focus areas |
 | `writingPage` | `content/writingPage.yaml` | Writing page header + newsletter callout |
 | `resources` | `content/resources.yaml` | PhD guide + MA resource lists |
+| `workWithMe` | `content/workWithMe.yaml` | Work With Me page text + Formspree endpoint |
 | `publications` | `content/publications.json` | Array of 30+ publications |
 | `writing` | `content/writing.json` | Array of writing articles + press items |
 | `substackPosts` | `content/substackPosts.js` | 3 most recent Substack posts (RSS fetch) |
@@ -286,13 +289,27 @@ early_psychosis:          # or general_mental_health
 
 ---
 
+### Work With Me — `content/workWithMe.yaml`
+
+Controls all text on the `/work-with-me/` page, plus the CPG and Psychology Today profile URLs.
+
+The contact form uses [Formspree](https://formspree.io). To activate it:
+1. Create a free account at formspree.io
+2. Create a new form (destination: `jasmine.mote@gmail.com`)
+3. Copy the endpoint URL (looks like `https://formspree.io/f/abcdefgh`)
+4. Paste it as the `collaboration.form_endpoint` value and commit
+
+Until this is done, the form will not submit successfully.
+
+---
+
 ## Deployment Setup
 
 **Platform: GitHub Actions + GitHub Pages (public repo, free tier)**
 
 Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month, which a daily scheduled rebuild plus dev pushes would exhaust. GitHub Actions gives 2,000 free minutes/month on public repos — effectively unlimited for this site.
 
-### One-time setup (already done for existing pages — reference for new deploys)
+### One-time setup (already done)
 
 1. **GitHub repo** — public repo, GitHub Pages enabled under Settings → Pages → Source: "GitHub Actions"
 2. **Custom domain** — Settings → Pages → Custom domain → `jasminemote.com`
@@ -323,20 +340,20 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 | Favicon | ❌ Missing | Create from Mental Healthy logo or initials lockup; drop in `public/` |
 | CV PDF | ❌ Missing | Drop into `public/cv.pdf` — linked from Research page |
 | OG image | ❌ Missing | For social sharing previews; 1200×630px; drop in `public/` |
-| Google Scholar URL | ❌ Placeholder | Update the two `https://scholar.google.com` links in `research/index.njk` |
+| Google Scholar URL | ❌ Placeholder | Update the `https://scholar.google.com` links in `research/index.njk` |
 | DOI URLs for publications | ❌ Mostly empty | Fill in `"url"` fields in `content/publications.json` |
 
 ---
 
 ## Key Design Decisions
 
-Decisions made during the initial design conversation (Claude Code, March 2026):
+Decisions made during the initial build (Claude Code, March 2026):
 
 - **Platform:** Static site (Eleventy + GitHub Pages) over WordPress, Squarespace, or Webflow. Jasmine comfortable with file editing; GitHub in-browser editor is sufficient for her update cadence.
 - **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
 - **RSS fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh.
 - **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
-- **Therapy page is the biggest content gap** — the current site barely mentions her clinical practice. A full `/therapy/` page is high priority.
+- **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG; all other inquiries go through the Formspree contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
 - **Publications bar chart is fully automatic** — adding a new pub to `publications.json` updates the chart and year groupings with no template changes needed.
 
@@ -361,14 +378,15 @@ npm run build
 
 ---
 
-## Next Steps (in rough priority order)
+## Pending / Refinement Items
 
-- [ ] Build `/therapy/` page — highest ROI, primary client acquisition
-- [ ] Build `/about/` page — expanded bio, photo, CV download
-- [ ] Build `/contact/` page — simple contact + note about therapy intake
-- [ ] Add CV PDF to `public/cv.pdf` (linked from Research page already)
-- [ ] Add favicon to `public/`
-- [ ] Add OG/social meta tags to `_includes/layouts/base.njk`
-- [ ] Update Google Scholar URL in `research/index.njk` (currently a placeholder)
-- [ ] Fill in DOI `"url"` fields in `content/publications.json`
-- [ ] Confirm domain registrar situation before any DNS changes (may be WordPress.com controlled)
+These are not new pages — the site is structurally complete. These are the remaining activation and content tasks:
+
+- [ ] **Activate contact form** — set up Formspree account and paste endpoint into `content/workWithMe.yaml`
+- [ ] **Add favicon** — drop file into `public/` (create from Mental Healthy logo or initials)
+- [ ] **Add CV PDF** — drop `cv.pdf` into `public/` (already linked from Research page)
+- [ ] **Add OG/social image** — 1200×630px, drop into `public/` and add meta tags to `base.njk`
+- [ ] **Update Google Scholar URL** — replace placeholder in `research/index.njk`
+- [ ] **Fill in DOI URLs** — update `"url"` fields in `content/publications.json`
+- [ ] **DNS cutover** — point jasminemote.com to GitHub Pages IPs (confirm registrar first)
+- [ ] **Content review** — Jasmine reviews all page copy and submits edits via GitHub browser editor
