@@ -74,7 +74,7 @@ description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology 
           <input type="hidden" name="access_key" value="{{ workWithMe.collaboration.web3forms_key }}">
           <input type="hidden" name="subject" value="New inquiry from jasminemote.com">
           <input type="hidden" name="from_name" value="jasminemote.com">
-          <input type="hidden" name="redirect" value="https://jasminemote.com/work-with-me/?sent=true">
+          <input type="hidden" name="redirect" value="{{ workWithMe.collaboration.redirect_url }}">
           <input type="checkbox" name="botcheck" style="display:none;">
           <div class="form-group">
             <label class="form-label" for="name">Name</label>

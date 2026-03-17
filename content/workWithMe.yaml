@@ -23,3 +23,10 @@ collaboration:
   # the email address associated with this access key.
   # ─────────────────────────────────────────────────────────────────────────────
   web3forms_key: "7c8ebf80-0084-4e59-b58d-ed1fd172baa5"
+
+  # ── FORM REDIRECT URL ────────────────────────────────────────────────────────
+  # After a successful form submission, Web3Forms redirects here.
+  # Update this to "https://jasminemote.com/work-with-me/?sent=true"
+  # once DNS has been cut over to the custom domain.
+  # ─────────────────────────────────────────────────────────────────────────────
+  redirect_url: "https://chawlz7.github.io/jasminemote.com/work-with-me/?sent=true"
