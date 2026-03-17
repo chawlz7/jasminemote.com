@@ -1,6 +1,6 @@
 # jasminemote.com — Project README
 
-> **Status:** Site complete. All 6 pages built and deployed. Pending: Formspree activation, favicon, CV PDF, OG image, DNS cutover to custom domain.
+> **Status:** Site complete. All 6 pages built and deployed. Contact form live (Web3Forms). Pending: favicon, CV PDF, OG image, DNS cutover, content review.
 
 ---
 
@@ -30,7 +30,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 | Hosting | GitHub Pages | Free on public repos; custom domain support |
 | Source control | GitHub | Jasmine edits content files in-browser |
 | Newsletter | [Substack](https://jasminemote.substack.com) | RSS fetched at build time |
-| Contact form | [Formspree](https://formspree.io) | Free tier; requires one-time account setup |
+| Contact form | [Web3Forms](https://web3forms.com) | Free tier; access key in `content/workWithMe.yaml` |
 | Fonts | Google Fonts | Playfair Display + DM Sans |
 | CSS | Hand-rolled, no framework | CSS custom properties throughout |
 
@@ -293,13 +293,9 @@ early_psychosis:          # or general_mental_health
 
 Controls all text on the `/work-with-me/` page, plus the CPG and Psychology Today profile URLs.
 
-The contact form uses [Formspree](https://formspree.io). To activate it:
-1. Create a free account at formspree.io
-2. Create a new form (destination: `jasmine.mote@gmail.com`)
-3. Copy the endpoint URL (looks like `https://formspree.io/f/abcdefgh`)
-4. Paste it as the `collaboration.form_endpoint` value and commit
+The contact form uses [Web3Forms](https://web3forms.com) and is fully active. Submissions go to `jasmine.mote@gmail.com`. The access key is stored as `collaboration.web3forms_key`.
 
-Until this is done, the form will not submit successfully.
+To change the destination email, log in at web3forms.com and update the email address on the account.
 
 ---
 
@@ -336,11 +332,13 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 
 | Asset | Status | Notes |
 |---|---|---|
-| Headshot / photo | ✅ Added | `public/jasmine-headshot.png` — professional session still recommended |
-| Favicon | ❌ Missing | Create from Mental Healthy logo or initials lockup; drop in `public/` |
-| CV PDF | ❌ Missing | Drop into `public/cv.pdf` — linked from Research page |
-| OG image | ❌ Missing | For social sharing previews; 1200×630px; drop in `public/` |
-| Google Scholar URL | ❌ Placeholder | Update the `https://scholar.google.com` links in `research/index.njk` |
+| Headshot / photo | ✅ Added | `public/jasmine-headshot.png` |
+| Contact form | ✅ Live | Web3Forms, sends to jasmine.mote@gmail.com |
+| Google Scholar | ✅ Linked | Real URL in `research/index.njk` |
+| ResearchGate | ✅ Linked | Real URL in `research/index.njk` |
+| Favicon | ❌ Missing | Drop file into `public/` (suggest creating from Mental Healthy logo or initials) |
+| CV PDF | ❌ Missing | Drop `cv.pdf` into `public/` — already linked from Research page |
+| OG image | ❌ Missing | 1200×630px social sharing image; drop into `public/` |
 | DOI URLs for publications | ❌ Mostly empty | Fill in `"url"` fields in `content/publications.json` |
 
 ---
@@ -353,7 +351,7 @@ Decisions made during the initial build (Claude Code, March 2026):
 - **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
 - **RSS fetch at build time** (not client-side) for cleaner page loads, no CORS concerns, no flash of empty cards. Daily GitHub Actions cron rebuild keeps it fresh.
 - **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
-- **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG; all other inquiries go through the Formspree contact form on the same page.
+- **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG and Psychology Today; all other inquiries go through the Web3Forms contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
 - **Publications bar chart is fully automatic** — adding a new pub to `publications.json` updates the chart and year groupings with no template changes needed.
 
@@ -380,13 +378,18 @@ npm run build
 
 ## Pending / Refinement Items
 
-These are not new pages — the site is structurally complete. These are the remaining activation and content tasks:
+The site is structurally complete and the contact form is live. Remaining tasks are assets, DNS, and content refinement.
 
-- [ ] **Activate contact form** — set up Formspree account and paste endpoint into `content/workWithMe.yaml`
-- [ ] **Add favicon** — drop file into `public/` (create from Mental Healthy logo or initials)
-- [ ] **Add CV PDF** — drop `cv.pdf` into `public/` (already linked from Research page)
-- [ ] **Add OG/social image** — 1200×630px, drop into `public/` and add meta tags to `base.njk`
-- [ ] **Update Google Scholar URL** — replace placeholder in `research/index.njk`
-- [ ] **Fill in DOI URLs** — update `"url"` fields in `content/publications.json`
-- [ ] **DNS cutover** — point jasminemote.com to GitHub Pages IPs (confirm registrar first)
-- [ ] **Content review** — Jasmine reviews all page copy and submits edits via GitHub browser editor
+### High priority
+- [ ] **DNS cutover** — point `jasminemote.com` to GitHub Pages IPs; confirm registrar (may be WordPress.com controlled)
+- [ ] **Add CV PDF** — drop `cv.pdf` into `public/`; already linked from the Research page header and bottom
+- [ ] **Content review** — Jasmine reads all page copy and submits edits via the GitHub browser editor
+
+### Medium priority
+- [ ] **Add favicon** — create from Mental Healthy logo or an initials lockup; drop any standard favicon file into `public/`
+- [ ] **Add OG/social image** — 1200×630px image for social sharing previews; drop into `public/` and add `<meta property="og:image">` tags to `_includes/layouts/base.njk`
+- [ ] **Fill in DOI URLs** — add `"url"` fields to entries in `content/publications.json` so publications link out to their papers
+
+### Low priority / nice to have
+- [ ] **Professional headshot** — current photo works; a dedicated professional session would upgrade it further
+- [ ] **Test contact form** — send a test submission from the live site to confirm Web3Forms delivery to jasmine.mote@gmail.com
