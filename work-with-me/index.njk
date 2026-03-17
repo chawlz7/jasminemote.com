@@ -1,0 +1,112 @@
+---
+layout: layouts/base.njk
+title: "Work With Me — Jasmine Mote, PhD"
+description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology Group, or get in touch for collaborations, peer supervision, media inquiries, and more."
+---
+
+{# ── PAGE HEADER ── #}
+<section class="page-header">
+  <div class="container">
+    <p class="page-eyebrow">{{ workWithMe.page.eyebrow }}</p>
+    <h1 class="page-headline">{{ workWithMe.page.headline | safe }}</h1>
+    <p class="page-subhead">{{ workWithMe.page.subhead }}</p>
+  </div>
+</section>
+
+{# ── THERAPY PATH ── #}
+<section class="wwm-therapy-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">{{ workWithMe.therapy.eyebrow }}</h2>
+    </div>
+
+    <div class="wwm-therapy-card">
+      <div class="wwm-therapy-body">
+        <h3 class="wwm-therapy-headline">{{ workWithMe.therapy.headline }}</h3>
+        <p class="wwm-therapy-text">{{ workWithMe.therapy.body }}</p>
+        <p class="wwm-therapy-instruction">{{ workWithMe.therapy.instruction | safe }}</p>
+        <div class="wwm-therapy-ctas">
+          <a href="{{ workWithMe.therapy.cpg_url }}" class="btn-primary" target="_blank" rel="noopener">{{ workWithMe.therapy.cta_label }} ↗</a>
+          <a href="{{ workWithMe.therapy.pt_url }}" class="btn-secondary" target="_blank" rel="noopener">{{ workWithMe.therapy.pt_label }} ↗</a>
+        </div>
+      </div>
+      <div class="wwm-therapy-steps">
+        <h4 class="wwm-steps-title">How it works</h4>
+        <ol class="wwm-steps-list">
+          <li><span>Visit my CPG profile using the link above</span></li>
+          <li><span>Click "Get Started" to submit an inquiry</span></li>
+          <li><span>I'll reach out to schedule a brief consultation call</span></li>
+          <li><span>We'll find a time that works and get started</span></li>
+        </ol>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# ── COLLABORATION FORM ── #}
+<section class="wwm-form-section">
+  <div class="container">
+
+    <div class="section-header">
+      <h2 class="section-title">{{ workWithMe.collaboration.eyebrow }}</h2>
+    </div>
+
+    <div class="wwm-form-layout">
+
+      <div class="wwm-form-intro">
+        <p class="wwm-form-body">{{ workWithMe.collaboration.body }}</p>
+        <div class="wwm-inquiry-tags">
+          <span class="tag">Peer consultation &amp; supervision</span>
+          <span class="tag">Academic collaboration</span>
+          <span class="tag">Media &amp; press</span>
+          <span class="tag">Substack collaboration</span>
+          <span class="tag">Other</span>
+        </div>
+      </div>
+
+      <div class="wwm-form-wrap">
+        <div class="wwm-success" id="wwm-success">
+          <strong>Message sent!</strong> Thanks for reaching out — I'll get back to you as soon as I can.
+        </div>
+        <form class="wwm-form" action="{{ workWithMe.collaboration.form_endpoint }}" method="POST">
+          <input type="hidden" name="_subject" value="New inquiry from jasminemote.com">
+          <input type="hidden" name="_next" value="https://jasminemote.com/work-with-me/?sent=true">
+          <div class="form-group">
+            <label class="form-label" for="name">Name</label>
+            <input class="form-input" type="text" id="name" name="name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inquiry_type">I am a&hellip;</label>
+            <select class="form-select" id="inquiry_type" name="inquiry_type">
+              <option value="">Select an option</option>
+              <option value="Clinician — peer support or supervision">Clinician — peer support or supervision</option>
+              <option value="Academic collaborator">Academic collaborator</option>
+              <option value="Journalist or media">Journalist or media</option>
+              <option value="Substack collaborator">Substack collaborator</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Message</label>
+            <textarea class="form-textarea" id="message" name="message" required rows="5" placeholder="Tell me a bit about what you're working on or what you have in mind."></textarea>
+          </div>
+          <button class="btn-primary" type="submit">Send Message</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  if (window.location.search.includes('sent=true')) {
+    var el = document.getElementById('wwm-success');
+    if (el) el.classList.add('is-visible');
+  }
+</script>

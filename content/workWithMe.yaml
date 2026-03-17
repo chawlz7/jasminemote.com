@@ -1,0 +1,28 @@
+page:
+  eyebrow: "Work With Me"
+  headline: "Two ways to <em>work with me</em>."
+  subhead: "Whether you're looking for a therapist or a collaborator, you're in the right place."
+
+therapy:
+  eyebrow: "For Therapy Clients"
+  headline: "Start therapy with Jasmine"
+  body: "I see individual clients through Cambridge Psychology Group, a group practice in the greater Boston area. I specialize in anxiety, OCD, perinatal mental health, and life transitions — and I bring a researcher's eye to everything I do clinically."
+  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
+  cta_label: "View my CPG profile"
+  pt_url: "https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066"
+  pt_label: "Psychology Today profile"
+  instruction: "On my CPG profile, click <strong>Get Started</strong> to submit a new client inquiry — I'll follow up from there."
+
+collaboration:
+  eyebrow: "Collaboration, Press & Media"
+  headline: "Working on something together?"
+  body: "I'm open to a range of collaborations — peer consultation and clinical supervision for therapists, academic and research partnerships, media and press inquiries, Substack collaborations, and more. Fill out the form below and I'll get back to you."
+
+  # ── IMPORTANT — FORMSPREE SETUP ─────────────────────────────────────────────
+  # Before this form will work, you need to:
+  # 1. Create a free account at https://formspree.io
+  # 2. Create a new form (use jasmine.mote@gmail.com as the email destination)
+  # 3. Copy the form endpoint URL (looks like: https://formspree.io/f/abcdefgh)
+  # 4. Paste it below, replacing the placeholder text
+  # ─────────────────────────────────────────────────────────────────────────────
+  form_endpoint: "https://formspree.io/f/YOUR_FORM_ID"
