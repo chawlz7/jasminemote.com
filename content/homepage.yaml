@@ -39,7 +39,7 @@ hero:
   eyebrow: "Clinical Psychologist · Researcher · Writer"
   headline: "Helping people understand the <em>science</em> of how they feel."
   bio: >-
-    I'm a PhD clinical psychologist, researcher at Boston University, and therapist
+    I'm a clinical psychologist, researcher at Boston University, and therapist
     in the Boston area. I write <em>Mental Healthy</em> — a newsletter on the science
     of mental health for parents and people navigating real life.
 
@@ -71,9 +71,9 @@ credentials:
 # ── Newsletter section ────────────────────────────────────────
 newsletter:
   intro: >-
-    Mental health science is complicated, contested, and deeply personal — especially
-    when you're pregnant, postpartum, or just trying to raise a kid while staying sane.
-    <em>Mental Healthy</em> makes the research accessible without making it simple.
+    When I became a parent, I did what my training as a researcher and clinician taught me to do: 
+    I turned to the science to better understand myself, my kids, and this new life. 
+    <em>Mental Healthy</em> is a journey through the science of pregnancy, parenting, and everything in between. 
 
 
 # ── About section ─────────────────────────────────────────────
@@ -94,20 +94,22 @@ about:
       value: "Mental Healthy"
       sub: "Newsletter on Substack"
   pullquote: >-
-    "I became a therapist and a writer for the same reason: because people deserve
-    honest, evidence-based answers about how their minds work."
+    "My mission is to provide evidence-based answers to life's thorniest questions: How do our minds work, and 
+    how can we live our most emotionally rich and fulfilling lives?" 
   body:
     - >-
       I'm a licensed clinical psychologist, researcher, and writer based in the Boston
       area. My work sits at the intersection of science and lived experience — in my
       research lab, my therapy practice, and on the page.
     - >-
-      As a Research Assistant Professor at Boston University's AMP Lab, I study the
+      As a Research Assistant Professor at Boston University's Approach Motivaiton and Particiation Lab, I study the
       emotional and social experiences of people living with serious mental illness. As
-      a therapist at Cambridge Psychology Group, I work with adults navigating anxiety,
+      a therapist at Cambridge Psychology Group, I work with adults navigating concerns around mood, anxiety,
       OCD, perinatal mental health, and major life transitions.
   tags:
     - "Perinatal mental health"
+    - "Mood disorders"
+    - "Psychosis"
     - "Anxiety & OCD"
     - "Serious mental illness"
     - "LGBTQIA+ affirmative"
