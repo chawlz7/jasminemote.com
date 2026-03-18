@@ -48,12 +48,12 @@ hero:
 credentials:
   - icon: "📬"
     label: "Mental Healthy Newsletter"
-    sub: "Mental health science for parents & people — Substack"
+    sub: "Mental health science on parenting & everything else  — Substack"
     url: "https://jasminemote.substack.com"
     external: true
   - icon: "🛋"
     label: "Therapy — Cambridge Psychology Group"
-    sub: "Anxiety, OCD, perinatal mental health, life transitions"
+    sub: "Mood, anxiety, OCD, perinatal mental health, life transitions"
     url: "/therapy/"
     external: false
   - icon: "🔬"
