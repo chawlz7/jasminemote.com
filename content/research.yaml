@@ -31,7 +31,18 @@ focus_areas:
       to the pleasure expected for future events (i.e., anticipatory pleasure) in people with
       schizophrenia and that anticipatory pleasure deficits may have direct links with other
       facets of the disorder, including motivation impairments.
-  - id: 2
+   - id: 2
+    title: "Social Processes in Psychopathology"
+    description: >
+      People with psychosis can experience multiple social difficulties, including impairments in social 
+      motivation and high rates of loneliness, that are related to poorer quality of life and shorter lifespans.
+      My work has found that people with schizophrenia experience similar rates of social pleasure when they are
+      with others compared to people without the disorder, but may simultaneously experience slightly more 
+      negative emotion during the same social interactions. This suggests that different emotions may be
+      more related to social difficulties, like loneliness, than others. I have also used qualitative
+      methods (i.e., interviewing people and synthesizing common themes across interviews) to better understand
+      barriers that people with schizophrenia may face in connecting with others, using their own words. 
+  - id: 3
     title: "Mental Health Intervention Development"
     description: >
       Through applying my research on basic emotion and social processes, I have sought to improve
@@ -39,7 +50,7 @@ focus_areas:
       of novel psychosocial and digital health interventions. I have also worked with the
       Boston-based small business Skip the Small Talk to evaluate the efficacy of their online
       social events in reducing loneliness during the 2020 COVID-19 global pandemic.
-  - id: 3
+  - id: 4
     title: "Culture, Environment, & Mental Health"
     description: >
       Throughout my work, I have focused on how individual and contextual factors such as race,
