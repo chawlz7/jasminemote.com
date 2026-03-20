@@ -53,6 +53,12 @@ module.exports = function(eleventyConfig) {
       .map(year => ({ year: parseInt(year), items: groups[year] }));
   });
 
+  // pubsByFocusArea — filters publications by focus_area id
+  // Usage in template: publications | pubsByFocusArea(area.id)
+  eleventyConfig.addFilter("pubsByFocusArea", (arr, id) => {
+    return arr ? arr.filter(p => p.focus_area === id) : [];
+  });
+
   // pubsChartData — builds bar chart data from publications array
   // Returns: [{ year, count, height (px, scaled to 120px max), label }]
   // Add new publications to publications.json and this updates automatically.

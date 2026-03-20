@@ -7,14 +7,27 @@ description: "Jasmine Mote's research focuses on emotion, social connection, and
 {# ── PAGE HEADER ── #}
 <section class="page-header">
   <div class="container">
-    <p class="page-eyebrow">{{ research.statement.eyebrow }}</p>
-    <h1 class="page-headline">{{ research.statement.headline | safe }}</h1>
-    <p class="page-subhead">{{ research.statement.body }}</p>
-    <p class="page-affiliation">{{ research.statement.affiliation }}</p>
-    <div class="page-header-links">
-      <a href="https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en" class="btn-secondary" target="_blank" rel="noopener">Google Scholar ↗</a>
-      <a href="https://www.researchgate.net/profile/Jasmine-Mote" class="btn-secondary" target="_blank" rel="noopener">ResearchGate ↗</a>
-      <a href="{{ '/cv.pdf' | url }}" class="btn-secondary">Download CV</a>
+    <div class="page-header-inner">
+      <div class="page-header-text">
+        <p class="page-eyebrow">{{ research.statement.eyebrow }}</p>
+        <h1 class="page-headline">{{ research.statement.headline | safe }}</h1>
+        <p class="page-subhead">{{ research.statement.body }}</p>
+        <p class="page-affiliation">{{ research.statement.affiliation }}</p>
+        <div class="page-header-links">
+          <a href="{{ '/cv.pdf' | url }}" class="btn-secondary">Download CV</a>
+        </div>
+      </div>
+      <div class="page-header-logos">
+        <a href="https://sites.bu.edu/amplab/" class="profile-logo-card" target="_blank" rel="noopener" aria-label="AMP Lab — Approach Motivation & Participation Lab">
+          <img src="{{ '/logos/amp-lab.png' | url }}" alt="AMP Lab" width="180" height="44">
+        </a>
+        <a href="https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en" class="profile-logo-card" target="_blank" rel="noopener" aria-label="Google Scholar profile">
+          <img src="{{ '/logos/google-scholar.png' | url }}" alt="Google Scholar" width="180" height="44">
+        </a>
+        <a href="https://www.researchgate.net/profile/Jasmine-Mote" class="profile-logo-card" target="_blank" rel="noopener" aria-label="ResearchGate profile">
+          <img src="{{ '/logos/researchgate.png' | url }}" alt="ResearchGate" width="180" height="44">
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -39,12 +52,38 @@ description: "Jasmine Mote's research focuses on emotion, social connection, and
     <div class="section-header">
       <h2 class="section-title">Research <em>Focus</em></h2>
     </div>
-    <div class="research-focus-grid">
+    <div class="research-focus-list">
       {% for area in research.focus_areas %}
+      {% set areaPublications = publications | pubsByFocusArea(area.id) %}
       <div class="research-focus-card">
         <div class="rfc-number">0{{ loop.index }}</div>
-        <h3 class="rfc-title">{{ area.title }}</h3>
-        <p class="rfc-desc">{{ area.description }}</p>
+        <div class="rfc-content">
+          <h3 class="rfc-title">{{ area.title }}</h3>
+          <p class="rfc-desc">{{ area.description }}</p>
+          {% if areaPublications.length > 0 %}
+          <div class="rfc-pubs">
+            <p class="rfc-pubs-label">Noteworthy Publications</p>
+            <div class="rfc-pubs-list">
+              {% for pub in areaPublications %}
+              <div class="rfc-pub-item{% if pub.url %} rfc-pub-item--linked{% endif %}">
+                {% if pub.url %}
+                <a href="{{ pub.url }}" target="_blank" rel="noopener" class="rfc-pub-link">
+                {% endif %}
+                <p class="pub-citation">
+                  <span class="pub-authors-page">{{ pub.authors }}</span>
+                  ({{ pub.year }}). {{ pub.title }}
+                  {% if pub.journal %}<span class="pub-journal-page">{{ pub.journal }}</span>{% endif %}
+                </p>
+                {% if pub.url %}
+                  <span class="pub-doi-link">View ↗</span>
+                </a>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
       </div>
       {% endfor %}
     </div>
@@ -99,9 +138,7 @@ description: "Jasmine Mote's research focuses on emotion, social connection, and
     {% endfor %}
 
     <div class="research-links">
-      <a href="https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en" class="btn-secondary" target="_blank" rel="noopener">Google Scholar ↗</a>
-      <a href="https://www.researchgate.net/profile/Jasmine-Mote" class="btn-secondary" target="_blank" rel="noopener">ResearchGate ↗</a>
-      <a href="{{ '/cv.pdf' | url }}" class="btn-secondary">Download CV</a>
+      <a href="https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en" class="btn-secondary" target="_blank" rel="noopener">View on Google Scholar ↗</a>
     </div>
 
   </div>

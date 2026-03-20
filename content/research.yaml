@@ -18,15 +18,36 @@ stats:
     label: "Years of active research"
 
 focus_areas:
-  - title: "Schizophrenia & Psychosis Spectrum"
-    description: "Emotion experience, social motivation, and cognitive symptoms in schizophrenia spectrum disorders, studied across laboratory and daily-life contexts."
-  - title: "Ecological Momentary Assessment"
-    description: "Using experience sampling and EMA to measure affect, social behavior, and daily functioning in real-world settings outside the clinic."
-  - title: "Digital Health & Mobile Interventions"
-    description: "Developing and evaluating smartphone apps and technology-based tools to improve social functioning and quality of life in serious mental illness."
-  - title: "Social Functioning & Motivation"
-    description: "Quality of everyday social interactions, social effort and conscientiousness, and interpersonal connection in people with and without psychosis."
-  - title: "Mental Health Disparities"
-    description: "Racial, ethnic, and gender disparities in diagnosis, symptom presentation, and access to evidence-based care across the psychosis spectrum."
-  - title: "Emotion Science"
-    description: "Facial emotion perception, affect regulation, reward processing, and the relationship between emotion and behavior in clinical populations."
+  - id: 1
+    title: "Emotion in Schizophrenia"
+    description: >
+      The emotional difficulties of people living with schizophrenia — including understanding
+      when and why people with this condition may experience less positive and more negative
+      emotions — is often overlooked during treatment despite being some of the most debilitating
+      aspects of this condition. I have answered various questions on the emotion experiences of
+      people living with schizophrenia across the lifespan, using my expertise in questionnaire,
+      clinical assessment, ecological momentary assessment (EMA), passive sensing, and
+      psychophysiological methods. For example, my work has shown that anhedonia may be specific
+      to the pleasure expected for future events (i.e., anticipatory pleasure) in people with
+      schizophrenia and that anticipatory pleasure deficits may have direct links with other
+      facets of the disorder, including motivation impairments.
+  - id: 2
+    title: "Mental Health Intervention Development"
+    description: >
+      Through applying my research on basic emotion and social processes, I have sought to improve
+      the lives of people living with a variety of mental health conditions through the development
+      of novel psychosocial and digital health interventions. I have also worked with the
+      Boston-based small business Skip the Small Talk to evaluate the efficacy of their online
+      social events in reducing loneliness during the 2020 COVID-19 global pandemic.
+  - id: 3
+    title: "Culture, Environment, & Mental Health"
+    description: >
+      Throughout my work, I have focused on how individual and contextual factors such as race,
+      gender, and living environments shape our mental health. This includes understanding how
+      racialized experiences affect the presentation of psychotic symptoms as well as how green
+      space exposure may or may not contribute to better mental health. Recently, I have also
+      explored how non-human relationships (i.e., pet dog ownership) affect the health and
+      well-being of adolescents with social anxiety. It is my hope that this work contributes to
+      reducing the mental health disparities among various minoritized communities and informs
+      policies that promote better mental health in the clinic, in our neighborhoods, and in our
+      own backyards.
