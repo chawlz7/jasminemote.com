@@ -32,12 +32,11 @@ description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology 
         </div>
       </div>
       <div class="wwm-therapy-steps">
-        <h4 class="wwm-steps-title">How it works</h4>
+        <h4 class="wwm-steps-title">{{ workWithMe.therapy.how_it_works_title }}</h4>
         <ol class="wwm-steps-list">
-          <li><span>Visit my CPG profile using the link above</span></li>
-          <li><span>Click "Get Started" to submit an inquiry</span></li>
-          <li><span>I'll reach out to schedule a brief consultation call</span></li>
-          <li><span>We'll find a time that works and get started</span></li>
+          {% for step in workWithMe.therapy.how_it_works_steps %}
+          <li><span>{{ step }}</span></li>
+          {% endfor %}
         </ol>
       </div>
     </div>
