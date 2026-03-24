@@ -14,10 +14,10 @@ therapy:
   instruction: "On my CPG profile, click <strong>Get Started</strong> to submit a new client inquiry — I'll follow up from there."
   how_it_works_title: "How it works"
   how_it_works_steps:
-    - "Visit my CPG profile using the link above"
+    - "Visit my CPG profile using the link nearby"
     - "Click \"Get Started\" to submit an inquiry"
-    - "I'll reach out to schedule a brief consultation call"
-    - "We'll find a time that works and get started"
+    - "An intake specialist will schedule a phone call to take some initial information"
+    - "If we're a good fit, we will find a time that works and get started"
 
 collaboration:
   eyebrow: "Collaboration, Press & Media"
