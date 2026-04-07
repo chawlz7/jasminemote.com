@@ -9,7 +9,8 @@ module.exports = function(eleventyConfig) {
   // ── Passthrough copy ──────────────────────────────────────────
   eleventyConfig.addPassthroughCopy({ "src/css": "css" });
   eleventyConfig.addPassthroughCopy({ "src/js": "js" });
-  eleventyConfig.addPassthroughCopy({ "public": "." });   // favicon, cv.pdf, og image, etc.
+  eleventyConfig.addPassthroughCopy({ "public": "." });   // favicon, og image, etc.
+  eleventyConfig.addPassthroughCopy({ "content/Mote-CV.pdf": "Mote-CV.pdf" });  // CV — Jasmine updates this file
 
   // ── Filters ───────────────────────────────────────────────────
 

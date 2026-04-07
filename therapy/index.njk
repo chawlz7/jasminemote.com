@@ -7,12 +7,12 @@ description: "Jasmine Mote is a licensed clinical psychologist seeing clients in
 {# ── PAGE HEADER ── #}
 <section class="page-header">
   <div class="container">
-    <p class="page-eyebrow">Clinical Psychology · Boston Area</p>
-    <h1 class="page-headline">Thoughtful, evidence-based therapy for <em>real</em> moments in life.</h1>
-    <p class="page-subhead">I work with adults navigating anxiety, OCD, perinatal mental health challenges, and major life transitions — including new parents, academics and professionals under intense pressure, and people exploring questions of identity.</p>
-    <p class="page-affiliation">Cambridge Psychology Group · Licensed Clinical Psychologist</p>
+    <p class="page-eyebrow">{{ therapy.page.eyebrow }}</p>
+    <h1 class="page-headline">{{ therapy.page.headline | safe }}</h1>
+    <p class="page-subhead">{{ therapy.page.subhead }}</p>
+    <p class="page-affiliation">{{ therapy.page.affiliation }}</p>
     <div class="page-header-links">
-      <a href="https://cambridgepsych.org/clinicians/jasmine-mote/" class="btn-primary" target="_blank" rel="noopener">View my CPG profile →</a>
+      <a href="{{ therapy.page.cpg_url }}" class="btn-primary" target="_blank" rel="noopener">{{ therapy.page.cta_label }}</a>
     </div>
   </div>
 </section>
@@ -23,22 +23,19 @@ description: "Jasmine Mote is a licensed clinical psychologist seeing clients in
     <div class="therapy-inner">
       <div>
         <div class="section-header">
-          <h2 class="section-title">What I <em>treat</em></h2>
+          <h2 class="section-title">{{ therapy.specialties.section_title | safe }}</h2>
         </div>
         <ul class="specialty-list">
-          <li>Anxiety, OCD, and obsessive-compulsive spectrum</li>
-          <li>Perinatal &amp; postpartum mental health</li>
-          <li>Life transitions (new parenthood, career, identity)</li>
-          <li>Depression and mood difficulties</li>
-          <li>Psychosis-spectrum and serious mental illness</li>
-          <li>Academics, researchers, and high-stress professionals</li>
+          {% for item in therapy.specialties.items %}
+          <li>{{ item }}</li>
+          {% endfor %}
         </ul>
       </div>
       <div>
         <div class="therapy-card">
-          <h3 class="therapy-card-title">Ready to get started?</h3>
-          <p class="therapy-card-body">I see clients through Cambridge Psychology Group. You can learn more about my practice and request an initial consultation on their website.</p>
-          <a href="https://cambridgepsych.org/clinicians/jasmine-mote/" class="btn-primary" target="_blank" rel="noopener">View my CPG profile →</a>
+          <h3 class="therapy-card-title">{{ therapy.cta_card.title }}</h3>
+          <p class="therapy-card-body">{{ therapy.cta_card.body }}</p>
+          <a href="{{ therapy.cta_card.cpg_url }}" class="btn-primary" target="_blank" rel="noopener">{{ therapy.cta_card.cta_label }}</a>
         </div>
       </div>
     </div>

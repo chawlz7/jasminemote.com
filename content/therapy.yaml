@@ -1,0 +1,23 @@
+page:
+  eyebrow: "Clinical Psychology · Boston Area"
+  headline: "Thoughtful, evidence-based therapy for <em>real</em> moments in life."
+  subhead: "I work with adults navigating anxiety, OCD, perinatal mental health challenges, and major life transitions — including new parents, academics and professionals under intense pressure, and people exploring questions of identity."
+  affiliation: "Cambridge Psychology Group · Licensed Clinical Psychologist"
+  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
+  cta_label: "View my CPG profile →"
+
+specialties:
+  section_title: "What I <em>treat</em>"
+  items:
+    - "Anxiety, OCD, and obsessive-compulsive spectrum"
+    - "Perinatal & postpartum mental health"
+    - "Life transitions (new parenthood, career, identity)"
+    - "Depression and mood difficulties"
+    - "Psychosis-spectrum and serious mental illness"
+    - "Academics, researchers, and high-stress professionals"
+
+cta_card:
+  title: "Ready to get started?"
+  body: "I see clients through Cambridge Psychology Group. You can learn more about my practice and request an initial consultation on their website."
+  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
+  cta_label: "View my CPG profile →"

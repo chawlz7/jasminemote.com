@@ -106,6 +106,7 @@ jasminemote.com/
 │   ├── research.yaml         # ← Jasmine edits: research statement, stats, focus areas
 │   ├── writingPage.yaml      # ← Jasmine edits: writing page header + newsletter callout
 │   ├── resources.yaml        # ← Jasmine edits: PhD guide link + all resource lists
+│   ├── therapy.yaml          # ← Jasmine edits: Therapy page text, specialties, CPG URL
 │   ├── workWithMe.yaml       # ← Jasmine edits: Work With Me page text + Formspree endpoint
 │   ├── publications.json     # ← Jasmine edits: add new publications here
 │   ├── writing.json          # ← Jasmine edits: add new articles and press clips here
@@ -166,6 +167,7 @@ jasminemote.com/
 | `research` | `content/research.yaml` | Research statement, stats, focus areas |
 | `writingPage` | `content/writingPage.yaml` | Writing page header + newsletter callout |
 | `resources` | `content/resources.yaml` | PhD guide + MA resource lists |
+| `therapy` | `content/therapy.yaml` | Therapy page text, specialties list, CPG URL |
 | `workWithMe` | `content/workWithMe.yaml` | Work With Me page text + Formspree endpoint |
 | `publications` | `content/publications.json` | Array of 30+ publications |
 | `writing` | `content/writing.json` | Array of writing articles + press items |
@@ -321,6 +323,27 @@ early_psychosis:          # or general_mental_health
 
 ---
 
+### Therapy page — `content/therapy.yaml`
+
+Controls all text on the `/therapy/` page: the page header, the specialties list, and the sidebar CTA card. To update her CPG profile URL or add/remove a specialty:
+
+```yaml
+specialties:
+  items:
+    - "New specialty here"
+    - "Another condition"
+```
+
+The `cpg_url` appears in both `page` and `cta_card` sections — update both if the URL changes.
+
+---
+
+### CV — `content/Mote-CV.pdf`
+
+To update the CV, replace `content/Mote-CV.pdf` with the new file (keeping the same filename). The site serves it at `/Mote-CV.pdf` — the "Download CV" button on the Research page links there automatically.
+
+---
+
 ### Work With Me — `content/workWithMe.yaml`
 
 Controls all text on the `/work-with-me/` page, plus the CPG and Psychology Today profile URLs.
@@ -370,7 +393,7 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 | Google Scholar | ✅ Linked | Real URL in `research/index.njk` |
 | ResearchGate | ✅ Linked | Real URL in `research/index.njk` |
 | Favicon | ❌ Missing | Drop file into `public/` (suggest creating from Mental Healthy logo or initials) |
-| CV PDF | ❌ Missing | Drop `cv.pdf` into `public/` — already linked from Research page |
+| CV PDF | ✅ Added | `content/Mote-CV.pdf` — Jasmine replaces this file to update her CV |
 | OG image | ❌ Missing | 1200×630px social sharing image; drop into `public/` |
 | DOI URLs for publications | ❌ Mostly empty | Fill in `"url"` fields in `content/publications.json` |
 
@@ -418,7 +441,7 @@ The site is structurally complete and the contact form is live. Remaining tasks 
 
 ### High priority
 - [ ] **DNS cutover** — point `jasminemote.com` to GitHub Pages IPs; confirm registrar (may be WordPress.com controlled)
-- [ ] **Add CV PDF** — drop `cv.pdf` into `public/`; already linked from the Research page header and bottom
+- [x] **Add CV PDF** — `content/Mote-CV.pdf` committed; served at `/Mote-CV.pdf`; linked from Research page
 - [ ] **Content review** — Jasmine reads all page copy and submits edits via the GitHub browser editor
 
 ### Medium priority
