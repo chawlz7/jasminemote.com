@@ -69,7 +69,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 **Key design patterns:**
 - Section headers: serif title left + small-caps link right, separated by a rule
 - Content grids: `gap: 1.5px; background: var(--rule)` creates a hairline-divided grid from white cards
-- Italic serif in headlines: used selectively for emphasis (e.g. "the *science* of how they feel")
+- Accent color in section headings: `<em>word</em>` inside a `.section-title` renders in `--accent` (indigo), no italic. To also add italic, use `<em><i>word</i></em>`.
 - Inner pages: `.page-header` section with eyebrow, serif headline, subhead; then content sections below
 
 ---
@@ -236,13 +236,15 @@ All content files live in `content/`. Open any file in GitHub's browser editor, 
 
 ### Homepage text — `content/homepage.yaml`
 
-Controls all major text on the homepage: hero headline and bio, credential cards, newsletter intro, about section body and pullquote, therapy section. The file has comments explaining every field.
+Controls all major text on the homepage: hero headline and bio, credential cards, newsletter intro, about section body and pullquote, therapy section, and section headings. The file has comments explaining every field.
+
+**Section headings** (`sections` key) — controls the four headings on the homepage ("Recent from Mental Healthy", "About Jasmine", "Writing & Press", "Research"). Use `<em>word</em>` to display a word in accent color (indigo, no italic). To get both accent color *and* italic, use `<em><i>word</i></em>`. Remove the tags entirely for a plain heading with no color accent.
 
 ---
 
 ### Research page — `content/research.yaml`
 
-Controls the research statement (eyebrow, headline, body, affiliation), the three stats cells, and the six focus area cards.
+Controls the research statement (eyebrow, headline, body, affiliation), the three stats cells, the six focus area cards, and section headings (`sections.focus_heading`, `sections.publications_heading`). See Homepage above for section heading formatting options.
 
 ```yaml
 stats:
@@ -306,13 +308,13 @@ Leave `"url": ""` and add `"note": "description"` for items without a public lin
 
 ### Writing page text — `content/writingPage.yaml`
 
-Controls the page header (eyebrow, headline, subhead) and the newsletter callout box (kicker, headline, body text, Substack URL, button label). Update this if the newsletter description changes.
+Controls the page header (eyebrow, headline, subhead), the newsletter callout box (kicker, headline, body text, Substack URL, button label), and section headings (`sections.essays_heading`, `sections.press_heading`). See Homepage above for section heading formatting options.
 
 ---
 
 ### Resources — `content/resources.yaml`
 
-Controls the PhD guide callout (update the `url` field when the guide moves) and both resource lists. To add a resource:
+Controls the PhD guide callout (update the `url` field when the guide moves), both resource lists, and section headings (`sections.phd_heading`, `sections.ma_resources_heading`). See Homepage above for section heading formatting options. To add a resource:
 
 ```yaml
 early_psychosis:          # or general_mental_health
