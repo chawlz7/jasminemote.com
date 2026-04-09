@@ -11,7 +11,7 @@ therapy:
   cta_label: "View my CPG profile"
   pt_url: "https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066"
   pt_label: "Psychology Today profile"
-  instruction: "On my CPG profile, click <strong>Get Started</strong> to submit a new client inquiry — I'll follow up from there."
+  instruction: "On my CPG profile, click <strong>Get Started</strong> to submit a new client inquiry — we will follow up from there."
   how_it_works_title: "How it works"
   how_it_works_steps:
     - "Visit my CPG profile using the link nearby"
