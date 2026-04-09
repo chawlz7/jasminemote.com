@@ -5,6 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer" }}</title>
   <meta name="description" content="{{ description or 'Jasmine Mote is a licensed clinical psychologist, researcher at Boston University, and writer. She sees therapy clients in the Boston area and writes Mental Healthy, a newsletter on the science of mental health for parents.' }}">
+  <link rel="canonical" href="https://jasminemote.com{{ page.url }}">
+  <!-- Open Graph -->
+  <meta property="og:site_name" content="Jasmine Mote, PhD">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jasminemote.com{{ page.url }}">
+  <meta property="og:title" content="{{ title or 'Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer' }}">
+  <meta property="og:description" content="{{ description or 'Jasmine Mote is a licensed clinical psychologist, researcher at Boston University, and writer. She sees therapy clients in the Boston area and writes Mental Healthy, a newsletter on the science of mental health for parents.' }}">
+  <meta property="og:image" content="https://jasminemote.com/og-image.png">
+  <meta property="og:image:alt" content="Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer">
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or 'Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer' }}">
+  <meta name="twitter:description" content="{{ description or 'Jasmine Mote is a licensed clinical psychologist, researcher at Boston University, and writer. She sees therapy clients in the Boston area and writes Mental Healthy, a newsletter on the science of mental health for parents.' }}">
+  <meta name="twitter:image" content="https://jasminemote.com/og-image.png">
+  <!-- Structured Data — Person (site-wide) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jasmine Mote",
+    "honorificSuffix": "PhD",
+    "url": "https://jasminemote.com",
+    "description": "Licensed clinical psychologist in the Boston area, Research Assistant Professor at Boston University, and science writer. Specializes in anxiety, OCD, perinatal mental health, emotion, and social connection.",
+    "jobTitle": ["Clinical Psychologist", "Research Assistant Professor"],
+    "worksFor": [
+      {
+        "@type": "CollegeOrUniversity",
+        "name": "Boston University",
+        "url": "https://www.bu.edu"
+      },
+      {
+        "@type": "MedicalOrganization",
+        "name": "Cambridge Psychology Group",
+        "url": "https://cambridgepsych.org"
+      }
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Somerville",
+      "addressRegion": "MA",
+      "addressCountry": "US"
+    },
+    "knowsAbout": ["Clinical Psychology", "Emotion Regulation", "Social Connection", "Schizophrenia", "Perinatal Mental Health", "OCD", "Anxiety", "Ecological Momentary Assessment"],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en",
+      "https://www.researchgate.net/profile/Jasmine-Mote",
+      "https://bsky.app/profile/jmote.bsky.social",
+      "https://jasminemote.substack.com",
+      "https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066",
+      "https://cambridgepsych.org/clinicians/jasmine-mote/"
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">

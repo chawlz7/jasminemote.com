@@ -21,3 +21,10 @@ cta_card:
   body: "I see clients through Cambridge Psychology Group. You can learn more about my practice and request an initial consultation on their website."
   cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
   cta_label: "View my CPG profile →"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Jasmine Mote is a licensed clinical psychologist seeing clients in the Boston area through Cambridge Psychology Group. She specializes in anxiety, OCD, perinatal mental health, and life transitions."

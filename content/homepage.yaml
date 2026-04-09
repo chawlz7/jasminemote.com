@@ -153,3 +153,10 @@ sections:
   about_heading: "About <em>Jasmine</em>"
   writing_heading: "Writing &amp; <em>Press</em>"
   research_heading: "<em>Research</em>"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Jasmine Mote is a licensed clinical psychologist, researcher at Boston University, and writer. She sees therapy clients in the Boston area and writes Mental Healthy, a newsletter on the science of mental health for parents."

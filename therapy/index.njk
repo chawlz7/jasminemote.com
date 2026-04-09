@@ -1,8 +1,39 @@
 ---
 layout: layouts/base.njk
 title: "Therapy — Jasmine Mote, PhD"
-description: "Jasmine Mote is a licensed clinical psychologist seeing clients in the Boston area through Cambridge Psychology Group. She specializes in anxiety, OCD, perinatal mental health, and life transitions."
+eleventyComputed:
+  description: "{{ therapy.seo.description }}"
 ---
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Jasmine Mote, PhD",
+  "url": "https://jasminemote.com/therapy/",
+  "description": "Licensed clinical psychologist in the Boston area specializing in perinatal mental health, mood disorders, anxiety, OCD, and psychosis. Sees clients through Cambridge Psychology Group.",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Boston",
+    "addressRegion": "MA",
+    "addressCountry": "US"
+  },
+  "areaServed": {
+    "@type": "State",
+    "name": "Massachusetts"
+  },
+  "parentOrganization": {
+    "@type": "MedicalOrganization",
+    "name": "Cambridge Psychology Group",
+    "url": "https://cambridgepsych.org"
+  },
+  "sameAs": [
+    "https://cambridgepsych.org/clinicians/jasmine-mote/",
+    "https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066"
+  ]
+}
+</script>
 
 {# ── PAGE HEADER ── #}
 <section class="page-header">

@@ -36,3 +36,10 @@ collaboration:
   # once DNS has been cut over to the custom domain.
   # ─────────────────────────────────────────────────────────────────────────────
   redirect_url: "https://chawlz7.github.io/jasminemote.com/work-with-me/?sent=true"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology Group, or get in touch for collaborations, peer supervision, media inquiries, and more."

@@ -75,3 +75,10 @@ focus_areas:
 sections:
   focus_heading: "Research <em>Focus</em>"
   publications_heading: "All <em>Publications</em>"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Jasmine Mote's research focuses on emotion, social connection, and serious mental illness. Research Assistant Professor at Boston University Sargent College."

@@ -101,3 +101,10 @@ general_mental_health:
 sections:
   phd_heading: "PhD <em>Guide</em>"
   ma_resources_heading: "Massachusetts Mental <em>Health</em> Resources"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Mental health resources in Massachusetts and a guide to clinical psychology PhD programs, compiled by Jasmine Mote, PhD."

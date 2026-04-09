@@ -42,3 +42,10 @@ newsletter_callout:
 sections:
   essays_heading: "Essays & <em>Articles</em>"
   press_heading: "Press & <em>Media</em>"
+
+
+# ── SEO ───────────────────────────────────────────────────────
+# The meta description shown in Google search results and link
+# previews. Keep it under 160 characters.
+seo:
+  description: "Essays, articles, and press coverage by Jasmine Mote, PhD — clinical psychologist and science writer. Published in Scientific American, STAT News, and more."
