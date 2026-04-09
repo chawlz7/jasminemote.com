@@ -50,7 +50,7 @@ description: "Jasmine Mote's research focuses on emotion, social connection, and
 <section class="research-focus-section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Research <em>Focus</em></h2>
+      <h2 class="section-title">{{ research.sections.focus_heading | safe }}</h2>
     </div>
     <div class="research-focus-list">
       {% for area in research.focus_areas %}
@@ -95,7 +95,7 @@ description: "Jasmine Mote's research focuses on emotion, social connection, and
   <div class="container">
 
     <div class="section-header">
-      <h2 class="section-title">All <em>Publications</em></h2>
+      <h2 class="section-title">{{ research.sections.publications_heading | safe }}</h2>
       <a href="https://scholar.google.com/citations?user=achpZVQAAAAJ&hl=en" class="section-link" target="_blank" rel="noopener">Google Scholar ↗</a>
     </div>
 

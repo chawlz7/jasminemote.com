@@ -34,3 +34,11 @@ newsletter_callout:
     says — in plain language.
   url: "https://jasminemote.substack.com"
   cta: "Read on Substack →"
+
+
+# ── Section headings ──────────────────────────────────────────
+# Use <em>word</em> around a word to display it in accent color.
+# Remove <em> tags entirely for plain headings with no color accent.
+sections:
+  essays_heading: "Essays & <em>Articles</em>"
+  press_heading: "Press & <em>Media</em>"

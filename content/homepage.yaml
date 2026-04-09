@@ -142,3 +142,14 @@ therapy:
       my practice and request an initial consultation on their website.
     cta_text: "View my CPG profile →"
     cta_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
+
+
+# ── Section headings ──────────────────────────────────────────
+# Use <em>word</em> around a word to display it in accent color.
+# Remove <em> tags entirely for plain headings with no color accent.
+# Note: use &amp; instead of & in fields that contain formatting tags.
+sections:
+  newsletter_heading: "Recent from <em>Mental Healthy</em>"
+  about_heading: "About <em>Jasmine</em>"
+  writing_heading: "Writing &amp; <em>Press</em>"
+  research_heading: "<em>Research</em>"

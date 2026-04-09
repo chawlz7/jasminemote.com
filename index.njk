@@ -54,7 +54,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
     </div>
 
     <div class="section-header">
-      <h2 class="section-title">Recent from <em>Mental Healthy</em></h2>
+      <h2 class="section-title">{{ homepage.sections.newsletter_heading | safe }}</h2>
       <a href="https://jasminemote.substack.com" class="section-link" target="_blank" rel="noopener">All posts ↗</a>
     </div>
 
@@ -98,7 +98,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
     <div class="about-inner">
       <div>
         <div class="section-header">
-          <h2 class="section-title">About <em>Jasmine</em></h2>
+          <h2 class="section-title">{{ homepage.sections.about_heading | safe }}</h2>
         </div>
         <blockquote class="about-pull">{{ homepage.about.pullquote | safe }}</blockquote>
         {% for para in homepage.about.body %}
@@ -134,7 +134,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
 <section class="writing-section" id="writing">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Writing &amp; <em>Press</em></h2>
+      <h2 class="section-title">{{ homepage.sections.writing_heading | safe }}</h2>
       <a href="{{ '/writing/' | url }}" class="section-link">All writing →</a>
     </div>
     <div class="writing-grid">
@@ -180,7 +180,7 @@ title: "Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer"
 <section class="research-section" id="research">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title"><em>Research</em></h2>
+      <h2 class="section-title">{{ homepage.sections.research_heading | safe }}</h2>
       <a href="{{ '/research/' | url }}" class="section-link">All publications →</a>
     </div>
     <div class="research-stats">

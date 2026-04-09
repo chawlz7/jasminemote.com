@@ -93,3 +93,11 @@ general_mental_health:
   - name: "DBSA Boston"
     detail: "Mood disorders and bipolar disorder support"
     url: "https://dbsaboston.org/"
+
+
+# ── Section headings ──────────────────────────────────────────
+# Use <em>word</em> around a word to display it in accent color.
+# Remove <em> tags entirely for plain headings with no color accent.
+sections:
+  phd_heading: "PhD <em>Guide</em>"
+  ma_resources_heading: "Massachusetts Mental <em>Health</em> Resources"

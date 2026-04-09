@@ -67,3 +67,11 @@ focus_areas:
       reducing the mental health disparities among various minoritized communities and informs
       policies that promote better mental health in the clinic, in our neighborhoods, and in our
       own backyards.
+
+
+# ── Section headings ──────────────────────────────────────────
+# Use <em>word</em> around a word to display it in accent color.
+# Remove <em> tags entirely for plain headings with no color accent.
+sections:
+  focus_heading: "Research <em>Focus</em>"
+  publications_heading: "All <em>Publications</em>"
