@@ -114,6 +114,7 @@ about:
     - "Psychosis"
     - "Anxiety"
     - "OCD"
+    - "Perfectionism"
     - "LGBTQIA+ affirmative"
     - "Anti-racist practice"
     - "Life transitions"
@@ -124,14 +125,14 @@ therapy:
   eyebrow: "Therapy — Boston Area"
   headline: "Thoughtful, evidence-based therapy for real moments in life."
   body: >-
-    I work with adults navigating anxiety, OCD, mood disorders, psychosis, perinatal mental health challenges,
+    I work with adults navigating mood and anxiety concerns, OCD, psychosis, mental health challenges in pregnancy and postpartum,
     and major life transitions — including new parents, academics and professionals
     under intense pressure, and people exploring questions of identity.
   specialties:
-    - "Depression and mood difficulties"
     - "Mental health challenges in pregnancy and postpartum"
+    - "Depression and mood difficulties"
     - "Life transitions (new parenthood, career, identity)"
-    - "Anxiety and OCD"
+    - "Anxiety, OCD, and perfectionism"
     - "Psychosis and serious mental illness"
     - "Academics, researchers, and high-stress professionals"
   card:
