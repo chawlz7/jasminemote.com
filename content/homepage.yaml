@@ -37,7 +37,7 @@ photo:
 # ── Hero ──────────────────────────────────────────────────────
 hero:
   eyebrow: "Clinical Psychologist · Researcher · Writer"
-  headline: "Helping people understand the <em>science</em> of how they feel."
+  headline: "Helping people understand the science of how they feel."
   bio: >-
     I'm a clinical psychologist, researcher at Boston University, and therapist
     in the Boston area. I write <em>Mental Healthy</em> — a newsletter on the science
@@ -53,7 +53,7 @@ credentials:
     external: true
   - icon: "🛋"
     label: "Therapy — Cambridge Psychology Group"
-    sub: "Mood, anxiety, OCD, perinatal mental health, life transitions"
+    sub: "Mood, anxiety, OCD, psychosis, perinatal mental health, life transitions"
     url: "/therapy/"
     external: false
   - icon: "🔬"
@@ -112,8 +112,8 @@ about:
     - "Perinatal mental health"
     - "Mood disorders"
     - "Psychosis"
-    - "Anxiety & OCD"
-    - "Serious mental illness"
+    - "Anxiety"
+    - "OCD"
     - "LGBTQIA+ affirmative"
     - "Anti-racist practice"
     - "Life transitions"
@@ -124,15 +124,15 @@ therapy:
   eyebrow: "Therapy — Boston Area"
   headline: "Thoughtful, evidence-based therapy for real moments in life."
   body: >-
-    I work with adults navigating anxiety, OCD, perinatal mental health challenges,
+    I work with adults navigating anxiety, OCD, mood disorders, psychosis, perinatal mental health challenges,
     and major life transitions — including new parents, academics and professionals
     under intense pressure, and people exploring questions of identity.
   specialties:
     - "Depression and mood difficulties"
-    - "Perinatal and postpartum mental health"
+    - "Mental health challenges in pregnancy and postpartum"
     - "Life transitions (new parenthood, career, identity)"
     - "Anxiety and OCD"
-    - "Psychosis-spectrum and serious mental illness"
+    - "Psychosis and serious mental illness"
     - "Academics, researchers, and high-stress professionals"
   card:
     title: "Ready to get started?"
