@@ -1,3 +1,25 @@
+# Search engines
 User-agent: *
 Allow: /
+
+# AI retrieval crawlers — allowed (answers queries, builds knowledge panels)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Training-only scrapers — blocked
+User-agent: CCBot
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://jasminemote.com/sitemap.xml
