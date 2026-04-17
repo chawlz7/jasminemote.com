@@ -21,8 +21,9 @@ eleventyComputed:
       <div class="hero-photo-col fade-up d5">
         <div class="hero-photo-block">
           <picture>
-            <source srcset="/jasmine-headshot.webp" type="image/webp">
-            <img src="{{ homepage.photo.src | url }}" alt="{{ homepage.photo.alt }}" class="hero-photo" width="840" height="840" fetchpriority="high">
+            <source srcset="/jasmine-headshot.webp" type="image/webp" media="(min-width: 900px)">
+            <source srcset="{{ homepage.photo.src | url }}" type="image/png" media="(min-width: 900px)">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ homepage.photo.alt }}" class="hero-photo" width="840" height="840" fetchpriority="high">
           </picture>
           <div class="hero-photo-name">Jasmine Mote, <em>PhD</em></div>
         </div>
