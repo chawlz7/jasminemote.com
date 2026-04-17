@@ -20,7 +20,10 @@ eleventyComputed:
 
       <div class="hero-photo-col fade-up d5">
         <div class="hero-photo-block">
-          <img src="{{ homepage.photo.src | url }}" alt="{{ homepage.photo.alt }}" class="hero-photo">
+          <picture>
+            <source srcset="/jasmine-headshot.webp" type="image/webp">
+            <img src="{{ homepage.photo.src | url }}" alt="{{ homepage.photo.alt }}" class="hero-photo" width="840" height="840" fetchpriority="high">
+          </picture>
           <div class="hero-photo-name">Jasmine Mote, <em>PhD</em></div>
         </div>
       </div>
