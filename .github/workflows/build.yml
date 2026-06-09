@@ -35,6 +35,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Refresh Substack posts
+        run: npm run update-substack
+        continue-on-error: true
+
       - name: Build
         run: npm run build
 
