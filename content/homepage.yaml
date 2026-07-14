@@ -58,7 +58,7 @@ credentials:
     external: false
   - icon: "🔬"
     label: "Research — Boston University"
-    sub: "AMP Lab · 25+ peer-reviewed publications"
+    sub: "AMP Lab · 30+ peer-reviewed publications"
     url: "/research/"
     external: false
   - icon: "✍️"
