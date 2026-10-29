@@ -1,6 +1,7 @@
 #!/bin/bash
 # Fetches the latest Substack posts and pushes an update to the site.
-# Run this after Jasmine publishes a new newsletter post.
+# Manual refresh; normally the hourly job on Charles's Mac Studio does this
+# (personalOS jobs/jasminemote_feed.py).
 #
 # Requirements: Node.js, git, and push access to the GitHub repo.
 # Usage: bash scripts/update-and-push.sh
@@ -12,6 +13,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 cd "$REPO_ROOT"
+
+# Start from GitHub's current main: content files are edited there.
+git pull --ff-only
 
 echo "Fetching latest Substack posts..."
 node scripts/update-substack.js

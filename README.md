@@ -29,7 +29,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 | CI/CD | GitHub Actions | Builds on push to main + daily 6am UTC cron |
 | Hosting | GitHub Pages | Free on public repos; custom domain support |
 | Source control | GitHub | Jasmine edits content files in-browser |
-| Newsletter | [Substack](https://jasminemote.substack.com) | Committed JSON file, updated by Mac Mini cron |
+| Newsletter | [Substack](https://jasminemote.substack.com) | Committed JSON file, updated hourly by a job on Charles's Mac Studio |
 | Contact form | [Web3Forms](https://web3forms.com) | Free tier; access key in `content/workWithMe.yaml` |
 | Fonts | Google Fonts | Playfair Display + DM Sans |
 | CSS | Hand-rolled, no framework | CSS custom properties throughout |
@@ -37,7 +37,7 @@ This is a redesign and rebuild of [jasminemote.com](https://jasminemote.com), th
 **Why this stack:**
 - Jasmine is comfortable editing YAML/JSON files but doesn't want to touch code or a CMS admin UI
 - GitHub's in-browser file editor is sufficient for her update cadence (bio, publications, writing credits)
-- Substack posts are committed as a JSON file and updated daily by a Mac Mini cron job — Substack blocks HTTP requests from GitHub Actions runners (Azure IPs), so fetching at build time isn't viable
+- Substack posts are committed as a JSON file and updated hourly by a job on Charles's Mac Studio — Substack blocks HTTP requests from GitHub Actions runners (Azure IPs), so fetching at build time isn't viable
 - GitHub Actions + Pages is fully free on a public repo (vs Netlify free tier which caps at 300 build minutes/month — insufficient for daily scheduled rebuilds)
 - No separate hosting account to manage; everything lives in GitHub
 
@@ -111,11 +111,11 @@ jasminemote.com/
 │   ├── publications.json     # ← Jasmine edits: add new publications here
 │   ├── writing.json          # ← Jasmine edits: add new articles and press clips here
 │   ├── substackPosts.js      # Reads substackPostsData.json; fallback posts if file missing
-│   └── substackPostsData.json  # ← Committed JSON of 3 most recent Substack posts (updated by cron)
+│   └── substackPostsData.json  # ← Committed JSON of 3 most recent Substack posts (updated by the Studio job)
 │
 ├── scripts/
 │   ├── update-substack.js    # Fetches Substack JSON API locally; writes substackPostsData.json
-│   └── update-and-push.sh   # Shell script: fetch + commit + push (runs on Mac Mini or any machine)
+│   └── update-and-push.sh   # Shell script: manual fetch + commit + push from any machine
 │
 ├── public/                   # Static assets copied to site root
 │   ├── CNAME                 # jasminemote.com — keeps custom domain on redeploy
@@ -186,15 +186,18 @@ jasminemote.com/
 
 Substack actively blocks HTTP requests from GitHub Actions runners (Azure datacenter IPs). Both the RSS feed (`/feed`) and the JSON API (`/api/v1/posts`) return 403 or 404 from those IPs — proxy services (e.g. ScraperAPI) are also detected and blocked. **Fetching Substack data at build time is not viable from GitHub Actions.**
 
-**Solution:** The Substack post data is committed directly to the repo as `content/substackPostsData.json`. The build just reads that file — no network call required. A cron job on a local Mac Mini fetches the data and pushes any changes, which triggers a new GitHub Pages build.
+**Solution:** The Substack post data is committed directly to the repo as `content/substackPostsData.json`. The build just reads that file — no network call required. A job on Charles's Mac Studio fetches the data and commits any changes, which triggers a new GitHub Pages build.
 
 ### How it works
 
-1. **Mac Mini cron** — runs `scripts/update-and-push.sh` daily at 8:10am (10 min after Jasmine's typical 8am Substack publish time)
-2. The script calls `node scripts/update-substack.js`, which fetches `https://jasminemote.substack.com/api/v1/posts?limit=3` from a residential IP (not blocked)
-3. If the posts have changed, it commits `content/substackPostsData.json` and pushes to `main`
-4. GitHub Actions picks up the push and rebuilds the site (~1 min)
-5. If posts haven't changed, the script exits silently with no commit
+1. **Studio job** — personalOS `jobs/jasminemote_feed.py` on Charles's Mac Studio, hourly at :10 (launchd `com.personalos.jobs.jasminemote`; spec at `~/personalos/jobs/personalos-jobs-spec.md`)
+2. It fetches `https://jasminemote.substack.com/api/v1/posts?limit=3` from a residential IP (not blocked), mapped exactly as `scripts/update-substack.js` does
+3. If the posts have changed, it writes `content/substackPostsData.json` on `main` through the GitHub contents API — no local checkout, so it can't collide with edits made on GitHub
+4. GitHub Actions picks up the commit and rebuilds the site (~1 min)
+5. If posts haven't changed, it does nothing
+6. Charles's 07:00 morning email checks that Substack's newest post is on the live homepage, so a stalled job shows up within a day
+
+The build itself does not try to fetch Substack (it always got a 403 and silently deployed old data, Jun–Oct 2026).
 
 ### Running manually
 
@@ -381,7 +384,7 @@ Chosen over Netlify because: Netlify's free tier caps at 300 build minutes/month
 
 - **On every push to `main`** — Actions builds and deploys automatically (~1 min)
 - **Daily at 6am UTC** — scheduled build as a safety net for any missed pushes
-- **Via Substack cron** — the Mac Mini cron job runs daily at 8:10am, fetches new posts, and pushes `substackPostsData.json` if changed — this push triggers a new build automatically
+- **Via the Substack job** — the Studio job runs hourly, fetches new posts, and commits `substackPostsData.json` if changed — this commit triggers a new build automatically
 - **Manual trigger** — Actions tab → "Build and Deploy" → "Run workflow"
 
 ---
@@ -407,7 +410,7 @@ Decisions made during the initial build (Claude Code, March 2026):
 
 - **Platform:** Static site (Eleventy + GitHub Pages) over WordPress, Squarespace, or Webflow. Jasmine comfortable with file editing; GitHub in-browser editor is sufficient for her update cadence.
 - **Newsletter first:** Jasmine agreed the Substack should be front and center. Homepage leads with it. *Mental Healthy* is the site's heartbeat — jasminemote.com is built around it, not the other way around.
-- **Committed JSON for Substack posts** (not fetched at build time) — Substack blocks requests from GitHub Actions runners (Azure IPs), making live API calls impossible during CI builds. Instead, `content/substackPostsData.json` is committed to the repo and updated by a Mac Mini cron job. The build reads the file; no network call needed. This gives clean page loads with no CORS concerns and no flash of empty cards, while keeping post data fresh via the cron.
+- **Committed JSON for Substack posts** (not fetched at build time) — Substack blocks requests from GitHub Actions runners (Azure IPs), making live API calls impossible during CI builds. Instead, `content/substackPostsData.json` is committed to the repo and updated hourly by a job on Charles's Mac Studio. The build reads the file; no network call needed. This gives clean page loads with no CORS concerns and no flash of empty cards, while keeping post data fresh via that job.
 - **Color palette derived from Mental Healthy logo** — indigo/violet pulled from the Substack branding so site and newsletter feel like the same brand family.
 - **Work With Me replaces a standalone Contact page** — therapy clients are routed to CPG and Psychology Today; all other inquiries go through the Web3Forms contact form on the same page.
 - **Content in YAML/JSON, not templates** — all page text Jasmine might want to update lives in `content/` files she can edit in GitHub's browser without touching any template code.
