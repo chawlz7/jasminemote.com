@@ -1,0 +1,36 @@
+// Cloudflare Workers deploy for jasminemote.com: the static site (dist/) plus one small Worker
+// (worker/index.ts) that answers /api/contact for the Work With Me form. Workers Builds runs
+// `npm run build` and deploys on every push to main, with a private preview URL for other branches.
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "jasminemote-com",
+	"main": "worker/index.ts",
+	"compatibility_date": "2026-10-01",
+	// Charles's personal Cloudflare account, which also holds the jasminemote.com zone.
+	"account_id": "fe41cbf76b22eb8cfa44edebbc27fed4",
+	"workers_dev": true,
+	"preview_urls": true,
+	"observability": { "enabled": true },
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS",
+		// Pages are served straight from dist/; only the form endpoint reaches the Worker.
+		"run_worker_first": ["/api/*"],
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "404-page"
+	},
+	// Contact-form email. jasminemote.com must have Cloudflare Email Routing on, and CONTACT_TO must be a
+	// verified destination address there; the binding may only send as CONTACT_FROM. CONTACT_TO is a
+	// Worker secret (`wrangler secret put CONTACT_TO`) so her inbox address isn't published in this repo.
+	"send_email": [{ "name": "EMAIL", "allowed_sender_addresses": ["website@jasminemote.com"] }],
+	"vars": {
+		"CONTACT_FROM": "website@jasminemote.com"
+	},
+	// TURNSTILE_SECRET and CONTACT_TO are Worker secrets (`wrangler secret put <NAME>`), never in this file.
+	"previews": {
+		"send_email": [{ "name": "EMAIL", "allowed_sender_addresses": ["website@jasminemote.com"] }],
+		"vars": {
+			"CONTACT_FROM": "website@jasminemote.com"
+		}
+	}
+}

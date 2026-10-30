@@ -1,0 +1,30 @@
+---
+// Publications from publications.json, with her name in bold in each author list.
+interface Pub { year: number; authors: string; title: string; journal?: string; url?: string }
+interface Props { items: Pub[]; showYear?: boolean; bare?: boolean }
+const { items, showYear = true, bare = false } = Astro.props;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const authors = (a: string) => esc(a).replace('Mote, J.', '<strong>Mote, J.</strong>');
+---
+<ol class:list={['pubs', { bare, 'no-year': !showYear }]}>
+	{items.map((p) => (
+		<li>
+			{showYear && <span class="year">{p.year}</span>}
+			<p class="cite">
+				<Fragment set:html={authors(p.authors)} /> {p.title} {p.journal && <em>{p.journal}</em>}
+				{p.url && <a href={p.url} target="_blank" rel="noopener" class="view">View<span class="sr-only">: {p.title}</span> ↗</a>}
+			</p>
+		</li>
+	))}
+</ol>
+<style>
+	.pubs { list-style: none; padding: 0 28px; background: var(--surface-raised); border-radius: var(--radius-md); }
+	.pubs.bare { padding: 0; background: none; }
+	li { display: grid; grid-template-columns: 64px 1fr; gap: var(--space-4); padding-block: 18px; font-size: var(--type-small); line-height: 1.55; }
+	li + li { border-top: 1px solid var(--rule-soft); }
+	.no-year li { grid-template-columns: 1fr; }
+	.year { font-weight: 600; color: var(--action); }
+	.cite :global(strong) { font-weight: 600; }
+	em { color: var(--text-muted); }
+	.view { font-weight: 600; white-space: nowrap; margin-left: 4px; }
+</style>

@@ -1,0 +1,28 @@
+---
+// Essays and articles from writing.json: outlet above title, a leaf marker, and her note as a chip.
+import Leaf from './Leaf.astro';
+interface Item { source: string; title: string; url?: string; note?: string }
+interface Props { items: Item[]; columns?: boolean }
+const { items, columns = true } = Astro.props;
+---
+<ul class:list={['ruled', 'writing', { columns }]}>
+	{items.map((w, i) => {
+		const inner = (
+			<>
+				<Leaf color={i % 2 ? 'var(--periwinkle-400)' : 'var(--sage-500)'} width={20} />
+				<span class="text">
+					<span class="meta" set:html={w.source} />
+					<span class="serif h3"><Fragment set:html={w.title} />{w.url && <span class="arrow"> ↗</span>}{w.note && <span class="chip sage note" set:html={w.note} />}</span>
+				</span>
+			</>
+		);
+		return <li>{w.url ? <a href={w.url} target="_blank" rel="noopener">{inner}</a> : <div class="item">{inner}</div>}</li>;
+	})}
+</ul>
+<style>
+	.columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); column-gap: var(--space-7); }
+	a, .item { display: grid; grid-template-columns: 24px 1fr; gap: 14px; padding-block: 18px; }
+	a :global(svg), .item :global(svg) { margin-top: 8px; }
+	.text { display: flex; flex-direction: column; gap: 2px; }
+	.note { margin-left: var(--space-2); font-family: var(--font-sans); font-size: 0.8125rem; vertical-align: middle; }
+</style>

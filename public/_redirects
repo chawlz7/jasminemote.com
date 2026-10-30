@@ -1,0 +1,7 @@
+# Old WordPress addresses → their pages on this site (permanent redirects).
+/publications /research/ 301
+/publications/ /research/ 301
+/contact-me /work-with-me/ 301
+/contact-me/ /work-with-me/ 301
+/cv.pdf /Mote-CV.pdf 301
+/sitemap.xml /sitemap-index.xml 301

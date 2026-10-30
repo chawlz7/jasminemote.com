@@ -1,0 +1,7 @@
+---
+// Her tags. Values (affirmative, anti-racist, transitions) sit in sage; clinical focus in mist.
+interface Props { tags: string[] }
+const { tags } = Astro.props;
+const sage = (t: string) => /affirmative|anti-racist|transition/i.test(t);
+---
+<ul class="chips">{tags.map((t) => <li class:list={['chip', { sage: sage(t) }]} set:html={t} />)}</ul>

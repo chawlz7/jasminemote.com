@@ -1,0 +1,68 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import SectionHead from '../../components/SectionHead.astro';
+
+const r = (await getEntry('resources', 'resources'))!.data;
+const lists = [
+	{ title: 'Early psychosis services', items: r.early_psychosis },
+	{ title: 'General mental health', items: r.general_mental_health },
+];
+---
+
+<Base title="Resources — Jasmine Mote, PhD" description={r.seo.description}>
+	<PageHeader eyebrow={r.page.eyebrow} headline={r.page.headline} subhead={r.page.subhead}>
+		<img slot="art" src="/images/sprig-twilight.png" alt="" width="561" height="363" class="sprig" />
+	</PageHeader>
+
+	<section class="section surface-raised">
+		<div class="container">
+			<SectionHead title={r.sections.phd_heading} />
+			<div class="guide">
+				<div class="guide-text">
+					<p class="label" style="color: var(--violet-700)" set:html={r.phd_guide.kicker} />
+					<h3 class="h2" set:html={r.phd_guide.headline} />
+					<p class="small body" set:html={r.phd_guide.body} />
+				</div>
+				<a class="btn btn-primary" href={r.phd_guide.url} target="_blank" rel="noopener" set:html={r.phd_guide.cta} />
+			</div>
+		</div>
+	</section>
+
+	<section class="section surface-sage">
+		<div class="container">
+			<SectionHead title={r.sections.ma_resources_heading} />
+			<p class="crisis" set:html={r.crisis_intro} />
+			<div class="lists">
+				{lists.map((l) => (
+					<div class="list">
+						<h3 class="h2">{l.title}</h3>
+						<ul class="ruled">
+							{l.items.map((item) => (
+								<li>
+									<a href={item.url} target="_blank" rel="noopener">
+										<span class="item-text"><span class="serif h3" set:html={item.name} /><span class="meta" set:html={item.detail} /></span>
+										<span class="arrow" aria-hidden="true">↗</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.sprig { width: 100%; max-width: 320px; }
+	.guide { display: flex; flex-wrap: wrap; gap: var(--space-5) var(--space-7); align-items: center; padding: 36px 40px; border-radius: var(--radius-md); background: var(--surface-mist); }
+	.guide-text { flex: 999 1 520px; display: flex; flex-direction: column; gap: 10px; }
+	.crisis { padding: 20px 24px; border-radius: var(--radius-md); background: var(--surface-raised); max-width: 860px; }
+	.lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: var(--space-6) var(--space-7); }
+	.list { display: flex; flex-direction: column; gap: var(--space-3); }
+	.list a { display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline; padding-block: var(--space-4); }
+	.item-text { display: flex; flex-direction: column; gap: 2px; }
+	.item-text .h3 { font-size: 1.1875rem; }
+</style>

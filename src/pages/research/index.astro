@@ -1,0 +1,121 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import PubList from '../../components/PubList.astro';
+import { LINKS } from '../../consts';
+
+const r = (await getEntry('research', 'research'))!.data;
+const pubs = (await getCollection('publications')).map((e) => e.data);
+const paragraphs = r.statement.body.split(/\n+/).map((p) => p.trim()).filter(Boolean);
+const years = [...new Set(pubs.map((p) => p.year))].sort((a, b) => b - a);
+const count = (y: number) => pubs.filter((p) => p.year === y).length;
+const most = Math.max(...years.map(count));
+// A shape from her logo marks each focus area, in place of numbers (design system: shapes).
+const shapes = [
+	'<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="var(--periwinkle-400)"/></svg>',
+	'<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><path d="M12 62V30a20 20 0 0 1 40 0v32z" fill="var(--sage-500)"/></svg>',
+	'<svg width="44" height="40" viewBox="0 0 64 40" aria-hidden="true"><path d="M2 20C14 2 50 2 62 20 50 38 14 38 2 20z" fill="var(--violet-600)"/></svg>',
+	'<svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><polygon points="32,8 39,23 55,24 43,36 47,52 32,43 17,52 21,36 9,24 25,23" fill="var(--nightfall-500)" stroke="var(--nightfall-500)" stroke-width="6" stroke-linejoin="round"/></svg>',
+];
+---
+
+<Base title="Research — Jasmine Mote, PhD" description={r.seo.description}>
+	<PageHeader eyebrow={r.statement.eyebrow} headline={r.statement.headline}>
+		{paragraphs.map((p) => <p class="body" set:html={p} />)}
+		<p class="meta" set:html={r.statement.affiliation} />
+		<div><a class="btn btn-secondary" href={LINKS.cv}>Download CV</a></div>
+		<div slot="art" class="profiles">
+			<a href={LINKS.amplab} target="_blank" rel="noopener"><img src="/logos/amp-lab.png" alt="AMP Lab" width="200" height="60" /></a>
+			<a href={LINKS.scholar} target="_blank" rel="noopener"><img src="/logos/google-scholar-logo_big.png" alt="Google Scholar profile" width="200" height="60" /></a>
+			<a href={LINKS.researchgate} target="_blank" rel="noopener"><img src="/logos/researchgate.png" alt="ResearchGate profile" width="60" height="60" /></a>
+		</div>
+	</PageHeader>
+
+	<section class="stats-wrap">
+		<div class="container stats">
+			{r.stats.map((s) => (
+				<div class="stat"><span class="serif num" set:html={s.number} /><span class="small" set:html={s.label} /></div>
+			))}
+		</div>
+	</section>
+
+	<section class="section surface-sage">
+		<div class="container">
+			<SectionHead title={r.sections.focus_heading} />
+			{r.focus_areas.map((a, i) => {
+				const noteworthy = pubs.filter((p) => p.focus_area === a.id);
+				return (
+					<article class="card area">
+						<div class="area-text">
+							<Fragment set:html={shapes[i % shapes.length]} />
+							<h3 class="h2" set:html={a.title} />
+							<p class="small body" set:html={a.description} />
+						</div>
+						{noteworthy.length > 0 && (
+							<div>
+								<p class="meta noteworthy">Noteworthy publications</p>
+								<PubList items={noteworthy} bare />
+							</div>
+						)}
+					</article>
+				);
+			})}
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<SectionHead title={r.sections.publications_heading} link={{ label: 'Google Scholar ↗', href: LINKS.scholar, external: true }} />
+			<div class="card chart">
+				<p class="meta">Publications by year</p>
+				<div class="bars">
+					{years.map((y) => (
+						<a href={`#y${y}`} aria-label={`${y}: ${count(y)} publications`}>
+							<span class="meta">{count(y)}</span>
+							<span class:list={['bar', { top: count(y) === most }]} style={`height: ${Math.round((110 * count(y)) / most)}px`} />
+							<span class="meta yr">{y}</span>
+						</a>
+					))}
+				</div>
+			</div>
+			<div class="years">
+				{years.map((y) => (
+					<div id={`y${y}`} class="year-group">
+						<h3 class="h1 year">{y}</h3>
+						<PubList items={pubs.filter((p) => p.year === y)} showYear={false} />
+					</div>
+				))}
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.profiles { display: flex; flex-direction: column; gap: var(--space-3); width: 100%; max-width: 280px; }
+	.profiles a { display: flex; align-items: center; justify-content: center; height: 76px; border-radius: var(--radius-md); background: var(--surface-raised); }
+	.profiles img { max-height: 42px; width: auto; max-width: 70%; }
+	.stats-wrap { padding-bottom: 72px; }
+	.stats { display: flex; flex-wrap: wrap; gap: var(--space-5) 0; }
+	.stat { flex: 1 1 220px; display: flex; flex-direction: column; gap: var(--space-1); padding-inline: var(--space-5); border-left: 1px solid var(--rule); }
+	.stat:first-child { padding-left: 0; border-left: 0; }
+	.num { font-size: 2.75rem; line-height: 1.1; color: var(--action); }
+	.area { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: var(--space-6) var(--space-7); padding: 36px; }
+	.area-text { display: flex; flex-direction: column; gap: 14px; }
+	.noteworthy { font-weight: 600; color: var(--sage-700); }
+	.chart { display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-5) 28px; }
+	.bars { display: flex; gap: 10px; align-items: flex-end; }
+	.bars a { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 160px; text-decoration: none; }
+	.bar { width: 100%; max-width: 44px; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--periwinkle-400); }
+	.bar.top, .bars a:hover .bar { background: var(--action); }
+	.yr { color: var(--text-body); }
+	.years { display: flex; flex-direction: column; gap: var(--space-5); }
+	.year-group { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-2) var(--space-5); align-items: start; scroll-margin-top: 24px; }
+	.year { color: var(--action); padding-top: 12px; }
+	@media (max-width: 640px) {
+		.year-group { grid-template-columns: 1fr; }
+		.bars { gap: 4px; }
+		.yr { font-size: 0.6875rem; writing-mode: vertical-rl; transform: rotate(180deg); }
+	}
+</style>

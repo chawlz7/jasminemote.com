@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "jasminemote-dev",
+      "runtimeExecutable": "/Users/chawlz/Documents/Claude Code/Projects/jasminemote.com/node_modules/.bin/eleventy",
+      "runtimeArgs": ["--serve", "--port=8082"],
+      "port": 8082
+    }
+  ]
+}

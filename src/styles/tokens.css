@@ -1,0 +1,68 @@
+/* Design system v1 — "Soft Modern, natural" (October 2026).
+   The source of truth is the design canvas: https://claude.ai/artifact/WUgFwece82zXuPCycXUaLv
+   Change a value here, not in a component. Every text pairing used on the site passes WCAG AA. */
+
+:root {
+	/* Color — palette */
+	--violet-600: #595298;    /* dusky violet: the logo violet, softened toward Nightfall Sky */
+	--violet-700: #443D7D;    /* hover, text on mist, quotes */
+	--periwinkle-400: #999FE8;
+	--periwinkle-200: #DCDEF7;
+	--mist-100: #E8E4F1;
+	--nightfall-500: #6F6578; /* Benjamin Moore CC-38, her office wall */
+	--sage-500: #8AA386;
+	--sage-700: #3D5139;
+	--sage-100: #E4E9DF;
+	--linen-50: #F5F0E8;
+	--white: #FFFFFF;
+	--ink-900: #221B2A;
+	--ink-700: #3B3445;
+	--ink-500: #5A5164;
+	--rule: #E2DACE;
+	--rule-soft: #EEE8DF;
+	--lavender-on-ink: #B4B9F0;
+	--muted-on-ink: #D6D0DE;
+
+	/* Color — roles */
+	--surface-page: var(--linen-50);
+	--surface-raised: var(--white);
+	--surface-sage: var(--sage-100);
+	--surface-mist: var(--mist-100);
+	--surface-inverse: var(--ink-900);
+	--text-primary: var(--ink-900);
+	--text-body: var(--ink-700);
+	--text-muted: var(--ink-500);
+	--text-accent: var(--violet-600);
+	--action: var(--violet-600);
+	--action-hover: var(--violet-700);
+	--focus: var(--violet-600);
+
+	/* Type */
+	--font-serif: 'Hedvig Letters Serif', Georgia, serif;
+	--font-sans: 'Albert Sans', 'Helvetica Neue', Arial, sans-serif;
+	--type-display: clamp(2.375rem, 4.4vw, 3.375rem); /* 38 → 54 */
+	--type-h1: clamp(1.875rem, 3.2vw, 2.5rem);         /* 30 → 40 */
+	--type-h2: clamp(1.5rem, 2.2vw, 1.75rem);          /* 24 → 28 */
+	--type-h3: clamp(1.25rem, 1.6vw, 1.3125rem);       /* 20 → 21 */
+	--type-quote: clamp(1.375rem, 2.3vw, 1.6875rem);   /* 22 → 27 */
+	--type-lede: 1.125rem;  /* 18 */
+	--type-body: 1.0625rem; /* 17 */
+	--type-small: 0.9375rem;/* 15 */
+	--type-meta: 0.875rem;  /* 14 */
+
+	/* Space */
+	--space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-5: 24px;
+	--space-6: 32px; --space-7: 48px; --space-8: 64px; --space-9: 88px;
+	--container: 1160px;
+	--gutter: 32px;
+	--section-y: var(--space-9);
+
+	/* Radius */
+	--radius-sm: 8px;
+	--radius-md: 16px;
+	--radius-pill: 999px;
+}
+
+@media (max-width: 640px) {
+	:root { --gutter: 20px; --section-y: 56px; }
+}

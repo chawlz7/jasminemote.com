@@ -1,0 +1,129 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ArchPortrait from '../components/ArchPortrait.astro';
+import PathwayList from '../components/PathwayList.astro';
+import SectionHead from '../components/SectionHead.astro';
+import PostRows from '../components/PostRows.astro';
+import SubscribeBand from '../components/SubscribeBand.astro';
+import Medallion from '../components/Medallion.astro';
+import Chips from '../components/Chips.astro';
+import WritingList from '../components/WritingList.astro';
+import LeafList from '../components/LeafList.astro';
+import CtaCard from '../components/CtaCard.astro';
+import PubList from '../components/PubList.astro';
+import { LINKS } from '../consts';
+
+const home = (await getEntry('homepage', 'homepage'))!.data;
+const research = (await getEntry('research', 'research'))!.data;
+const therapyPage = (await getEntry('therapy', 'therapy'))!.data;
+const writing = (await getCollection('writing')).map((e) => e.data).filter((w) => w.category === 'writing').slice(0, 6);
+const recent = (await getCollection('publications')).map((e) => e.data).sort((a, b) => b.year - a.year).slice(0, 4);
+const photo = home.photo.src.replace(/\.png$/, '.webp');
+---
+
+<Base title="Jasmine Mote, PhD — Clinical Psychologist, Researcher, Writer" description={home.seo.description}>
+	<section class="section hero">
+		<div class="container grid">
+			<div class="copy">
+				<p class="label" set:html={home.hero.eyebrow} />
+				<h1 class="display" set:html={home.hero.headline} />
+				<p class="lede" set:html={home.hero.bio} />
+				<div><a class="btn btn-primary" href="/work-with-me/">Work with me →</a></div>
+				<PathwayList items={home.credentials} />
+			</div>
+			<div class="art"><ArchPortrait src={photo} alt={home.photo.alt} eager /></div>
+		</div>
+	</section>
+
+	<section class="section surface-raised">
+		<div class="container">
+			<div class="nl-head">
+				<img src="/images/mental-healthy-mark.png" alt="Mental Healthy" width="80" height="80" />
+				<SectionHead title={home.sections.newsletter_heading} link={{ label: 'All posts ↗', href: LINKS.substack, external: true }} />
+			</div>
+			<p class="lede" set:html={home.newsletter.intro} />
+			<PostRows />
+			<SubscribeBand />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container split">
+			<div class="main">
+				<h2 class="h1" set:html={home.sections.about_heading} />
+				<p class="quote" set:html={home.about.pullquote} />
+				{home.about.body.map((p) => <p class="body" set:html={p} />)}
+				<Chips tags={home.about.tags} />
+				<div class="text-links">
+					<a href={LINKS.substack} target="_blank" rel="noopener">Newsletter ↗</a>
+					<a href="/research/">Research &amp; publications</a>
+					<a href={therapyPage.page.cpg_url} target="_blank" rel="noopener">Cambridge Psychology Group ↗</a>
+					<a href={LINKS.bluesky} target="_blank" rel="noopener">Bluesky ↗</a>
+					<a href={LINKS.cv}>Download CV</a>
+				</div>
+			</div>
+			<aside class="side about-side">
+				<Medallion size={160} />
+				<dl class="card creds">
+					{home.about.credentials.map((c) => (
+						<div><dt set:html={c.label} /><dd class="serif h3" set:html={c.value} /><dd class="meta" set:html={c.sub} /></div>
+					))}
+				</dl>
+			</aside>
+		</div>
+	</section>
+
+	<section class="section surface-raised">
+		<div class="container">
+			<SectionHead title={home.sections.writing_heading} link={{ label: 'All writing →', href: '/writing/' }} />
+			<WritingList items={writing} />
+		</div>
+	</section>
+
+	<section class="section surface-sage">
+		<div class="container split">
+			<div class="main">
+				<p class="label on-sage" set:html={home.therapy.eyebrow} />
+				<h2 class="h1" set:html={home.therapy.headline} />
+				<p class="body" set:html={home.therapy.body} />
+				<LeafList items={home.therapy.specialties} />
+			</div>
+			<div class="side">
+				<CtaCard title={home.therapy.card.title} body={home.therapy.card.body} label={home.therapy.card.cta_text} href={home.therapy.card.cta_url} />
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<SectionHead title={home.sections.research_heading} link={{ label: 'All publications →', href: '/research/' }} />
+			<p class="stat-line">
+				<span><span class="serif num" set:html={research.stats[0].number} /> <span set:html={research.stats[0].label.toLowerCase()} /></span>
+				<span set:html={research.statement.affiliation} />
+			</p>
+			<PubList items={recent} />
+			<div class="text-links">
+				<a href="/research/">Full publication list →</a>
+				<a href={LINKS.scholar} target="_blank" rel="noopener">Google Scholar ↗</a>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.hero { padding-top: 64px; }
+	.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: var(--space-8); align-items: center; }
+	.copy { display: flex; flex-direction: column; gap: var(--space-5); }
+	.art { display: flex; justify-content: center; }
+	.nl-head { display: flex; align-items: center; gap: 14px; }
+	.nl-head > :global(.head) { flex: 1; }
+	.nl-head img { width: 80px; height: 80px; flex: none; }
+	.about-side { display: flex; flex-direction: column; gap: var(--space-5); }
+	.creds { display: flex; flex-direction: column; padding: 6px var(--space-5); }
+	.creds > div { padding-block: 14px; }
+	.creds > div + div { border-top: 1px solid var(--rule-soft); }
+	.creds dt { font-size: var(--type-meta); font-weight: 600; color: var(--action); }
+	.stat-line { display: flex; flex-wrap: wrap; gap: var(--space-2) 28px; color: var(--text-body); }
+	.num { font-size: 1.4375rem; color: var(--action); }
+</style>

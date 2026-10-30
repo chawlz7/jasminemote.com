@@ -1,0 +1,70 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Chips from '../../components/Chips.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+const w = (await getEntry('workWithMe', 'workWithMe'))!.data;
+const steps = w.therapy.how_it_works_steps;
+---
+
+<Base title="Work With Me — Jasmine Mote, PhD" description={w.seo.description}>
+	<PageHeader eyebrow={w.page.eyebrow} headline={w.page.headline} subhead={w.page.subhead}>
+		<img slot="art" src="/images/sprig-garden.png" alt="" width="561" height="363" class="sprig" />
+	</PageHeader>
+
+	<section class="section surface-sage" id="therapy">
+		<div class="container">
+			<h2 class="h1" set:html={w.therapy.eyebrow} />
+			<div class="card split clients">
+				<div class="main">
+					<h3 class="h2" set:html={w.therapy.headline} />
+					<p class="body" set:html={w.therapy.body} />
+					<p class="instruction" set:html={w.therapy.instruction} />
+					<div class="btn-row">
+						<a class="btn btn-primary" href={w.therapy.cpg_url} target="_blank" rel="noopener"><Fragment set:html={w.therapy.cta_label} /> ↗</a>
+						<a class="btn btn-secondary" href={w.therapy.pt_url} target="_blank" rel="noopener"><Fragment set:html={w.therapy.pt_label} /> ↗</a>
+					</div>
+				</div>
+				<div class="side">
+					<p class="meta steps-title" set:html={w.therapy.how_it_works_title} />
+					<ol class="steps">
+						{steps.map((s, i) => (
+							<li class:list={{ last: i === steps.length - 1 }}><span class="dot">{i + 1}</span><span set:html={s} /></li>
+						))}
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="collaborate">
+		<div class="container">
+			<h2 class="h1" set:html={w.collaboration.eyebrow} />
+			<div class="split">
+				<div class="side intro">
+					<h3 class="h2" set:html={w.collaboration.headline} />
+					<p class="body" set:html={w.collaboration.body} />
+					<Chips tags={['Peer consultation & supervision', 'Academic collaboration', 'Media & press', 'Substack collaboration', 'Other']} />
+				</div>
+				<div class="main"><ContactForm /></div>
+			</div>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.sprig { width: 100%; max-width: 300px; transform: scaleX(-1); }
+	.clients { padding: clamp(28px, 4vw, 48px); }
+	.instruction { padding: var(--space-4) 20px; border-radius: var(--radius-sm); background: var(--surface-mist); font-size: 1rem; color: #2E2547; }
+	.instruction :global(strong) { color: var(--violet-700); }
+	.steps-title { font-weight: 600; color: var(--sage-700); margin-bottom: var(--space-4); }
+	.steps { list-style: none; padding: 0; display: flex; flex-direction: column; }
+	.steps li { position: relative; display: grid; grid-template-columns: 28px 1fr; gap: 14px; padding-bottom: var(--space-4); font-size: 1rem; line-height: 1.5; }
+	/* The line joining the steps, like a vine between nodes. */
+	.steps li:not(.last)::before { content: ''; position: absolute; left: 13px; top: 28px; bottom: 0; width: 2px; background: var(--periwinkle-400); }
+	.dot { width: 26px; height: 26px; border-radius: 50%; background: var(--action); color: var(--white); font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+	.last .dot { background: var(--sage-500); color: var(--ink-900); }
+	.intro { display: flex; flex-direction: column; gap: var(--space-5); }
+</style>

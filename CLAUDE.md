@@ -1,14 +1,11 @@
-# Project Instructions
+# jasminemote.com
 
-## Content YAML Files — DO NOT OVERWRITE
+All the instructions for working in this repo are in AGENTS.md. Change rules there, not here.
 
-Jasmine edits site content directly via GitHub's web editor. The YAML files in `content/` are her domain. **Always pull from origin before any session involving these files, and never overwrite them with local versions.**
+@AGENTS.md
 
-YAML files managed by Jasmine:
-- `content/research.yaml`
-- `content/workWithMe.yaml`
-- `content/resources.yaml`
-- `content/therapy.yaml`
-- Any other `content/*.yaml` files
+## The one rule to never break
 
-**Rule:** If a session involves changes near these files, run `git pull` first. If there's a conflict between a local version and the remote version of a YAML file, the remote (Jasmine's) version wins.
+Jasmine edits `src/content/*.yaml` and `*.json` herself (Pages CMS, saving to `main`). Always
+`git pull` first, never overwrite her versions with local ones, and if a local and remote copy
+conflict, hers wins.

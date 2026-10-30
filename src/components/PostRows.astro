@@ -1,0 +1,33 @@
+---
+// Mental Healthy posts as editorial rows: image, date, title, her Substack subtitle as a deck,
+// the opening lines, and the link (design system: posts, option 2).
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('substackPosts')).map((p) => p.data);
+const fmt = new Intl.DateTimeFormat('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+---
+<div class="rows">
+	{posts.map((p) => (
+		<a class="row" href={p.url} target="_blank" rel="noopener">
+			{p.image && <img src={p.image} alt="" width="720" height="480" loading="lazy" />}
+			<span class="text">
+				<span class="meta"><time datetime={p.date.toISOString()}>{fmt.format(p.date)}</time></span>
+				<span class="serif title">{p.title}</span>
+				{p.subtitle && <span class="deck">{p.subtitle}</span>}
+				<span class="excerpt small">{p.excerpt}</span>
+				<span class="more">Read on Substack ↗</span>
+			</span>
+		</a>
+	))}
+</div>
+<style>
+	.rows { display: flex; flex-direction: column; border-bottom: 1px solid var(--rule); }
+	.row { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: var(--space-5) 36px; align-items: start; padding-block: 28px; border-top: 1px solid var(--rule); color: var(--text-primary); text-decoration: none; }
+	img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius-md); }
+	.text { display: flex; flex-direction: column; gap: 10px; max-width: 640px; }
+	.title { font-size: clamp(1.375rem, 2vw, 1.625rem); line-height: 1.2; }
+	.row:hover .title { color: var(--action-hover); }
+	.deck { font-style: italic; color: var(--violet-700); line-height: 1.5; }
+	.excerpt { color: var(--text-body); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+	.more { font-size: var(--type-small); font-weight: 600; color: var(--action); }
+	@media (max-width: 760px) { .row { grid-template-columns: 1fr; } }
+</style>

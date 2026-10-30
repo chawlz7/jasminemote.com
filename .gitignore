@@ -1,5 +1,18 @@
-_site/
+# build output
+dist/
+# generated types
+.astro/
+# dependencies
 node_modules/
+# logs
+npm-debug.log*
+# environment variables
+.env
+.env.production
+.dev.vars
+# macOS
 .DS_Store
-{_data,_includes/
-.claude/
+# wrangler local state
+.wrangler/
+# agent worktrees
+.claude/worktrees/

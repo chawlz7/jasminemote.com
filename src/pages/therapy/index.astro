@@ -1,0 +1,30 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ArchPortrait from '../../components/ArchPortrait.astro';
+import LeafList from '../../components/LeafList.astro';
+import CtaCard from '../../components/CtaCard.astro';
+
+const t = (await getEntry('therapy', 'therapy'))!.data;
+---
+
+<Base title="Therapy — Jasmine Mote, PhD" description={t.seo.description}>
+	<PageHeader eyebrow={t.page.eyebrow} headline={t.page.headline} subhead={t.page.subhead}>
+		<p class="meta" set:html={t.page.affiliation} />
+		<div class="btn-row"><a class="btn btn-primary" href={t.page.cpg_url} target="_blank" rel="noopener" set:html={t.page.cta_label} /></div>
+		<ArchPortrait slot="art" src="/jasmine-headshot.webp" alt="Jasmine Mote, PhD" max={400} eager />
+	</PageHeader>
+
+	<section class="section surface-sage">
+		<div class="container split">
+			<div class="main">
+				<h2 class="h1" set:html={t.specialties.section_title} />
+				<LeafList items={t.specialties.items} />
+			</div>
+			<div class="side">
+				<CtaCard title={t.cta_card.title} body={t.cta_card.body} label={t.cta_card.cta_label} href={t.cta_card.cpg_url} />
+			</div>
+		</div>
+	</section>
+</Base>

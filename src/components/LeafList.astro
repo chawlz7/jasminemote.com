@@ -1,0 +1,8 @@
+---
+import Leaf from './Leaf.astro';
+interface Props { items: string[] }
+const { items } = Astro.props;
+---
+<ul class="leaf-list">
+	{items.map((item) => <li><Leaf /><span set:html={item} /></li>)}
+</ul>

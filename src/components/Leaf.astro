@@ -1,0 +1,6 @@
+---
+// The leaf from her logo's vines, simplified (design system: shape vocabulary). Decorative.
+interface Props { color?: string; width?: number }
+const { color = 'var(--violet-600)', width = 18 } = Astro.props;
+---
+<svg width={width} height={Math.round(width * 0.65)} viewBox="0 0 64 40" fill={color} aria-hidden="true"><path d="M2 20C14 2 50 2 62 20 50 38 14 38 2 20z" /></svg>

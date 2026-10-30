@@ -1,0 +1,89 @@
+/* Site styles, built only from tokens.css. Components keep their own scoped styles; what lives here
+   is shared: the page base, layout, type roles, buttons, chips and lists. */
+@import './tokens.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+	margin: 0;
+	background: var(--surface-page);
+	color: var(--text-primary);
+	font-family: var(--font-sans);
+	font-size: var(--type-body);
+	line-height: 1.65;
+	-webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--action); }
+a:hover { color: var(--action-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+p, h1, h2, h3, ul, ol, dl, dd, figure { margin: 0; }
+
+/* Headings: Hedvig has no italic, so emphasis inside a heading (her YAML's <em>) is color. */
+h1, h2, h3, .serif { font-family: var(--font-serif); font-weight: 400; text-wrap: balance; }
+h1 em, h2 em, h3 em, .serif em { font-style: normal; color: var(--text-accent); }
+
+/* Layout */
+.container { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+.section { padding-block: var(--section-y); }
+.section > .container { display: flex; flex-direction: column; gap: var(--space-6); }
+.surface-raised { background: var(--surface-raised); }
+.surface-sage { background: var(--surface-sage); }
+.surface-mist { background: var(--surface-mist); }
+.split, .section > .container.split { display: flex; flex-direction: row; flex-wrap: wrap; gap: var(--space-7) var(--space-8); align-items: flex-start; }
+.split > .main { flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: var(--space-5); }
+.split > .side { flex: 1 1 300px; min-width: 0; }
+
+/* Type roles */
+.display { font-size: var(--type-display); line-height: 1.1; letter-spacing: -0.01em; }
+.h1 { font-size: var(--type-h1); line-height: 1.15; }
+.h2 { font-size: var(--type-h2); line-height: 1.2; }
+.h3 { font-size: var(--type-h3); line-height: 1.3; }
+.label { font-size: 1rem; font-weight: 500; color: var(--text-accent); }
+.label.on-sage { color: var(--sage-700); }
+.lede { font-size: var(--type-lede); line-height: 1.65; color: var(--text-body); max-width: 68ch; }
+.body { color: var(--text-body); max-width: 68ch; }
+.small { font-size: var(--type-small); }
+.meta { font-size: var(--type-meta); color: var(--text-muted); }
+.quote { font-family: var(--font-serif); font-size: var(--type-quote); line-height: 1.4; color: var(--violet-700); }
+
+/* Buttons — pill radius is reserved for these and chips */
+.btn {
+	display: inline-flex; align-items: center; gap: 6px; min-height: 50px; padding: 0 26px;
+	border-radius: var(--radius-pill); font: inherit; font-size: 1rem; font-weight: 600;
+	text-decoration: none; cursor: pointer; border: 0;
+}
+.btn-primary { background: var(--action); color: var(--white); }
+.btn-primary:hover { background: var(--action-hover); color: var(--white); }
+.btn-secondary { min-height: 44px; padding: 0 20px; border: 1.5px solid var(--action); color: var(--action); background: transparent; }
+.btn-secondary:hover { border-color: var(--action-hover); color: var(--action-hover); }
+.btn-quiet { min-height: 44px; padding: 0 18px; background: var(--surface-mist); color: var(--violet-700); font-size: var(--type-small); }
+.btn-quiet:hover { background: #DDD7EB; color: var(--violet-700); }
+.btn-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.text-links { display: flex; flex-wrap: wrap; gap: var(--space-5); font-weight: 600; }
+
+/* Chips: clinical focus in mist, values in sage */
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); padding: 0; list-style: none; }
+.chip { padding: 5px 14px; border-radius: var(--radius-pill); background: var(--surface-mist); color: var(--violet-700); font-size: var(--type-meta); font-weight: 500; }
+.chip.sage { background: var(--surface-sage); color: var(--sage-700); }
+
+/* Leaf list (specialties) */
+.leaf-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.leaf-list li { display: flex; gap: var(--space-3); align-items: baseline; }
+.leaf-list svg { flex: none; }
+
+/* Cards */
+.card { background: var(--surface-raised); border-radius: var(--radius-md); padding: var(--space-6); }
+
+/* Ruled list, used for writing, press and resources */
+.ruled { list-style: none; padding: 0; border-bottom: 1px solid var(--rule); }
+.ruled > li { border-top: 1px solid var(--rule); }
+.ruled a { color: var(--text-primary); text-decoration: none; }
+.ruled a:hover .serif { color: var(--action-hover); }
+.arrow { color: var(--action); }
+
+/* Visually hidden, for screen-reader-only text */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+html { scroll-behavior: smooth; }

@@ -1,0 +1,28 @@
+---
+// Her four ways in, under the hero (homepage.yaml credentials, in order: newsletter, therapy,
+// research, writing). Internal pages link in the site; the newsletter opens Substack.
+import PathwayIcon from './PathwayIcon.astro';
+interface Item { label: string; sub: string; url: string; external: boolean }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+const kinds = ['newsletter', 'therapy', 'research', 'writing'] as const;
+---
+<ul class="pathways">
+	{items.map((item, i) => (
+		<li>
+			<a href={item.url} {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}>
+				<PathwayIcon kind={kinds[i]} />
+				<span class="text"><span class="label-text" set:html={item.label} /><span class="sub" set:html={item.sub} /></span>
+				<span class="arrow" aria-hidden="true">{item.external ? '↗' : '→'}</span>
+			</a>
+		</li>
+	))}
+</ul>
+<style>
+	.pathways { list-style: none; padding: 0; margin-top: var(--space-2); display: flex; flex-direction: column; gap: var(--space-1); max-width: 580px; }
+	a { display: grid; grid-template-columns: 52px 1fr auto; gap: var(--space-4); align-items: center; padding: 10px 14px; border-radius: var(--radius-md); color: var(--text-primary); text-decoration: none; transition: background 0.15s; }
+	li:first-child a, a:hover { background: var(--surface-raised); }
+	.text { display: flex; flex-direction: column; line-height: 1.35; }
+	.label-text { font-weight: 600; }
+	.sub { font-size: var(--type-meta); color: var(--text-muted); }
+</style>

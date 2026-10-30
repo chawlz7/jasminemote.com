@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page Not Found — Jasmine Mote, PhD" description="The page you're looking for doesn't exist. Find Jasmine's writing, research, therapy info, and more." noindex>
+	<section class="section">
+		<div class="container nf">
+			<p class="label">404</p>
+			<h1 class="display">Page not found</h1>
+			<p class="lede">This page doesn't exist — or may have moved when the site was rebuilt.</p>
+			<p class="body">If you were looking for something from the old site, here's where things live now:</p>
+			<ul class="leaf-list">
+				<li><a href="/research/">Research &amp; Publications</a> — formerly at <code>/publications/</code></li>
+				<li><a href="/work-with-me/">Work With Me</a> — formerly at <code>/contact-me/</code></li>
+				<li><a href="https://jasminemote.substack.com" target="_blank" rel="noopener">Mental Healthy on Substack</a> — blog posts now live there</li>
+			</ul>
+			<p class="body">Or go back to the <a href="/">homepage</a>.</p>
+			<img src="/images/sprig-garden.png" alt="" width="561" height="363" />
+		</div>
+	</section>
+</Base>
+
+<style>
+	.nf { align-items: flex-start; }
+	.nf img { width: 220px; margin-top: var(--space-5); }
+	.leaf-list li::before { content: ''; width: 14px; height: 9px; flex: none; background: var(--sage-500); border-radius: 50%; }
+</style>

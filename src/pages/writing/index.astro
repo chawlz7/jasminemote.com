@@ -1,0 +1,65 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import WritingList from '../../components/WritingList.astro';
+
+const w = (await getEntry('writingPage', 'writingPage'))!.data;
+const items = (await getCollection('writing')).map((e) => e.data);
+const essays = items.filter((i) => i.category === 'writing');
+const press = items.filter((i) => i.category === 'press');
+const nc = w.newsletter_callout;
+---
+
+<Base title="Writing & Press — Jasmine Mote, PhD" description={w.seo.description}>
+	<PageHeader eyebrow={w.page.eyebrow} headline={w.page.headline} subhead={w.page.subhead}>
+		<div><a class="btn btn-secondary" href={nc.url} target="_blank" rel="noopener">Mental Healthy Newsletter ↗</a></div>
+		<img slot="art" src="/images/sprig-garden.png" alt="" width="561" height="363" class="sprig" />
+	</PageHeader>
+
+	<section class="section surface-raised">
+		<div class="container">
+			<div class="callout">
+				<img src="/images/mental-healthy-mark.png" alt="Mental Healthy" width="120" height="120" />
+				<div class="nc-text">
+					<p class="label" style="color: var(--violet-700)" set:html={nc.kicker} />
+					<p class="serif wordmark">Mental <em>Healthy</em></p>
+					<p class="small body" set:html={nc.body} />
+				</div>
+				<a class="btn btn-primary" href={nc.url} target="_blank" rel="noopener" set:html={nc.cta} />
+			</div>
+			<SectionHead title={w.sections.essays_heading} />
+			<WritingList items={essays} />
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<SectionHead title={w.sections.press_heading} />
+			<ul class="ruled press">
+				{press.map((p) => {
+					const inner = (
+						<>
+							<span class="meta" set:html={p.source} />
+							<span class="serif h3 title"><Fragment set:html={p.title} />{p.url && <span class="arrow"> ↗</span>}</span>
+							<span class="tags">{p.note && <span class="chip" set:html={p.note} />}{p.date && <span class="meta" set:html={p.date} />}</span>
+						</>
+					);
+					return <li>{p.url ? <a href={p.url} target="_blank" rel="noopener">{inner}</a> : <div class="row">{inner}</div>}</li>;
+				})}
+			</ul>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.sprig { width: 100%; max-width: 340px; }
+	.callout { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; padding: 40px; border-radius: var(--radius-md); background: var(--surface-mist); }
+	.callout img { width: 120px; height: 120px; flex: none; }
+	.nc-text { flex: 1 1 420px; display: flex; flex-direction: column; gap: var(--space-2); }
+	.wordmark { font-size: 2.125rem; line-height: 1.1; }
+	.press a, .press .row { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 2.4fr) auto; gap: 6px var(--space-6); align-items: baseline; padding-block: 20px; }
+	.tags { display: flex; gap: 10px; align-items: center; }
+	@media (max-width: 760px) { .press a, .press .row { grid-template-columns: 1fr; } }
+</style>

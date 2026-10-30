@@ -1,0 +1,33 @@
+---
+// The four pathway icons: a line drawing on a shape from her logo (design system: icons).
+interface Props { kind: 'newsletter' | 'therapy' | 'research' | 'writing' }
+const { kind } = Astro.props;
+---
+{kind === 'newsletter' && (
+	<span class="icon trap" aria-hidden="true">
+		<svg class="bg" viewBox="0 0 48 48"><path d="M13 10h22l5 27H8z" fill="var(--mist-100)" stroke="var(--mist-100)" stroke-width="7" stroke-linejoin="round" /></svg>
+		<svg class="glyph" viewBox="0 0 24 24" stroke="var(--violet-700)"><path d="M6.5 5.5h11l1.6 10H4.9z" /><path d="M3 18.5h18" /><path d="M8.6 12.6l2.4-2.8 2 1.9 2.8-3.4" /></svg>
+	</span>
+)}
+{kind === 'therapy' && (
+	<span class="icon round" style="background: var(--sage-100)" aria-hidden="true">
+		<svg class="glyph" viewBox="0 0 24 24" stroke="var(--sage-700)"><path d="M3.5 5h9a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2H8.2L5 16v-2.5H3.5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" /><path d="M17 9.5h2.5a2 2 0 0 1 2 2V16a2 2 0 0 1-2 2H19v2.5L15.8 18H12a2 2 0 0 1-1.9-1.4" /></svg>
+	</span>
+)}
+{kind === 'research' && (
+	<span class="icon" aria-hidden="true"><span class="arch">
+		<svg class="glyph" viewBox="0 0 24 24" stroke="var(--violet-700)"><rect x="7" y="2.5" width="10" height="19" rx="2.5" /><path d="M9.5 14.5l2-2.5 1.6 1.4 2-2.8" /><path d="M11 18.5h2" /></svg>
+	</span></span>
+)}
+{kind === 'writing' && (
+	<span class="icon round" style="background: var(--periwinkle-200)" aria-hidden="true">
+		<svg class="glyph" viewBox="0 0 24 24" stroke="var(--violet-700)"><path d="M12 2.8l5.2 6.4L12 21.2 6.8 9.2z" /><path d="M12 21.2v-8.4" /><circle cx="12" cy="11.2" r="1.4" /></svg>
+	</span>
+)}
+<style>
+	.icon { position: relative; width: 52px; height: 52px; flex: none; display: flex; align-items: center; justify-content: center; }
+	.round { border-radius: 50%; }
+	.bg { position: absolute; inset: 0; }
+	.arch { width: 44px; height: 52px; border-radius: 22px 22px 10px 10px; background: var(--mist-100); display: flex; align-items: center; justify-content: center; align-self: flex-end; }
+	.glyph { position: relative; width: 26px; height: 26px; fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+</style>

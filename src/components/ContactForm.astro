@@ -1,0 +1,71 @@
+---
+// Collaboration, press & media form → POST /api/contact (worker/index.ts), which screens for bots and
+// emails Jasmine. Bot checks: a honeypot field people never see, the time the form appeared, and
+// Cloudflare Turnstile once TURNSTILE_SITE_KEY is set in consts.ts.
+import { TURNSTILE_SITE_KEY } from '../consts';
+const roles = ['Clinician — peer support or supervision', 'Academic collaborator', 'Journalist or media', 'Substack collaborator', 'Other'];
+---
+<form class="card form" method="post" action="/api/contact" data-contact novalidate>
+	<div class="pair">
+		<div class="field"><label for="c-name">Name</label><input id="c-name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="Your name" /></div>
+		<div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="your@email.com" /></div>
+	</div>
+	<div class="field">
+		<label for="c-role">I am a…</label>
+		<select id="c-role" name="role" required>
+			<option value="">Select an option</option>
+			{roles.map((r) => <option value={r}>{r}</option>)}
+		</select>
+	</div>
+	<div class="field"><label for="c-message">Message</label><textarea id="c-message" name="message" rows="6" required maxlength="5000" placeholder="Tell me a bit about what you're working on or what you have in mind."></textarea></div>
+	<input type="hidden" name="started" value="" data-started />
+	<div class="guard" aria-hidden="true"><label for="c-website">Website</label><input id="c-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+	{TURNSTILE_SITE_KEY && <div class="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-appearance="interaction-only"></div>}
+	<p class="small status" role="status" aria-live="polite" data-status hidden></p>
+	<div><button class="btn btn-primary" type="submit">Send message →</button></div>
+</form>
+{TURNSTILE_SITE_KEY && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-contact]');
+	if (form) {
+		const started = form.querySelector<HTMLInputElement>('[data-started]');
+		if (started) started.value = String(Date.now());
+		const status = form.querySelector<HTMLElement>('[data-status]')!;
+		const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+		const say = (text: string, ok: boolean) => {
+			status.hidden = false;
+			status.textContent = text;
+			status.dataset.ok = String(ok);
+		};
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			if (!form.reportValidity()) return;
+			button.disabled = true;
+			try {
+				const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+				const body = await res.json().catch(() => ({ ok: false }));
+				if (!res.ok || !body.ok) throw new Error(body.error || 'send');
+				form.reset();
+				say("Thanks — your message is on its way. I'll get back to you soon.", true);
+			} catch {
+				say("That didn't send. Please try again in a moment.", false);
+			} finally {
+				button.disabled = false;
+			}
+		});
+	}
+</script>
+
+<style>
+	.form { display: flex; flex-direction: column; gap: var(--space-5); padding: clamp(28px, 4vw, 44px); }
+	.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: var(--space-5); }
+	.field { display: flex; flex-direction: column; gap: var(--space-2); }
+	label { font-size: var(--type-meta); font-weight: 600; }
+	input, select, textarea { min-height: 50px; padding: 0 var(--space-4); border-radius: var(--radius-sm); border: 1.5px solid #D8D0DF; background: var(--surface-page); font: inherit; font-size: 1rem; color: var(--text-primary); }
+	textarea { padding-block: 14px; resize: vertical; }
+	input:focus, select:focus, textarea:focus { outline: 2px solid var(--focus); outline-offset: 2px; border-color: var(--focus); background: var(--white); }
+	.guard { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+	.status { margin: 0; padding: 12px 16px; border-radius: var(--radius-sm); background: var(--surface-sage); color: var(--sage-700); }
+	.status[data-ok='false'] { background: #F6E3E3; color: #7A2424; }
+</style>

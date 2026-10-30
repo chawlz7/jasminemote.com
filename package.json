@@ -1,21 +1,30 @@
 {
-  "name": "jasminemote",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "jasminemote-com",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "build": "eleventy",
-    "start": "eleventy --serve",
-    "dev": "eleventy --serve --watch",
+    "dev": "astro dev",
+    "build": "astro build && node scripts/headers.mjs",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check && tsc -p worker/tsconfig.json --noEmit",
+    "serve": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "types": "wrangler types worker/worker-configuration.d.ts",
     "update-substack": "node scripts/update-substack.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.2",
-"js-yaml": "^4.1.0",
-    "luxon": "^3.7.2",
-    "node-fetch": "^2.7.0"
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.4.4",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.156.0"
   }
 }

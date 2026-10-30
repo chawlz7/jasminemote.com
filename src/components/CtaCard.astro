@@ -1,0 +1,18 @@
+---
+// "Ready to get started?": a white card with one primary action, her vine peeking over the corner.
+interface Props { title: string; body: string; label: string; href: string }
+const { title, body, label, href } = Astro.props;
+---
+<div class="wrap">
+	<img class="vine" src="/images/vine-garden-left.png" alt="" width="432" height="463" loading="lazy" />
+	<div class="card stack">
+		<h3 class="h2" set:html={title} />
+		<p class="small body" set:html={body} />
+		<div><a class="btn btn-primary" href={href} target="_blank" rel="noopener">{label}</a></div>
+	</div>
+</div>
+<style>
+	.wrap { position: relative; padding-top: 70px; }
+	.vine { position: absolute; left: -10px; top: -20px; width: 130px; }
+	.stack { position: relative; display: flex; flex-direction: column; gap: var(--space-4); }
+</style>

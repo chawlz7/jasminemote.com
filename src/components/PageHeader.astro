@@ -1,0 +1,23 @@
+---
+// The top of an inner page: her eyebrow, headline and subhead, with a slot for buttons and one
+// piece of art on the right.
+interface Props { eyebrow: string; headline: string; subhead?: string }
+const { eyebrow, headline, subhead } = Astro.props;
+---
+<header class="section page-header">
+	<div class="container">
+		<div class="split">
+			<div class="main">
+				<p class="label" set:html={eyebrow} />
+				<h1 class="display" set:html={headline} />
+				{subhead && <p class="lede" set:html={subhead} />}
+				<slot />
+			</div>
+			{Astro.slots.has('art') && <div class="side art"><slot name="art" /></div>}
+		</div>
+	</div>
+</header>
+<style>
+	.page-header { padding-top: 72px; }
+	.art { display: flex; justify-content: center; align-self: center; }
+</style>

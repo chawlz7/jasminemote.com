@@ -1,0 +1,15 @@
+---
+// A section title (her YAML heading, which may carry an <em> accent) with an optional quiet link.
+interface Props { title: string; link?: { label: string; href: string; external?: boolean }; level?: 'h2' | 'h3' }
+const { title, link, level = 'h2' } = Astro.props;
+const Tag = level;
+---
+<div class="head">
+	<Tag class="h1" set:html={title} />
+	{link && (
+		<a class="btn btn-quiet" href={link.href} {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}>{link.label}</a>
+	)}
+</div>
+<style>
+	.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4); }
+</style>

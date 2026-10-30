@@ -22,4 +22,4 @@ Disallow: /
 User-agent: Bytespider
 Disallow: /
 
-Sitemap: https://jasminemote.com/sitemap.xml
+Sitemap: https://jasminemote.com/sitemap-index.xml
