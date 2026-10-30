@@ -81,20 +81,28 @@ const person = {
 		<Footer />
 		<script>
 			// Grow each [data-grow] element (her vines, the research bars, the step line) once it is
-			// a little way into view. Without html.motion everything is simply shown.
+			// a little way into view. An element inside a [data-grow-scope] (the footer) grows when the
+			// scope's top edge arrives instead: the footer's sprig sits at the very bottom of the page,
+			// where the page can't scroll it any further up. Without html.motion everything just shows.
 			if (document.documentElement.classList.contains('motion')) {
-				const io = new IntersectionObserver(
-					(entries) => {
-						for (const e of entries) {
-							if (e.isIntersecting) {
-								e.target.classList.add('grown');
-								io.unobserve(e.target);
-							}
-						}
-					},
-					{ rootMargin: '0px 0px -12% 0px' },
-				);
-				document.querySelectorAll('[data-grow]').forEach((el) => io.observe(el));
+				const grow: IntersectionObserverCallback = (entries, observer) => {
+					for (const e of entries) {
+						if (!e.isIntersecting) continue;
+						const targets = e.target.matches('[data-grow]') ? [e.target] : e.target.querySelectorAll('[data-grow]');
+						targets.forEach((t) => t.classList.add('grown'));
+						observer.unobserve(e.target);
+					}
+				};
+				// Elements grow once a little way into view; a scope grows the moment its top edge shows.
+				const inView = new IntersectionObserver(grow, { rootMargin: '0px 0px -12% 0px' });
+				const atEdge = new IntersectionObserver(grow);
+				const scopes = new Set<Element>();
+				document.querySelectorAll('[data-grow]').forEach((el) => {
+					const scope = el.closest('[data-grow-scope]');
+					if (scope) scopes.add(scope);
+					else inView.observe(el);
+				});
+				scopes.forEach((scope) => atEdge.observe(scope));
 			}
 		</script>
 	</body>
