@@ -57,6 +57,16 @@
 	--gutter: 32px;
 	--section-y: var(--space-9);
 
+	/* Motion — calm and settling: one easing curve, no overshoot or bounce. Everything that moves is
+	   switched off under prefers-reduced-motion (global.css). */
+	--ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-breathe: cubic-bezier(0.45, 0, 0.55, 1);
+	--dur-quick: 160ms;   /* hover, focus, color */
+	--dur-base: 320ms;    /* page cross-fade, small moves */
+	--dur-settle: 700ms;  /* hero entrance */
+	--dur-grow: 1200ms;   /* vines growing in */
+	--dur-breathe: 8s;    /* the hero circle, one full breath */
+
 	/* Radius */
 	--radius-sm: 8px;
 	--radius-md: 16px;

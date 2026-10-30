@@ -70,9 +70,9 @@ const shapes = [
 			<SectionHead title={r.sections.publications_heading} link={{ label: 'Google Scholar ↗', href: LINKS.scholar, external: true }} />
 			<div class="card chart">
 				<p class="meta">Publications by year</p>
-				<div class="bars">
-					{years.map((y) => (
-						<a href={`#y${y}`} aria-label={`${y}: ${count(y)} publications`}>
+				<div class="bars" data-grow="bars">
+					{years.map((y, i) => (
+						<a href={`#y${y}`} style={`--i: ${i}`} aria-label={`${y}: ${count(y)} publications`}>
 							<span class="meta">{count(y)}</span>
 							<span class:list={['bar', { top: count(y) === most }]} style={`height: ${Math.round((110 * count(y)) / most)}px`} />
 							<span class="meta yr">{y}</span>
@@ -109,6 +109,10 @@ const shapes = [
 	.bars a { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 160px; text-decoration: none; }
 	.bar { width: 100%; max-width: 44px; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: var(--periwinkle-400); }
 	.bar.top, .bars a:hover .bar { background: var(--action); }
+	/* The bars grow up from the baseline, one after another, when the chart scrolls into view. */
+	:global(html.motion) .bar { transform: scaleY(0); transform-origin: bottom; transition: transform 700ms var(--ease-settle) calc(var(--i) * 45ms), background-color var(--dur-quick); }
+	:global(html.motion) .bars:global(.grown) .bar { transform: none; }
+	@media (prefers-reduced-motion: reduce) { .bar { transform: none !important; } }
 	.yr { color: var(--text-body); }
 	.years { display: flex; flex-direction: column; gap: var(--space-5); }
 	.year-group { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-2) var(--space-5); align-items: start; scroll-margin-top: 24px; }

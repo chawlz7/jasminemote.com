@@ -85,5 +85,43 @@ h1 em, h2 em, h3 em, .serif em { font-style: normal; color: var(--text-accent); 
 /* Visually hidden, for screen-reader-only text */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
-@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
 html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ───────── Motion ─────────
+   Design system: motion. Content is visible without JavaScript; the grow-in reveals only arm once
+   the script in Base.astro has marked the page (html.motion). */
+
+/* Page changes: a soft cross-fade, the nav held still. Browsers without support just navigate. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--dur-base); animation-timing-function: var(--ease-settle); }
+nav[aria-label='Main'] { view-transition-name: site-nav; }
+
+/* Hover: colors ease, arrows nudge forward. */
+a, .btn { transition: color var(--dur-quick) var(--ease-settle), background-color var(--dur-quick) var(--ease-settle), border-color var(--dur-quick) var(--ease-settle); }
+.arrow, .more { display: inline-block; transition: transform var(--dur-quick) var(--ease-settle); }
+a:hover .arrow, a:focus-visible .arrow, a:hover .more { transform: translateX(3px); }
+
+/* Hero: one settle on load. */
+@keyframes settle { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.settle > * { animation: settle var(--dur-settle) var(--ease-settle) both; }
+.settle > *:nth-child(2) { animation-delay: 80ms; }
+.settle > *:nth-child(3) { animation-delay: 160ms; }
+.settle > *:nth-child(4) { animation-delay: 240ms; }
+.settle > *:nth-child(n + 5) { animation-delay: 320ms; }
+
+/* Vines grow up from their stem when they come into view. */
+html.motion img[data-grow] { clip-path: inset(100% 0 0 0); transition: clip-path var(--dur-grow) var(--ease-settle); }
+html.motion img[data-grow].grown { clip-path: inset(0 0 0 0); }
+
+/* The breathing circle beside her photo. */
+@keyframes breathe { from { transform: scale(1); } to { transform: scale(1.05); } }
+.breathe { animation: breathe calc(var(--dur-breathe) / 2) var(--ease-breathe) infinite alternate; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+	@view-transition { navigation: none; }
+	.settle > *, .breathe { animation: none !important; }
+	html.motion img[data-grow] { clip-path: none !important; transition: none !important; }
+	a, .btn, .arrow, .more { transition: none !important; }
+	a:hover .arrow, a:hover .more { transform: none !important; }
+}

@@ -49,6 +49,8 @@ const person = {
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="theme-color" content="#F5F0E8" />
+		<!-- Arms the grow-in reveals before first paint, only where motion is welcome. -->
+		<script is:inline>if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) document.documentElement.classList.add('motion');</script>
 
 		<meta property="og:site_name" content={SITE_NAME} />
 		<meta property="og:type" content="website" />
@@ -77,6 +79,24 @@ const person = {
 		<Nav />
 		<main id="main"><slot /></main>
 		<Footer />
+		<script>
+			// Grow each [data-grow] element (her vines, the research bars, the step line) once it is
+			// a little way into view. Without html.motion everything is simply shown.
+			if (document.documentElement.classList.contains('motion')) {
+				const io = new IntersectionObserver(
+					(entries) => {
+						for (const e of entries) {
+							if (e.isIntersecting) {
+								e.target.classList.add('grown');
+								io.unobserve(e.target);
+							}
+						}
+					},
+					{ rootMargin: '0px 0px -12% 0px' },
+				);
+				document.querySelectorAll('[data-grow]').forEach((el) => io.observe(el));
+			}
+		</script>
 	</body>
 </html>
 

@@ -11,7 +11,7 @@ const steps = w.therapy.how_it_works_steps;
 
 <Base title="Work With Me — Jasmine Mote, PhD" description={w.seo.description}>
 	<PageHeader eyebrow={w.page.eyebrow} headline={w.page.headline} subhead={w.page.subhead}>
-		<img slot="art" src="/images/sprig-garden.png" alt="" width="561" height="363" class="sprig" />
+		<img slot="art" src="/images/sprig-garden.png" alt="" width="561" height="363" data-grow class="sprig" />
 	</PageHeader>
 
 	<section class="section surface-sage" id="therapy">
@@ -29,7 +29,7 @@ const steps = w.therapy.how_it_works_steps;
 				</div>
 				<div class="side">
 					<p class="meta steps-title" set:html={w.therapy.how_it_works_title} />
-					<ol class="steps">
+					<ol class="steps" data-grow="steps">
 						{steps.map((s, i) => (
 							<li class:list={{ last: i === steps.length - 1 }}><span class="dot">{i + 1}</span><span set:html={s} /></li>
 						))}
@@ -63,7 +63,13 @@ const steps = w.therapy.how_it_works_steps;
 	.steps { list-style: none; padding: 0; display: flex; flex-direction: column; }
 	.steps li { position: relative; display: grid; grid-template-columns: 28px 1fr; gap: 14px; padding-bottom: var(--space-4); font-size: 1rem; line-height: 1.5; }
 	/* The line joining the steps, like a vine between nodes. */
-	.steps li:not(.last)::before { content: ''; position: absolute; left: 13px; top: 28px; bottom: 0; width: 2px; background: var(--periwinkle-400); }
+	.steps li:not(.last)::before { content: ''; position: absolute; left: 13px; top: 28px; bottom: 0; width: 2px; background: var(--periwinkle-400); transform-origin: top; }
+	/* The line between steps draws itself downward when the list scrolls into view. */
+	:global(html.motion) .steps li:not(.last)::before { transform: scaleY(0); transition: transform 500ms var(--ease-settle); }
+	:global(html.motion) .steps:global(.grown) li:not(.last)::before { transform: none; }
+	:global(html.motion) .steps:global(.grown) li:nth-child(2)::before { transition-delay: 350ms; }
+	:global(html.motion) .steps:global(.grown) li:nth-child(3)::before { transition-delay: 700ms; }
+	@media (prefers-reduced-motion: reduce) { .steps li::before { transform: none !important; } }
 	.dot { width: 26px; height: 26px; border-radius: 50%; background: var(--action); color: var(--white); font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; justify-content: center; }
 	.last .dot { background: var(--sage-500); color: var(--ink-900); }
 	.intro { display: flex; flex-direction: column; gap: var(--space-5); }

@@ -7,13 +7,17 @@ const { src, alt, max = 460, eager = false } = Astro.props;
 <div class="arch" style={`max-width: ${max}px`}>
 	<div class="field" aria-hidden="true"></div>
 	<img class="photo" src={src} alt={alt} width="900" height="975" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
-	<svg class="dot" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--periwinkle-400)" /></svg>
-	<img class="vine" src="/images/vine-garden-right.png" alt="" width="408" height="479" loading="lazy" />
+	<svg class="dot breathe" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--periwinkle-400)" /></svg>
+	<img class="vine" src="/images/vine-garden-right.png" alt="" width="408" height="479" loading="lazy" data-grow />
 </div>
 <style>
 	.arch { position: relative; width: 100%; aspect-ratio: 460 / 560; }
 	.field, .photo { position: absolute; border-radius: 50% 50% var(--radius-md) var(--radius-md) / 36% 36% var(--radius-md) var(--radius-md); }
 	.field { left: 12%; top: 7%; width: 78%; height: 88%; background: var(--surface-sage); }
+	/* On load the arch behind her photo rises into place. */
+	@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+	.field { animation: rise 900ms var(--ease-settle) 200ms both; }
+	@media (prefers-reduced-motion: reduce) { .field { animation: none; } }
 	.photo { left: 4%; top: 0; width: 74%; height: 84%; object-fit: cover; }
 	.dot { position: absolute; right: 4%; top: 3%; width: 20%; }
 	.vine { position: absolute; right: -2%; bottom: 0; width: 40%; }
