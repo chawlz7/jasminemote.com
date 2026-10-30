@@ -1,45 +1,36 @@
 page:
-  eyebrow: "Work With Me"
-  headline: "Two ways to work with me."
-  subhead: "Whether you're looking for a therapist or a collaborator, you're in the right place."
-
+  eyebrow: Work With Me
+  headline: Two ways to work with me.
+  subhead: Whether you're looking for a therapist or a collaborator, you're in the
+    right place.
 therapy:
-  eyebrow: "For Therapy Clients"
-  headline: "Start therapy with Jasmine"
-  body: "I see individual clients through Cambridge Psychology Group, a group practice in the greater Boston area. I specialize in perinatal mental health, mood and anxiety concerns, OCD, psychosis, and life transitions — and I bring a researcher's eye to everything I do clinically."
-  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
-  cta_label: "View my CPG profile"
-  pt_url: "https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066"
-  pt_label: "Psychology Today profile"
-  instruction: "On my CPG profile, click <strong>Get Started</strong> to submit a new client inquiry — we will follow up from there."
-  how_it_works_title: "How it works"
+  eyebrow: For Therapy Clients
+  headline: Start therapy with Jasmine
+  body: I see individual clients through Cambridge Psychology Group, a group
+    practice in the greater Boston area. I specialize in perinatal mental
+    health, mood and anxiety concerns, OCD, psychosis, and life transitions —
+    and I bring a researcher's eye to everything I do clinically.
+  instruction: On my CPG profile, click <strong>Get Started</strong> to submit a
+    new client inquiry — we will follow up from there.
+  cta_label: View my CPG profile
+  cpg_url: https://cambridgepsych.org/clinicians/jasmine-mote/
+  pt_label: Psychology Today profile
+  pt_url: https://www.psychologytoday.com/us/therapists/jasmine-mote-arlington-ma/1050066
+  how_it_works_title: How it works
   how_it_works_steps:
-    - "Visit my CPG profile using the link nearby"
-    - "Click \"Get Started\" to submit an inquiry"
-    - "An intake specialist will schedule a phone call to take some initial information"
-    - "If we're a good fit, we will find a time that works and get started"
-
+    - Visit my CPG profile using the link nearby
+    - Click "Get Started" to submit an inquiry
+    - An intake specialist will schedule a phone call to take some initial
+      information
+    - If we're a good fit, we will find a time that works and get started
 collaboration:
-  eyebrow: "Collaboration, Press & Media"
-  headline: "Working on something together?"
-  body: "I'm open to a range of collaborations — peer consultation and clinical supervision for therapists, academic and research partnerships, media and press inquiries, Substack collaborations, and more. Fill out the form below and I'll get back to you."
-
-  # ── WEB3FORMS KEY ────────────────────────────────────────────────────────────
-  # To change the destination email, log in at https://web3forms.com and update
-  # the email address associated with this access key.
-  # ─────────────────────────────────────────────────────────────────────────────
-  web3forms_key: "7c8ebf80-0084-4e59-b58d-ed1fd172baa5"
-
-  # ── FORM REDIRECT URL ────────────────────────────────────────────────────────
-  # After a successful form submission, Web3Forms redirects here.
-  # Update this to "https://jasminemote.com/work-with-me/?sent=true"
-  # once DNS has been cut over to the custom domain.
-  # ─────────────────────────────────────────────────────────────────────────────
-  redirect_url: "https://chawlz7.github.io/jasminemote.com/work-with-me/?sent=true"
-
-
-# ── SEO ───────────────────────────────────────────────────────
-# The meta description shown in Google search results and link
-# previews. Keep it under 160 characters.
+  eyebrow: Collaboration, Press, & Media
+  headline: Let's work together!
+  body: I'm open to a range of collaborations — peer consultation and clinical
+    supervision for therapists, training workshops for students, academic and
+    research partnerships, media and press inquiries, Substack collaborations,
+    and more. Fill out the form below and I'll get back to you.
 seo:
-  description: "Start therapy with Jasmine Mote, PhD through Cambridge Psychology Group, or get in touch for collaborations, peer supervision, media inquiries, and more."
+  description: Start therapy with Jasmine Mote, PhD through Cambridge Psychology
+    Group, or get in touch for collaborations, peer supervision, media
+    inquiries, and more.
