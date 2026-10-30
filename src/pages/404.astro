@@ -1,4 +1,5 @@
 ---
+import Vine from '../components/Vine.astro';
 import Base from '../layouts/Base.astro';
 ---
 
@@ -15,13 +16,13 @@ import Base from '../layouts/Base.astro';
 				<li><a href="https://jasminemote.substack.com" target="_blank" rel="noopener">Mental Healthy on Substack</a> — blog posts now live there</li>
 			</ul>
 			<p class="body">Or go back to the <a href="/">homepage</a>.</p>
-			<img src="/images/sprig-garden.png" alt="" width="561" height="363" data-grow />
+			<span class="sprig"><Vine variant="garden-left-tilt" /></span>
 		</div>
 	</section>
 </Base>
 
 <style>
 	.nf { align-items: flex-start; }
-	.nf img { width: 220px; margin-top: var(--space-5); }
+	.sprig { display: block; width: 220px; margin-top: var(--space-5); }
 	.leaf-list li::before { content: ''; width: 14px; height: 9px; flex: none; background: var(--sage-500); border-radius: 50%; }
 </style>

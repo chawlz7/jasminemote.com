@@ -89,11 +89,13 @@ const person = {
 					for (const e of entries) {
 						if (!e.isIntersecting) continue;
 						const targets = e.target.matches('[data-grow]') ? [e.target] : e.target.querySelectorAll('[data-grow]');
-						// An image only starts growing once it has loaded, or the growth would play out
-						// before the art arrives and the vine would just pop in.
+						// A vine only starts growing once all of its images have loaded, or the growth would
+						// play out before the art arrives and it would just pop in.
 						targets.forEach((t) => {
-							const ready = t instanceof HTMLImageElement ? t.decode().catch(() => {}) : Promise.resolve();
-							ready.then(() => requestAnimationFrame(() => t.classList.add('grown')));
+							const imgs = t instanceof HTMLImageElement ? [t] : [...t.querySelectorAll('img')];
+							Promise.all(imgs.map((i) => i.decode().catch(() => {}))).then(() =>
+								requestAnimationFrame(() => t.classList.add('grown')),
+							);
 						});
 						observer.unobserve(e.target);
 					}

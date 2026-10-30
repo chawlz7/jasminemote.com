@@ -1,4 +1,5 @@
 ---
+import Vine from '../../components/Vine.astro';
 import { getCollection, getEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -15,7 +16,7 @@ const nc = w.newsletter_callout;
 <Base title="Writing & Press — Jasmine Mote, PhD" description={w.seo.description}>
 	<PageHeader eyebrow={w.page.eyebrow} headline={w.page.headline} subhead={w.page.subhead}>
 		<div><a class="btn btn-secondary" href={nc.url} target="_blank" rel="noopener">Mental Healthy Newsletter ↗</a></div>
-		<img slot="art" src="/images/sprig-garden.png" alt="" width="561" height="363" data-grow class="sprig" />
+		<div slot="art" class="sprig"><Vine variant="garden-left-tilt" /></div>
 	</PageHeader>
 
 	<section class="section surface-raised">

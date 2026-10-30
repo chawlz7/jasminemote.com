@@ -1,10 +1,11 @@
 ---
+import Vine from './Vine.astro';
 // "Ready to get started?": a white card with one primary action, her vine peeking over the corner.
 interface Props { title: string; body: string; label: string; href: string }
 const { title, body, label, href } = Astro.props;
 ---
 <div class="wrap">
-	<img class="vine" src="/images/vine-garden-left.png" alt="" width="432" height="463" data-grow />
+	<span class="vine"><Vine variant="garden-left" /></span>
 	<div class="card stack">
 		<h3 class="h2" set:html={title} />
 		<p class="small body" set:html={body} />

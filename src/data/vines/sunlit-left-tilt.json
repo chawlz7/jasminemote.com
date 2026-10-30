@@ -1,0 +1,77 @@
+{
+ "w": 561,
+ "h": 363,
+ "stem": "/images/vines/sunlit-left-tilt/stem.png",
+ "pieces": [
+  {
+   "src": "/images/vines/sunlit-left-tilt/p10.png",
+   "kind": "leaf",
+   "ox": 22.5,
+   "oy": 79.01,
+   "t": 0.21
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p09.png",
+   "kind": "leaf",
+   "ox": 26.79,
+   "oy": 79.56,
+   "t": 0.213
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p07.png",
+   "kind": "star",
+   "ox": 31.61,
+   "oy": 57.73,
+   "t": 0.423
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p08.png",
+   "kind": "leaf",
+   "ox": 39.82,
+   "oy": 56.08,
+   "t": 0.453
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p06.png",
+   "kind": "berry",
+   "ox": 48.04,
+   "oy": 44.75,
+   "t": 0.552
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p05.png",
+   "kind": "leaf",
+   "ox": 51.25,
+   "oy": 30.94,
+   "t": 0.677
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p03.png",
+   "kind": "star",
+   "ox": 80.0,
+   "oy": 25.97,
+   "t": 0.74
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p04.png",
+   "kind": "berry",
+   "ox": 60.89,
+   "oy": 20.72,
+   "t": 0.793
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p01.png",
+   "kind": "leaf",
+   "ox": 73.39,
+   "oy": 18.78,
+   "t": 0.798
+  },
+  {
+   "src": "/images/vines/sunlit-left-tilt/p02.png",
+   "kind": "bud",
+   "ox": 60.54,
+   "oy": 12.98,
+   "t": 0.87
+  }
+ ]
+}

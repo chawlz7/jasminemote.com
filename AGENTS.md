@@ -43,9 +43,11 @@ hasn't written, ask Charles; don't invent them. The schemas in `src/content.conf
 - Hedvig Letters Serif has no italic; emphasis in a heading (`<em>` in her YAML) renders in violet.
 - Sentence case everywhere; no uppercase letter-spaced labels. Corners: 8 fields, 16 cards, pills only
   for buttons and chips; the arch only for her portrait.
-- At most three botanical moments per page, always growing from an edge, never behind text. Vine
-  images carry `data-grow` and load eagerly (never `loading="lazy"`): they animate in on scroll and
-  must already be there when their moment comes. They're small (16–44 KB).
+- At most three botanical moments per page, always growing from an edge, never behind text. Use the
+  `Vine` component (`<Vine variant="garden-left-tilt" flip />`): the stem rises and each leaf, flower,
+  berry and bud unfurls as the stem reaches it. Variants are recolored splits of her original
+  cut-paper vines (layers in `public/images/vines/<variant>/`, manifests in `src/data/vines/`); don't
+  redraw them. Layers load eagerly (never `loading="lazy"`) so they're there when their moment comes.
 - Avoid the generated-site tells (cream + serif + clay, icon-card grids, stat tiles, big radii).
 
 ## Making a change

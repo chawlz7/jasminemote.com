@@ -1,14 +1,16 @@
 ---
+import Vine from './Vine.astro';
 import { LINKS } from '../consts';
 ---
 <div class="band">
 	<p class="serif h2 text">Get <em>Mental Healthy</em> in your inbox</p>
 	<a class="btn btn-primary" href={LINKS.substack} target="_blank" rel="noopener">Subscribe on Substack →</a>
-	<img class="vine" src="/images/vine-garden-right.png" alt="" width="408" height="479" data-grow />
+	<span class="vine"><Vine variant="garden-right" /></span>
 </div>
 <style>
 	.band { position: relative; overflow: hidden; border-radius: var(--radius-md); background: var(--surface-mist); padding: 36px 40px; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5); }
 	.text { flex: 1 1 320px; font-size: clamp(1.5rem, 2.4vw, 1.875rem); }
-	.vine { width: 96px; margin: -36px -40px -36px var(--space-2); align-self: stretch; object-fit: contain; object-position: bottom; }
+	.vine { width: 96px; margin: -36px -40px -36px var(--space-2); align-self: stretch; display: flex; align-items: flex-end; }
+	.vine > :global(*) { width: 100%; }
 	@media (max-width: 640px) { .vine { display: none; } }
 </style>

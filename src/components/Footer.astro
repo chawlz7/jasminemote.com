@@ -1,10 +1,11 @@
 ---
+import Vine from './Vine.astro';
 import Medallion from './Medallion.astro';
 import { NAV } from '../consts';
 ---
 
 <footer data-grow-scope>
-	<img class="sprig" src="/images/sprig-sunlit.png" alt="" width="561" height="363" data-grow />
+	<span class="sprig"><Vine variant="sunlit-left-tilt" /></span>
 	<div class="container row">
 		<a class="sign" href="/">
 			<Medallion size={64} field="var(--violet-600)" line="var(--linen-50)" />

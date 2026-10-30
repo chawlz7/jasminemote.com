@@ -1,0 +1,77 @@
+{
+ "w": 432,
+ "h": 463,
+ "stem": "/images/vines/garden-left/stem.png",
+ "pieces": [
+  {
+   "src": "/images/vines/garden-left/p10.png",
+   "kind": "leaf",
+   "ox": 25.99,
+   "oy": 86.8,
+   "t": 0.143
+  },
+  {
+   "src": "/images/vines/garden-left/p09.png",
+   "kind": "leaf",
+   "ox": 31.09,
+   "oy": 84.63,
+   "t": 0.147
+  },
+  {
+   "src": "/images/vines/garden-left/p07.png",
+   "kind": "star",
+   "ox": 27.38,
+   "oy": 66.67,
+   "t": 0.333
+  },
+  {
+   "src": "/images/vines/garden-left/p08.png",
+   "kind": "leaf",
+   "ox": 35.03,
+   "oy": 61.47,
+   "t": 0.392
+  },
+  {
+   "src": "/images/vines/garden-left/p06.png",
+   "kind": "berry",
+   "ox": 40.37,
+   "oy": 47.84,
+   "t": 0.522
+  },
+  {
+   "src": "/images/vines/garden-left/p05.png",
+   "kind": "leaf",
+   "ox": 38.05,
+   "oy": 36.15,
+   "t": 0.639
+  },
+  {
+   "src": "/images/vines/garden-left/p04.png",
+   "kind": "berry",
+   "ox": 45.48,
+   "oy": 23.59,
+   "t": 0.764
+  },
+  {
+   "src": "/images/vines/garden-left/p02.png",
+   "kind": "bud",
+   "ox": 42.69,
+   "oy": 18.61,
+   "t": 0.814
+  },
+  {
+   "src": "/images/vines/garden-left/p01.png",
+   "kind": "leaf",
+   "ox": 58.24,
+   "oy": 14.94,
+   "t": 0.84
+  },
+  {
+   "src": "/images/vines/garden-left/p03.png",
+   "kind": "star",
+   "ox": 68.91,
+   "oy": 15.58,
+   "t": 0.844
+  }
+ ]
+}

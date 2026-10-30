@@ -1,0 +1,84 @@
+---
+// One of her vines, grown piece by piece (design system: botanicals + motion). The stem rises as one
+// continuous piece; each leaf, star flower, berry and bud unfurls from the point where it meets the
+// stem, at the moment the rising stem reaches it. Without motion it is simply the finished vine.
+//
+// The art comes from her original cut-paper vines, split and recolored by the vine pipeline
+// (variants in src/data/vines/*.json, images in public/images/vines/<variant>/). Every layer is the
+// same full size, so they line up exactly. Decorative: hidden from screen readers.
+import gardenRight from '../data/vines/garden-right.json';
+import gardenLeft from '../data/vines/garden-left.json';
+import gardenLeftTilt from '../data/vines/garden-left-tilt.json';
+import sunlitLeftTilt from '../data/vines/sunlit-left-tilt.json';
+import twilightLeftTilt from '../data/vines/twilight-left-tilt.json';
+
+const VARIANTS = {
+	'garden-right': gardenRight,
+	'garden-left': gardenLeft,
+	'garden-left-tilt': gardenLeftTilt,
+	'sunlit-left-tilt': sunlitLeftTilt,
+	'twilight-left-tilt': twilightLeftTilt,
+};
+
+interface Props {
+	variant: keyof typeof VARIANTS;
+	class?: string;
+	flip?: boolean; // mirror left-right
+}
+const { variant, class: className, flip = false } = Astro.props;
+const v = VARIANTS[variant];
+
+// Timing, worked out here at build time. The stem's reveal uses --ease-grow (cubic-bezier 0.5, 0,
+// 0.25, 1) over STEM_MS; a piece starts unfurling when the eased reveal reaches its height t.
+const STEM_MS = 1800;
+const LEAD_MS = 80; // start a touch early, so the piece is opening as the stem arrives
+function timeAtHeight(t: number) {
+	const [p1x, p1y, p2x, p2y] = [0.5, 0, 0.25, 1];
+	const cx = 3 * p1x, bx = 3 * (p2x - p1x) - cx, ax = 1 - cx - bx;
+	const cy = 3 * p1y, by = 3 * (p2y - p1y) - cy, ay = 1 - cy - by;
+	const x = (s: number) => ((ax * s + bx) * s + cx) * s;
+	const y = (s: number) => ((ay * s + by) * s + cy) * s;
+	let lo = 0, hi = 1;
+	for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (y(m) < t) lo = m; else hi = m; }
+	return x((lo + hi) / 2);
+}
+const pieces = v.pieces.map((p) => ({
+	...p,
+	delay: Math.max(0, Math.round(timeAtHeight(Math.min(0.98, Math.max(0.02, p.t))) * STEM_MS - LEAD_MS)),
+}));
+---
+
+<span
+	class:list={['vine-art', className, { flip }]}
+	style={`aspect-ratio: ${v.w} / ${v.h}; --stem: ${STEM_MS}ms`}
+	data-grow
+	aria-hidden="true"
+>
+	<img class="stem" src={v.stem} alt="" width={v.w} height={v.h} />
+	{pieces.map((p) => (
+		<img class:list={['piece', p.kind]} src={p.src} alt="" width={v.w} height={v.h} style={`transform-origin: ${p.ox}% ${p.oy}%; --d: ${p.delay}ms`} />
+	))}
+</span>
+
+<style>
+	.vine-art { position: relative; display: block; }
+	.vine-art.flip { transform: scaleX(-1); }
+	.vine-art img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+	/* Before it grows (only when motion is on): stem hidden from the top down, pieces folded away. */
+	:global(html.motion) .vine-art:not(.grown) .stem { clip-path: inset(100% 0 0 0); }
+	:global(html.motion) .vine-art:not(.grown) .piece { opacity: 0; transform: scale(0) rotate(-14deg); }
+	:global(html.motion) .vine-art:not(.grown) .piece.star { transform: scale(0) rotate(-40deg); }
+	:global(html.motion) .vine-art:not(.grown) .piece.berry,
+	:global(html.motion) .vine-art:not(.grown) .piece.bud { transform: scale(0); }
+
+	/* Growing: the stem rises, each piece unfurls at its moment. */
+	:global(html.motion) .vine-art.grown .stem { clip-path: inset(0); transition: clip-path var(--stem) var(--ease-grow); }
+	:global(html.motion) .vine-art.grown .piece {
+		transition: transform 600ms var(--ease-settle) var(--d), opacity 200ms linear var(--d);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.vine-art .stem, .vine-art .piece { clip-path: none !important; opacity: 1 !important; transform: none !important; transition: none !important; }
+	}
+</style>
