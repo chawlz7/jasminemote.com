@@ -8,7 +8,7 @@ const { src, alt, max = 460, eager = false } = Astro.props;
 	<div class="field" aria-hidden="true"></div>
 	<img class="photo" src={src} alt={alt} width="900" height="975" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
 	<svg class="dot breathe" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="var(--periwinkle-400)" /></svg>
-	<img class="vine" src="/images/vine-garden-right.png" alt="" width="408" height="479" loading="lazy" data-grow />
+	<img class="vine" src="/images/vine-garden-right.png" alt="" width="408" height="479" data-grow />
 </div>
 <style>
 	.arch { position: relative; width: 100%; aspect-ratio: 460 / 560; }

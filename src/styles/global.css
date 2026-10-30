@@ -111,7 +111,7 @@ a:hover .arrow, a:focus-visible .arrow, a:hover .more { transform: translateX(3p
 .settle > *:nth-child(n + 5) { animation-delay: 320ms; }
 
 /* Vines grow up from their stem when they come into view. */
-html.motion img[data-grow] { clip-path: inset(100% 0 0 0); transition: clip-path var(--dur-grow) var(--ease-settle); }
+html.motion img[data-grow] { clip-path: inset(100% 0 0 0); transition: clip-path var(--dur-grow) var(--ease-grow); }
 html.motion img[data-grow].grown { clip-path: inset(0 0 0 0); }
 
 /* The breathing circle beside her photo. */

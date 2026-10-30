@@ -61,10 +61,11 @@
 	   switched off under prefers-reduced-motion (global.css). */
 	--ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
 	--ease-breathe: cubic-bezier(0.45, 0, 0.55, 1);
+	--ease-grow: cubic-bezier(0.5, 0, 0.25, 1); /* slow start, visible middle: reads as growing, not appearing */
 	--dur-quick: 160ms;   /* hover, focus, color */
 	--dur-base: 320ms;    /* page cross-fade, small moves */
 	--dur-settle: 700ms;  /* hero entrance */
-	--dur-grow: 1200ms;   /* vines growing in */
+	--dur-grow: 1600ms;   /* vines growing in */
 	--dur-breathe: 8s;    /* the hero circle, one full breath */
 
 	/* Radius */
