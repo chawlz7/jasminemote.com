@@ -21,6 +21,11 @@ const MIN_FILL_MS = 3000;
 export default {
 	async fetch(request, env): Promise<Response> {
 		const url = new URL(request.url);
+		// www.jasminemote.com redirects to jasminemote.com, as it did on GitHub Pages.
+		if (url.hostname === 'www.jasminemote.com') {
+			url.hostname = 'jasminemote.com';
+			return Response.redirect(url.toString(), 301);
+		}
 		if (url.pathname !== '/api/contact') return env.ASSETS.fetch(request);
 		if (request.method !== 'POST') return json({ ok: false, error: 'method' }, 405);
 		return handle(request, env);

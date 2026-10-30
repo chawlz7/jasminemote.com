@@ -9,13 +9,19 @@
 	// Charles's personal Cloudflare account, which also holds the jasminemote.com zone.
 	"account_id": "fe41cbf76b22eb8cfa44edebbc27fed4",
 	"workers_dev": true,
+	// The live domain. Both hostnames point at this Worker; the Worker redirects www to the apex.
+	"routes": [
+		{ "pattern": "jasminemote.com", "custom_domain": true },
+		{ "pattern": "www.jasminemote.com", "custom_domain": true }
+	],
 	"preview_urls": true,
 	"observability": { "enabled": true },
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS",
-		// Pages are served straight from dist/; only the form endpoint reaches the Worker.
-		"run_worker_first": ["/api/*"],
+		// The Worker sees every request first: it answers /api/contact, redirects www, and hands
+		// everything else to the static files in dist/.
+		"run_worker_first": true,
 		"html_handling": "auto-trailing-slash",
 		"not_found_handling": "404-page"
 	},
