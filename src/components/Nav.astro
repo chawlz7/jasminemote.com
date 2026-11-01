@@ -6,30 +6,76 @@ const current = (href: string) => path === href || path.startsWith(href);
 const wwm = current('/work-with-me/');
 ---
 
-<nav aria-label="Main">
+<nav aria-label="Main" data-nav>
 	<div class="container bar">
 		<a class="wordmark serif" href="/">Jasmine Mote, <em>PhD</em></a>
 		<ul class="links">
 			{NAV.map(({ label, href }) => (
 				<li><a href={href} aria-current={current(href) ? 'page' : undefined}>{label}</a></li>
 			))}
-			<li>
-				<a class:list={['btn', wwm ? 'btn-primary' : 'btn-secondary', 'cta']} href="/work-with-me/" aria-current={wwm ? 'page' : undefined}>Work with me</a>
-			</li>
 		</ul>
+		<a class:list={['btn', wwm ? 'btn-primary' : 'btn-secondary', 'cta']} href="/work-with-me/" aria-current={wwm ? 'page' : undefined}>Work with me</a>
 	</div>
 </nav>
 
+<script>
+	// Phones: the header slides away while reading down and comes back on the first scroll up, so the
+	// links are always one small scroll away without taking reading space. Desktop never hides it.
+	const nav = document.querySelector<HTMLElement>('[data-nav]');
+	const phone = window.matchMedia('(max-width: 640px)');
+	let lastY = window.scrollY;
+	let ticking = false;
+	function update() {
+		ticking = false;
+		if (!nav) return;
+		const y = window.scrollY;
+		const dy = y - lastY;
+		if (!phone.matches || y < nav.offsetHeight || nav.contains(document.activeElement)) {
+			nav.classList.remove('tucked');
+		} else if (dy > 6) {
+			nav.classList.add('tucked');
+		} else if (dy < -6) {
+			nav.classList.remove('tucked');
+		}
+		if (Math.abs(dy) > 6) lastY = y;
+	}
+	window.addEventListener('scroll', () => {
+		if (!ticking) { ticking = true; requestAnimationFrame(update); }
+	}, { passive: true });
+	nav?.addEventListener('focusin', () => nav.classList.remove('tucked'));
+</script>
+
 <style>
 	nav { border-bottom: 1px solid var(--rule); background: var(--surface-page); }
-	.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-5); padding-block: 18px; }
-	.wordmark { font-size: 1.4375rem; color: var(--text-primary); text-decoration: none; }
-	.links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-6); list-style: none; padding: 0; font-size: 1rem; }
-	.links a:not(.btn) { color: var(--text-primary); text-decoration: none; }
-	.links a:not(.btn):hover { color: var(--action); }
-	.links a[aria-current='page']:not(.btn) { color: var(--action); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; }
-	.cta { min-height: 44px; padding: 0 20px; }
+	.bar { display: flex; align-items: center; gap: var(--space-3) var(--space-6); padding-block: 18px; }
+	.wordmark { font-size: 1.4375rem; color: var(--text-primary); text-decoration: none; margin-right: auto; white-space: nowrap; }
+	.links { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-6); list-style: none; padding: 0; margin: 0; font-size: 1rem; }
+	.links a { color: var(--text-primary); text-decoration: none; }
+	.links a:hover { color: var(--action); }
+	.links a[aria-current='page'] { color: var(--action); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; }
+	.cta { min-height: 44px; padding: 0 20px; white-space: nowrap; }
+
+	/* Between phone and desktop the row gets tight; let the links wrap under the name. */
+	@media (max-width: 960px) {
+		.bar { flex-wrap: wrap; }
+	}
+
+	/* Phones: name and Work with me on the first row, the four pages spread across the second. */
 	@media (max-width: 640px) {
-		.links { gap: var(--space-2) var(--space-5); font-size: 0.9375rem; }
+		nav { position: sticky; top: 0; z-index: 20; transition: transform var(--dur-base, 240ms) var(--ease-settle); }
+		nav:global(.tucked) { transform: translateY(-100%); }
+		.bar { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'mark cta' 'links links'; gap: 12px var(--space-3); padding-block: 14px 12px; }
+		.wordmark { grid-area: mark; font-size: 1.3125rem; margin: 0; }
+		.cta { grid-area: cta; min-height: 40px; padding: 0 14px; font-size: 0.875rem; }
+		.links { grid-area: links; justify-content: space-between; flex-wrap: nowrap; gap: var(--space-3); font-size: 0.9375rem; }
+		.links a[aria-current='page'] { text-underline-offset: 6px; }
+	}
+	@media (max-width: 370px) {
+		.wordmark { font-size: 1.125rem; }
+		.cta { padding: 0 12px; }
+		.links { font-size: 0.875rem; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		nav { transition: none; }
 	}
 </style>
