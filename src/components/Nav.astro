@@ -55,19 +55,22 @@ const wwm = current('/work-with-me/');
 	.links a[aria-current='page'] { color: var(--action); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 8px; }
 	.cta { min-height: 44px; padding: 0 20px; white-space: nowrap; }
 
-	/* Between phone and desktop the row gets tight; let the links wrap under the name. */
+	/* Below desktop: name and Work with me on the first row, the four pages on the second. */
 	@media (max-width: 960px) {
-		.bar { flex-wrap: wrap; }
+		.bar { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'mark cta' 'links links'; gap: 14px var(--space-4); }
+		.wordmark { grid-area: mark; margin: 0; }
+		.cta { grid-area: cta; }
+		.links { grid-area: links; }
 	}
 
-	/* Phones: name and Work with me on the first row, the four pages spread across the second. */
+	/* Phones: a tighter header, pages spread across the width, and it tucks away while reading. */
 	@media (max-width: 640px) {
 		nav { position: sticky; top: 0; z-index: 20; transition: transform var(--dur-base, 240ms) var(--ease-settle); }
 		nav:global(.tucked) { transform: translateY(-100%); }
-		.bar { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'mark cta' 'links links'; gap: 12px var(--space-3); padding-block: 14px 12px; }
-		.wordmark { grid-area: mark; font-size: 1.3125rem; margin: 0; }
-		.cta { grid-area: cta; min-height: 40px; padding: 0 14px; font-size: 0.875rem; }
-		.links { grid-area: links; justify-content: space-between; flex-wrap: nowrap; gap: var(--space-3); font-size: 0.9375rem; }
+		.bar { gap: 12px var(--space-3); padding-block: 14px 12px; }
+		.wordmark { font-size: 1.3125rem; }
+		.cta { min-height: 40px; padding: 0 14px; font-size: 0.875rem; }
+		.links { justify-content: space-between; flex-wrap: nowrap; gap: var(--space-3); font-size: 0.9375rem; }
 		.links a[aria-current='page'] { text-underline-offset: 6px; }
 	}
 	@media (max-width: 370px) {
