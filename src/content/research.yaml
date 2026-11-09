@@ -1,83 +1,90 @@
 statement:
   eyebrow: Research
-  headline: "The science of emotion, social connection & mental illness"
+  headline: The science of emotion, social connection & mental illness
   body: >
-    How we feel and who we interact with are major factors in our mental health. I study emotion, social motivation, and interpersonal connection
-    in real-world contexts, with a focus on these experiences in people with living with psychosis. I have expertise in ecological momentary assessment (EMA), smartphone sensing,
-    qualitative, and experimental methods. I love interdisciplinary collaboration and have worked with psychologists,
-    psychiatrists, occupational therapists, neuroscientists, veterinary scientists, and psychophysiologists. My work has been funded by the National Institute of Mental Health,
-    Eunice Kennedy Shriver National Institute of Child Health and Human Development, Waltham Petcare Science Institute, and the American Psychological Foundation. 
+    How we feel and who we interact with are major factors that affect our
+    mental health. I study emotion, social motivation, and interpersonal
+    connection in real-world contexts, with a focus on these experiences in
+    people living with psychosis. I have expertise in ecological momentary
+    assessment (EMA), smartphone sensing, qualitative, and experimental methods.
+    I love interdisciplinary collaboration and have worked with psychologists,
+    psychiatrists, occupational therapists, neuroscientists, veterinary
+    scientists, and psychophysiologists. My work has been funded by the National
+    Institute of Mental Health, Eunice Kennedy Shriver National Institute of
+    Child Health and Human Development, Waltham Petcare Science Institute, and
+    the American Psychological Foundation. 
 
-    
-    From the lab to your phone, I am dedicated to understanding and addressing the emotional and social difficulties in our everyday lives.
-    See below for a summary of main areas of interest and links for all of my publications. 
-  affiliation: "Research Assistant Professor · Boston University Sargent College · AMP Lab"
 
+    From the lab to your phone, I am dedicated to understanding and addressing
+    the emotional and social difficulties in our everyday lives. See below for a
+    summary of main areas of interest and links for all of my publications. 
+  affiliation: Research Assistant Professor · Boston University Sargent College · AMP Lab
 stats:
-  - number: "30+"
-    label: "Peer-reviewed publications"
-  - number: "BU"
-    label: "Research Asst. Professor<br>Sargent College — AMP Lab"
-  - number: "15+"
-    label: "Years of active research"
-
+  - number: 30+
+    label: Peer-reviewed publications
+  - number: BU
+    label: Research Asst. Professor<br>Sargent College — AMP Lab
+  - number: 15+
+    label: Years of active research
 focus_areas:
   - id: 1
-    title: "Emotion in Schizophrenia"
+    title: Emotion in Schizophrenia
     description: >
-      The emotional difficulties of people living with schizophrenia — including understanding
-      when and why people with this condition may experience less positive and more negative
-      emotions — is often overlooked during treatment despite being some of the most debilitating
-      aspects of this condition. I have answered various questions on the emotion experiences of
-      people living with schizophrenia across the lifespan, using my expertise in questionnaire,
-      clinical assessment, ecological momentary assessment (EMA), passive sensing, and
-      psychophysiological methods. For example, my work has shown that anhedonia may be specific
-      to the pleasure expected for future events (i.e., anticipatory pleasure) in people with
-      schizophrenia and that anticipatory pleasure deficits may have direct links with other
-      facets of the disorder, including motivation impairments.
+      The emotional difficulties of people living with schizophrenia — including
+      understanding when and why people with this condition may experience less
+      positive and more negative emotions — is often overlooked during treatment
+      despite being some of the most debilitating aspects of this condition. I
+      have answered various questions on the emotion experiences of people
+      living with schizophrenia across the lifespan, using my expertise in
+      questionnaire, clinical assessment, ecological momentary assessment (EMA),
+      passive sensing, and psychophysiological methods. For example, my work has
+      shown that anhedonia may be specific to the pleasure expected for future
+      events (i.e., anticipatory pleasure) in people with schizophrenia and that
+      anticipatory pleasure deficits may have direct links with other facets of
+      the disorder, including motivation impairments.
   - id: 2
-    title: "Social Processes in Psychopathology"
+    title: Social Processes in Psychopathology
     description: >
-      People with psychosis can experience multiple social difficulties, including impairments in social 
-      motivation and high rates of loneliness, that are related to poorer quality of life and shorter lifespans.
-      My work has found that people with schizophrenia experience similar rates of social pleasure when they are
-      with others compared to people without the disorder, but may simultaneously experience slightly more 
-      negative emotion during the same social interactions. I have also found that positive emotions may be particularly
-      important for understanding social motivation difficulties in this population. Further, I have used qualitative
-      methods (i.e., interviewing people and synthesizing common themes across interviews) to better understand
-      barriers that people with schizophrenia may face in connecting with others, using their own words.
+      People with psychosis can experience multiple social difficulties,
+      including impairments in social  motivation and high rates of loneliness,
+      that are related to poorer quality of life and shorter lifespans. My work
+      has found that people with schizophrenia experience similar rates of
+      social pleasure when they are with others compared to people without the
+      disorder, but may simultaneously experience slightly more negative emotion
+      during the same interactions. I have also found that positive emotions may
+      be particularly important for understanding social motivation difficulties
+      in this population. Further, I have used qualitative methods (i.e.,
+      interviewing people and synthesizing common themes across interviews) to
+      better understand barriers that people with schizophrenia may face in
+      connecting with others, using their own words.
   - id: 3
-    title: "Mental Health Intervention Development"
+    title: Mental Health Intervention Development
     description: >
-      Through applying my research on basic emotion and social processes, I have sought to improve
-      the lives of people living with a variety of mental health conditions through the development
-      of novel psychosocial and digital health interventions. I have also worked with the
-      Boston-based small business Skip the Small Talk to evaluate the efficacy of their online
-      social events in reducing loneliness during the 2020 COVID-19 global pandemic.
+      Through applying my research on basic emotion and social processes, I have
+      sought to improve the lives of people living with a variety of mental
+      health conditions through the development of novel psychosocial and
+      digital health interventions. I have also worked with the Boston-based
+      small business Skip the Small Talk to evaluate the efficacy of their
+      online social events in reducing loneliness during the 2020 COVID-19
+      global pandemic.
   - id: 4
-    title: "Culture, Environment, & Mental Health"
+    title: Culture, Environment, & Mental Health
     description: >
-      Throughout my work, I have focused on how individual and contextual factors such as race,
-      gender, and living environments shape our mental health. This includes understanding how
-      racialized experiences affect the presentation of psychotic symptoms as well as how green
-      space exposure may or may not contribute to better mental health. Recently, I have also
-      explored how non-human relationships (i.e., pet dog ownership) affect the health and
-      well-being of adolescents with social anxiety. It is my hope that this work contributes to
-      reducing the mental health disparities among various minoritized communities and informs
-      policies that promote better mental health in the clinic, in our neighborhoods, and in our
-      own backyards.
-
-
-# ── Section headings ──────────────────────────────────────────
-# Use <em>word</em> around a word to display it in accent color.
-# Remove <em> tags entirely for plain headings with no color accent.
+      Throughout my work, I have focused on how individual and contextual
+      factors such as race, gender, and living environments shape our mental
+      health. This includes understanding how racialized experiences affect the
+      presentation of psychotic symptoms as well as how green space exposure may
+      or may not contribute to better mental health. Recently, I have also
+      explored how non-human relationships (i.e., pet dog ownership) affect the
+      health and well-being of adolescents with social anxiety. It is my hope
+      that this work contributes to reducing the mental health disparities among
+      various minoritized communities and informs policies that promote better
+      mental health in the clinic, in our neighborhoods, and in our own
+      backyards.
 sections:
-  focus_heading: "Research <em>Focus</em>"
-  publications_heading: "All <em>Publications</em>"
-
-
-# ── SEO ───────────────────────────────────────────────────────
-# The meta description shown in Google search results and link
-# previews. Keep it under 160 characters.
+  focus_heading: Research <em>Focus</em>
+  publications_heading: All <em>Publications</em>
 seo:
-  description: "Jasmine Mote's research focuses on emotion, social connection, and serious mental illness. Research Assistant Professor at Boston University Sargent College."
+  description: Jasmine Mote's research focuses on emotion, social connection, and
+    serious mental illness. Research Assistant Professor at Boston University
+    Sargent College.
