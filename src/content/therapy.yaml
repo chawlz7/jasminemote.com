@@ -1,30 +1,30 @@
 page:
-  eyebrow: "Clinical Psychology · Boston Area"
-  headline: "Thoughtful, evidence-based therapy for real moments in life."
-  subhead: "I work with adults navigating mood and anxiety concerns, OCD, psychosis, mental health challenges in pregnancy and postpartum, and major life transitions — including new parents, academics and professionals under intense pressure, and people exploring questions of identity."
-  affiliation: "Cambridge Psychology Group · Licensed Clinical Psychologist"
-  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
-  cta_label: "View my CPG profile →"
-
+  eyebrow: Clinical Psychology · Boston Area
+  headline: Thoughtful, evidence-based therapy for real moments in life.
+  subhead: I work with adults navigating mood and anxiety concerns, OCD,
+    psychosis, mental health challenges in pregnancy and postpartum, and major
+    life transitions — including new parents, academics and professionals under
+    intense pressure, and people exploring questions of identity. I am licensed
+    to serve clients in Massachusetts and Florida (telehealth only).
+  affiliation: Cambridge Psychology Group · Licensed Clinical Psychologist
+  cta_label: View my CPG profile →
+  cpg_url: https://cambridgepsych.org/clinicians/jasmine-mote/
 specialties:
-  section_title: "What I treat"
+  section_title: What I treat
   items:
-    - "Mental health challenges in pregnancy and postpartum"
-    - "Depression and mood difficulties"
-    - "Life transitions (new parenthood, career, identity)"
-    - "Anxiety, OCD, and perfectionism"
-    - "Psychosis and serious mental illness"
-    - "Academics, researchers, and high-stress professionals"
-
+    - Mental health challenges in pregnancy and postpartum
+    - Depression and mood difficulties
+    - Life transitions (new parenthood, career, identity)
+    - Anxiety, OCD, and perfectionism
+    - Psychosis and serious mental illness
+    - Academics, researchers, and high-stress professionals
 cta_card:
-  title: "Ready to get started?"
-  body: "I see clients through Cambridge Psychology Group. You can learn more about my practice and request an initial consultation on their website."
-  cpg_url: "https://cambridgepsych.org/clinicians/jasmine-mote/"
-  cta_label: "View my CPG profile →"
-
-
-# ── SEO ───────────────────────────────────────────────────────
-# The meta description shown in Google search results and link
-# previews. Keep it under 160 characters.
+  title: Ready to get started?
+  body: I see clients through Cambridge Psychology Group. You can learn more about
+    my practice and request an initial consultation on their website.
+  cta_label: View my CPG profile →
+  cpg_url: https://cambridgepsych.org/clinicians/jasmine-mote/
 seo:
-  description: "Jasmine Mote is a licensed clinical psychologist seeing clients in the Boston area through Cambridge Psychology Group. She specializes in anxiety, OCD, perinatal mental health, and life transitions."
+  description: Jasmine Mote is a licensed clinical psychologist seeing clients in
+    the Boston area through Cambridge Psychology Group. She specializes in
+    anxiety, OCD, perinatal mental health, and life transitions.
